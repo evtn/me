@@ -1,0 +1,50 @@
+.card-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 35em;
+    position: relative;
+
+    &__header {
+        display: flex;
+        gap: 1em;
+        position: relative;
+    }
+    &__content {
+        display: flex;
+        gap: 1em;
+        & .card {
+            width: 50%;
+            background: var(--card-alpha);
+        }
+    }
+}
+.card-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: min-content;
+    height: max-content;
+
+    & > h2 {
+        margin: 0;
+    }
+}
+
+@media (max-width: 35em) {
+    .card-group {
+        align-items: center;
+        width: 20em;
+        &__header {
+            flex-direction: column;
+            width: 100%;
+        }
+        &__content {
+            flex-direction: column;
+            width: 100%;
+            & .card {
+                width: unset;
+            }
+        }
+    }
+}

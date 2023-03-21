@@ -1,0 +1,52 @@
+.switch {
+    border: none;
+    background: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 1em;
+    padding: 0;
+
+    &__element {
+        padding: 2px;
+        width: 1em;
+        border-radius: 1em;
+        display: flex;
+        border: var(--text) 1px solid;
+        // box-sizing: border-box;
+
+        transition-property: border-color;
+        transition-duration: 0.1s;
+        transition-timing-function: linear;
+
+        &-circle {
+            width: 0.5em;
+            height: 0.5em;
+            border-radius: 1em; // yes, it could be 0.25em as well, I know;
+            background: var(--text);
+            flex-shrink: 0;
+
+            transition-property: background-color;
+            transition-duration: 0.1s;
+            transition-timing-function: linear;
+        }
+        &-mover {
+            width: 0;
+            transition-property: width;
+            transition-duration: 0.1s;
+            transition-timing-function: linear;
+        }
+    }
+    &[data-active="true"] {
+        .switch__element {
+            border-color: var(--accent);
+            &-circle {
+                background: var(--accent);
+            }
+            &-mover {
+                width: 100%;
+            }
+        }
+    }
+}

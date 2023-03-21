@@ -1,0 +1,31 @@
+.projects {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    & h2,
+    & h1 {
+        margin: 0;
+    }
+}
+
+.project {
+    color: var(--text);
+    background: var(--card);
+    padding: 1em;
+    border-radius: 0.5em;
+    border: 1px var(--blue-dark) solid;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1em;
+    }
+    & p {
+        margin-bottom: 0;
+    }
+}

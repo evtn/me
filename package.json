@@ -1,0 +1,23 @@
+{
+  "name": "evtnme",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@primer/octicons-react": "^18.2.0",
+    "jotai": "^2.0.3",
+    "preact": "^10.11.3",
+    "sass": "^1.59.3",
+    "vite-plugin-compression": "^0.5.1"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.5.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.1.0"
+  }
+}
