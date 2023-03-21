@@ -37,6 +37,7 @@ body {
   scrollbar-color: var(--text) transparent;
   scrollbar-width: thin;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {

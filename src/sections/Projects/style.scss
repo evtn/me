@@ -29,3 +29,15 @@
         margin-bottom: 0;
     }
 }
+
+@media (max-width: 55em) {
+    .project {
+        &__header {
+            flex-direction: column;
+        }
+    }
+    .scroll-portal {
+        height: max-content;
+        overflow: hidden;
+    }
+}
