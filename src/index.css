@@ -35,6 +35,7 @@ body {
   min-width: 100vw;
   min-height: 100vh;
   scrollbar-color: var(--text) transparent;
+  scrollbar-width: thin;
   overflow-y: scroll;
 }
 
