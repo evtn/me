@@ -36,8 +36,8 @@ export const entries: SidebarEntryData[] = [
     color: "var(--red)",
   },
   {
-    href: "mailto:j@evtn.ru",
-    text: "j@evtn.ru",
+    href: "mailto:j@evtn.me",
+    text: "j@evtn.me",
     icon: MentionIcon,
     color: "var(--purple)",
   },
