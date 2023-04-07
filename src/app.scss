@@ -39,7 +39,7 @@ main,
     color: var(--link);
 }
 
-main[data-colors="false"] {
+html[data-colors="false"] {
     filter: #{saturate(400%) grayscale(100%)};
 }
 

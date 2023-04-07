@@ -1,4 +1,5 @@
 import { useAtom } from "jotai";
+import { useEffect } from "preact/hooks";
 import "./app.scss";
 import { PopupContainer } from "./components/Popup";
 import { Content } from "./sections/Content";
@@ -9,8 +10,12 @@ import "./styles/colors.css";
 export function App() {
   const [isColored] = useAtom(colorfulAtom);
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-colors", String(isColored));
+  }, [isColored]);
+
   return (
-    <main data-colors={isColored}>
+    <main>
       <SideBar />
       <Content />
       <PopupContainer />
