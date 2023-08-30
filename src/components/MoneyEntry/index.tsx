@@ -3,7 +3,7 @@ import { FunctionalComponent } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { SidebarEntry } from "../../sections/SideBar/entry";
 
-const initialCompensation = 2500;
+const initialCompensation = 3000;
 
 export const MoneyEntry: FunctionalComponent = () => {
   const [compensation, setCompensation] = useState<number>(initialCompensation);
@@ -11,7 +11,7 @@ export const MoneyEntry: FunctionalComponent = () => {
   useEffect(() => {
     const interval = setInterval(
       () => setCompensation((value) => value + 1),
-      1000
+      1000,
     );
     return () => clearInterval(interval);
   }, []);
