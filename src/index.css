@@ -1,7 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira%20Code:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@500&display=swap");
+
+main[data-monospace="true"] {
+  font-family:
+    "Fira Code",
+    Noto Sans Georgian,
+    monospace;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 0.9rem;
+}
 
 :root {
-  font-family: Manrope, sans-serif;
+  font-family:
+    Manrope,
+    Noto Sans Georgian,
+    sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -17,7 +32,6 @@
 }
 
 a {
-  font-weight: 500;
   color: var(--link);
   text-decoration: inherit;
   opacity: 0.9;
@@ -48,7 +62,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: var(--text);
-  border-radius: 1em;
+  border-radius: 1rem;
 }
 
 p {
@@ -60,4 +74,9 @@ button {
   padding: 0;
   font-size: 1em;
   background: unset;
+}
+
+*:focus,
+[data-focused="true"] {
+  outline: 2px solid var(--local-accent, var(--accent));
 }

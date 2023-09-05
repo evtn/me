@@ -1,6 +1,7 @@
 import { XIcon } from "@primer/octicons-react";
 import { useAtom } from "jotai";
 import { FunctionalComponent } from "preact";
+import { useEffect } from "preact/hooks";
 import { popupAtom } from "../../state/popup";
 import "./style.scss";
 
@@ -9,10 +10,20 @@ export const PopupContainer: FunctionalComponent = () => {
 
   const isOpen = !!contents;
 
+  useEffect(() => {
+    const style = document.documentElement.style;
+
+    if (!!contents) {
+      style.overflowY = "hidden";
+    } else {
+      style.overflowY = "scroll";
+    }
+  }, [contents]);
+
   return (
     <div
       className="popup"
-      is-open={isOpen}
+      data-open={isOpen}
       onClick={() => setContents(undefined)}
     >
       <div className="popup__container" onClick={(e) => e.stopPropagation()}>

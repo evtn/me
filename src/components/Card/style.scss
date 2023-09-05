@@ -1,42 +1,87 @@
+main[data-colors="false"] {
+    .card {
+        border-color: transparent;
+    }
+}
+
 .card {
     background: var(--card);
     border-radius: 0.75em;
-    padding: 0.75em;
     flex-grow: 1;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     gap: 0.5em;
-    border: 1px var(--blue-medium) solid;
+    border: 1px var(--local-accent) solid;
+
+    &[data-text="true"] {
+        padding: 1em;
+    }
+
+    &[data-type="common"] {
+        width: 50%;
+    }
+
+    &[data-type="time"] {
+        width: 11rem;
+        flex-grow: 0;
+    }
 
     &__icon {
         width: 3em;
         height: 3em;
         flex-shrink: 0;
-        background: var(--icon-background);
-        color: var(--icon-color);
+        background: var(--local-accent);
+        color: var(--background);
         border-radius: 0.5em;
         overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.inverted {
+            background: var(--background);
+            color: var(--local-accent);
+        }
+        & code {
+            font-weight: 600;
+        }
     }
 
     &__title {
         margin: 0;
         line-height: 1;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
     }
 
     &__subtitle {
         margin: 0;
         font-weight: 500;
         line-height: 1;
+        font-size: 0.9em;
         &-alpha {
             opacity: 0.5;
         }
+    }
+
+    &[data-text="false"] &__header-text {
+        padding: 0.75em;
+    }
+
+    &[data-text="false"] &__icon {
+        height: 100%;
+        width: 3.75em;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
     }
 
     &__header {
         display: flex;
         align-items: center;
         gap: 0.5em;
+        height: 4.5rem;
         &-text {
             display: flex;
             flex-direction: column;
@@ -44,6 +89,10 @@
             gap: 0.25em;
         }
     }
+}
+
+a.card {
+    color: var(--text);
 }
 
 .icon-padded {

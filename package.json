@@ -12,8 +12,11 @@
     "@primer/octicons-react": "^18.2.0",
     "jotai": "^2.0.3",
     "preact": "^10.11.3",
+    "react-aria": "^3.27.0",
+    "react-stately": "^3.25.0",
     "sass": "^1.59.3",
-    "vite-plugin-compression": "^0.5.1"
+    "vite-plugin-compression": "^0.5.1",
+    "vite-tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",

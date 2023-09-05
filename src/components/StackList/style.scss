@@ -1,0 +1,6 @@
+.stack-list {
+    & > :not(:last-child):after {
+        content: " · ";
+        color: var(--text);
+    }
+}

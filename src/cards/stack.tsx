@@ -1,14 +1,10 @@
 import { Icon } from "@primer/octicons-react";
-import { useAtom } from "jotai";
 import { FunctionalComponent } from "preact";
 import { makePaddedIcon } from "../components/Card/paddedIcon";
-import { CardGroup, CardGroupProps } from "../components/CardGroup";
-import { JSLogo, TSLogo } from "../components/icons/CornerLogo";
-import { PythonLogo } from "../components/icons/PythonLogo";
-import { ReactLogo } from "../components/icons/ReactLogo";
-import { colorfulAtom } from "../state/colorful";
-import { formatDateRange } from "../utils/date";
-import { getColor, paintStack, StackList } from "./common";
+import { CardGroup, CardGroupProps } from "@/components";
+import { JSLogo, TSLogo, PythonLogo, ReactLogo } from "@/icons";
+import { formatDateRange } from "@/utils/date";
+import { getColor, paintStack, StackList } from "@/components/StackList";
 
 type StackData = {
   main: string;
@@ -60,26 +56,29 @@ const stacks: StackData[] = [
 ];
 
 const stackToCardGroup = (stack: StackData): CardGroupProps => {
-  const [isColored] = useAtom(colorfulAtom);
-  const title = paintStack(stack.main, isColored);
-  const dateRange = formatDateRange(stack.startDate);
+  const title = paintStack(stack.main);
+  const dateRange = formatDateRange(stack.startDate, undefined, {
+    month: undefined,
+  });
 
   return {
     headerCards: [
       {
         icon: {
           ...stack.icon,
-          color: `var(--${getColor(stack.main, isColored)})`,
-          invertColor: isColored,
+          color: getColor(stack.main),
+          invertColor: true,
         },
         title: title,
-        subtitle: <StackList stack={stack.extra} isColored={false} />,
+        subtitle: <StackList stack={stack.extra} />,
+        cardType: "experience",
       },
       {
         title: dateRange.duration,
         subtitle: (
           <span className="card__subtitle-alpha">{dateRange.range}</span>
         ),
+        cardType: "time",
       },
     ],
   };

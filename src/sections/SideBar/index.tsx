@@ -1,18 +1,35 @@
 import { useAtom } from "jotai";
 import { FunctionalComponent } from "preact";
 import { useState } from "preact/hooks";
-import { Logo } from "../../components/Logo";
-import { MoneyEntry } from "../../components/MoneyEntry";
-import { Switch } from "../../components/Switch";
-import { colorfulAtom } from "../../state/colorful";
 import { ProjectsEntry } from "../Projects/entry";
-import { entries, SidebarEntry } from "./entry";
+import { entries } from "./entry";
+import { SidebarEntry, Logo, MoneyEntry, Switch } from "@/components";
+import { Settings, settingsAtom } from "@/state/settings";
+
 import "./style.scss";
 
-type SideBarProps = {};
+export const SideBar: FunctionalComponent = () => {
+  const [settings, setSettings] = useAtom(settingsAtom);
 
-export const SideBar: FunctionalComponent<SideBarProps> = ({}) => {
-  const [isColored, setIsColored] = useAtom(colorfulAtom);
+  const toggleSetting = (toggleKey: string, newValue: boolean) => {
+    const newSettings: Settings = {};
+
+    Object.entries(settings).map(([key, value]) => {
+      newSettings[key] = key === toggleKey ? newValue : value;
+    });
+
+    setSettings(newSettings);
+  };
+
+  const switches = Object.entries(settings).map(([key, value]) => (
+    <Switch
+      label={key}
+      onSwitch={(newValue) => toggleSetting(key, newValue)}
+      currentValue={value}
+      className="sidebar-entry__link"
+    />
+  ));
+
   const [specialization, setSpecialization] = useState(0);
 
   const incrementSpecialization = () => setSpecialization((v) => v + 1);
@@ -20,7 +37,7 @@ export const SideBar: FunctionalComponent<SideBarProps> = ({}) => {
   return (
     <div
       className="scroll-portal sidebar-portal"
-      style={{ "--icon-color": isColored ? "var(--accent)" : "var(--text)" }}
+      style={{ "--icon-color": "var(--accent)" }}
     >
       <section className="sidebar">
         <Logo />
@@ -29,19 +46,13 @@ export const SideBar: FunctionalComponent<SideBarProps> = ({}) => {
           <h2 onClick={incrementSpecialization}>
             {["Frontend", "Python"][specialization % 2]} Developer
           </h2>
-
           {entries.map((e) => (
             <SidebarEntry data={e} />
           ))}
-
           <MoneyEntry />
           <ProjectsEntry />
-          <Switch
-            label={`${isColored ? "more" : "no"} colors`}
-            onSwitch={(state) => setIsColored(state)}
-            defaultState={isColored}
-            externalClassName="sidebar-entry__link"
-          />
+
+          {switches}
         </div>
       </section>
     </div>

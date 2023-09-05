@@ -1,13 +1,14 @@
 import { GlobeIcon } from "@primer/octicons-react";
 import { FunctionalComponent } from "preact";
-import { CardIconData } from "../components/Card";
-import { makePaddedIcon } from "../components/Card/paddedIcon";
-import { CardGroup, CardGroupProps } from "../components/CardGroup";
-import { EpamLogo } from "../components/icons/EpamLogo";
-import { InteticsLogo } from "../components/icons/InteticsLogo";
-import { MCCLogo } from "../components/icons/MCCLogo";
-import { formatDateRange } from "../utils/date";
-import { StackList } from "./common";
+import {
+  CardIconData,
+  makePaddedIcon,
+  CardGroup,
+  CardGroupProps,
+  StackList,
+} from "@/components";
+import { EpamLogo, InteticsLogo, MCCLogo } from "@/icons";
+import { formatDateRange } from "@/utils/date";
 
 type ExperiencePiece = {
   companyName: string;
@@ -26,7 +27,8 @@ export const experiences: ExperiencePiece[] = [
     companyDescription:
       "EPAM Systems is a B2B company that provides software development services.",
     icon: {
-      color: "var(--blue)",
+      color: "blue",
+      invertColor: true,
       icon: EpamLogo,
     },
     stack: ["TypeScript", "React", "Jotai"],
@@ -42,7 +44,7 @@ export const experiences: ExperiencePiece[] = [
     companyDescription:
       "MCC Soft is a small software studio. It's mostly focused on backend and mobile software.",
     icon: {
-      color: "var(--blue)",
+      color: "green",
       invertColor: true,
       icon: MCCLogo,
     },
@@ -59,7 +61,7 @@ export const experiences: ExperiencePiece[] = [
     companyDescription:
       "Intetics is also a B2B company that provides software development services.",
     icon: {
-      color: "var(--orange)",
+      color: "orange",
       invertColor: true,
       icon: makePaddedIcon(InteticsLogo),
     },
@@ -75,9 +77,9 @@ export const experiences: ExperiencePiece[] = [
     companyName: "Freelance",
     companyDescription: "Freelance is...well, it is not a company.",
     icon: {
-      color: "var(--purple)",
+      color: "purple",
       invertColor: true,
-      icon: makePaddedIcon(GlobeIcon),
+      icon: makePaddedIcon(() => <GlobeIcon size={24} />),
     },
     stack: ["TypeScript", "Python", "React"],
 
@@ -97,13 +99,15 @@ const experienceToCardGroup = (experience: ExperiencePiece): CardGroupProps => {
       {
         title: experience.companyName,
         icon: experience.icon,
-        subtitle: <StackList stack={experience.stack} isColored={true} />,
+        subtitle: <StackList stack={experience.stack} />,
+        cardType: "experience",
       },
       {
         title: dateRange.duration,
         subtitle: (
           <span className="card__subtitle-alpha">{dateRange.range}</span>
         ),
+        cardType: "time",
       },
     ],
     contentCards: [

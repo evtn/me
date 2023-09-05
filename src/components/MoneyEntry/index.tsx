@@ -1,7 +1,7 @@
 import { FiscalHostIcon, PlusIcon, SyncIcon } from "@primer/octicons-react";
 import { FunctionalComponent } from "preact";
 import { useEffect, useState } from "preact/hooks";
-import { SidebarEntry } from "../../sections/SideBar/entry";
+import { SidebarEntry } from "@/components";
 
 const initialCompensation = 3000;
 
@@ -19,7 +19,7 @@ export const MoneyEntry: FunctionalComponent = () => {
   const entryData = {
     text: `\$${compensation.toString()}`,
     icon: FiscalHostIcon,
-    color: "var(--green)",
+    color: "green",
   };
 
   const refreshButton = (

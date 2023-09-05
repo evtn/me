@@ -2,10 +2,9 @@
     align-content: center;
     display: flex;
     align-items: flex-start;
-    // justify-content: center;
     flex-direction: column;
-    gap: 3em;
-    padding: 1em;
+    gap: 2rem;
+    padding: 1rem;
     flex-wrap: wrap;
     box-sizing: border-box;
     height: 100vh;
@@ -16,8 +15,14 @@
     align-self: stretch;
 }
 
-@media (max-width: 95em), (max-height: 58em) {
+@media (max-width: 95rem), (max-height: 58rem) {
     .content {
         height: max-content;
+    }
+}
+
+@media (max-width: 35em) {
+    .content {
+        gap: 0;
     }
 }

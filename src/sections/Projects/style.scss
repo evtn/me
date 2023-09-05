@@ -1,7 +1,7 @@
 .projects {
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 1rem;
     & h2,
     & h1 {
         margin: 0;
@@ -10,27 +10,38 @@
 
 .project {
     color: var(--text);
-    background: var(--card);
-    padding: 1em;
-    border-radius: 0.5em;
-    border: 1px var(--blue-dark) solid;
 
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
+    gap: 0.5rem;
+    position: relative;
 
     &__header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 1em;
+        gap: 1rem;
     }
+
+    &__repo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding-top: 0.5rem;
+        color: var(--text);
+        opacity: 0.8;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
     & p {
         margin-bottom: 0;
     }
 }
 
-@media (max-width: 55em) {
+@media (max-width: 55rem) {
     .project {
         &__header {
             flex-direction: column;

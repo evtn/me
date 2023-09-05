@@ -1,3 +1,5 @@
+import { settingsAtom } from "@/state/settings";
+import { useAtom } from "jotai";
 import { FunctionalComponent } from "preact";
 import { story } from "../../utils/story";
 import { usePopup } from "../Popup";
@@ -5,6 +7,7 @@ import "./style.scss";
 
 export const Logo: FunctionalComponent = () => {
   const setPopupContents = usePopup();
+  const [settings] = useAtom(settingsAtom);
 
   return (
     <svg
@@ -19,13 +22,13 @@ export const Logo: FunctionalComponent = () => {
       <g>
         <text
           fill="var(--icon-color)"
-          font-family="Manrope"
-          font-size="14.667"
+          font-family={settings.Monospace ? "Fira Code" : "Manrope"}
+          font-size={settings.Monospace ? 11.2 : 14.6}
           font-weight="bold"
           className="logo__text"
         >
           <textPath href="#circle">
-            photo from this cv is on a vacation for an indefinite period of
+            Photo from this CV is on a vacation for an indefinite period of
             time, sorry for the inconvenience.
           </textPath>
         </text>

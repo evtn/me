@@ -39,12 +39,45 @@ main,
     color: var(--link);
 }
 
-html[data-colors="false"] {
-    filter: #{saturate(400%) grayscale(100%)};
+main[data-lowercase="true"] * {
+    text-transform: lowercase;
 }
 
 // thanks octicons for inline styles
 .octicon {
     display: block !important;
     vertical-align: unset !important;
+}
+
+.colored {
+    &-red {
+        --local-accent: var(--red);
+    }
+    &-orange {
+        --local-accent: var(--orange);
+    }
+    &-yellow {
+        --local-accent: var(--yellow);
+    }
+    &-green {
+        --local-accent: var(--green);
+    }
+    &-blue {
+        --local-accent: var(--blue);
+    }
+    &-purple {
+        --local-accent: var(--purple);
+    }
+    &-pink {
+        --local-accent: var(--pink);
+    }
+    &-dark {
+        --local-accent: var(--blue-medium);
+    }
+    &-text {
+        --local-accent: var(--text);
+    }
+    &-background {
+        --local-accent: var(--background);
+    }
 }

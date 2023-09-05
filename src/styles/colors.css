@@ -4,9 +4,9 @@
   --blue-dark: #141d24;
   --blue-medium: #1e2835;
   --blue-medium-alpha: #1e283588;
-  --blue-light: #eaf6ff;
-  --blue-light-alpha: #eaf6ff88;
-  --white: #f3f8fe;
+  --blue-light: #fafdff;
+  --white: #fff;
+  --white-alpha: #fff8;
   --black-overlay: #0005;
   --blue-overlay: #418ce555;
 
@@ -22,13 +22,21 @@
 
   /* light theme colors */
 
-  --bright-red: #e85656;
-  --bright-orange: #f59865;
-  --bright-yellow: #ebb521;
-  --bright-green: #2be843;
+  --bright-red: #ff5151;
+  --bright-orange: #fd803c;
+  --bright-yellow: #f0c82c;
+  --bright-green: #39f951;
   --bright-blue: #418ce5;
-  --bright-purple: #5645e6;
-  --bright-pink: #d54ae7;
+  --bright-purple: #4d3be6;
+  --bright-pink: #ee3cb1;
+
+  /* monochromatic */
+
+  --dull-white: #f9f9f9;
+  --dull-lightgray: #f0f0f0;
+  --dull-black: #1c1c1c;
+  --dull-gray: #262626;
+  --dull-gray-alpha: #26262688;
 }
 
 /* dark theme */
@@ -48,10 +56,26 @@
   --accent: var(--blue);
   --link: var(--accent);
   --overlay: var(--black-overlay);
+  --local-accent: var(--text);
+}
+
+main[data-colors="false"] {
+  --background: var(--dull-black);
+  --card: var(--dull-gray);
+  --card-alpha: var(--dull-gray-alpha);
+  --text: var(--dull-white);
+  --accent: var(--text);
 }
 
 /* light theme */
 @media (prefers-color-scheme: light) {
+  main[data-colors="false"] {
+    --background: var(--dull-lightgray);
+    --card: var(--dull-white);
+    --card-alpha: var(--dull-white);
+    --text: var(--dull-black);
+  }
+
   :root {
     --red: var(--bright-red);
     --orange: var(--bright-orange);
@@ -61,12 +85,22 @@
     --purple: var(--bright-purple);
     --pink: var(--bright-pink);
 
-    --background: var(--white);
-    --card: var(--blue-light);
-    --card-alpha: var(--blue-light-alpha);
+    --background: var(--blue-light);
+    --card: var(--white);
+    --card-alpha: var(--white-alpha);
     --text: var(--blue-dark);
     --accent: var(--blue);
     --link: var(--accent);
     --overlay: var(--blue-overlay);
   }
+}
+
+main[data-colors="false"] {
+  --red: var(--text);
+  --orange: var(--text);
+  --yellow: var(--text);
+  --green: var(--text);
+  --blue: var(--text);
+  --purple: var(--text);
+  --pink: var(--text);
 }

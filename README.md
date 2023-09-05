@@ -14,7 +14,7 @@ This code was written in a short period of time, with little to no design guidel
 
 If you want to point out some problem with code, create an issue. Any non-constructive issue would be closed without discussion — if you don't have time for constructive points, then I don't have time to hear whatever you will write instead.
 
-If you want to suggest a feature, consider that the design is more or less final.
+If you want to suggest a feature, create an issue. Keep in mind that it's ultimately up to me to decide if this feature should be on *my* website.
 
 ## Usage
 
@@ -24,3 +24,13 @@ To develop locally, clone the repository, run `install` with your favourite pack
 
 - to serve a dev build, run `dev` script
 - to make a production build, run `build` script
+
+## To Do
+
+### Theme selector
+
+At the moment, theme is derived from system theme. [This may work poorly in Chromium-based browsers](https://bugs.chromium.org/p/chromium/issues/detail?id=998903), so a nice selector / override could be implemented.
+
+### Finer settings system
+
+I've added localstorage-backed settings system, but for now it's just generating a few switches. A more complex system could allow storing, e.g., theme data for theme selector

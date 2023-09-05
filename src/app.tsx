@@ -1,24 +1,44 @@
 import { useAtom } from "jotai";
-import { useEffect } from "preact/hooks";
+import { useMemo } from "preact/hooks";
+
+import { PopupContainer } from "@/components";
+
+import { Content } from "@/sections/Content";
+import { SideBar } from "@/sections/SideBar";
+
+import { popupAtom } from "@/state/popup";
+import { settingsAtom } from "@/state/settings";
+
 import "./app.scss";
-import { PopupContainer } from "./components/Popup";
-import { Content } from "./sections/Content";
-import { SideBar } from "./sections/SideBar";
-import { colorfulAtom } from "./state/colorful";
 import "./styles/colors.css";
 
-export function App() {
-  const [isColored] = useAtom(colorfulAtom);
+export const App = () => {
+  const [settings] = useAtom(settingsAtom);
+  const [popupContents] = useAtom(popupAtom);
 
-  useEffect(() => {
-    document.documentElement.setAttribute("data-colors", String(isColored));
-  }, [isColored]);
+  const data = useMemo(
+    () =>
+      Object.fromEntries(
+        Object.entries(settings).map(([key, value]) => [
+          `data-${key.toLowerCase()}`,
+          String(value),
+        ]),
+      ),
+    [settings],
+  );
 
   return (
-    <main>
+    <main
+      {...data}
+      // onWheel={(e) => {
+      //   if (popupContents) {
+      //     e.preventDefault();
+      //   }
+      // }}
+    >
       <SideBar />
       <Content />
       <PopupContainer />
     </main>
   );
-}
+};
