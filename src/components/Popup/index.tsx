@@ -11,7 +11,7 @@ export const PopupContainer: FunctionalComponent = () => {
   const isOpen = !!contents;
 
   useEffect(() => {
-    const style = document.documentElement.style;
+    const style = document.body.style;
 
     if (!!contents) {
       style.overflowY = "hidden";
