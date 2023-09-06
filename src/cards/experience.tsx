@@ -23,7 +23,7 @@ type ExperiencePiece = {
 
 export const experiences: ExperiencePiece[] = [
   {
-    companyName: "EPAM",
+    companyName: "EPAM Systems",
     companyDescription:
       "EPAM Systems is a B2B company that provides software development services.",
     icon: {
