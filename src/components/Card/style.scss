@@ -12,7 +12,7 @@ main[data-colors="false"] {
     justify-content: flex-start;
     flex-direction: column;
     gap: 0.5em;
-    border: 1px var(--local-accent) solid;
+    outline: 1px var(--local-accent) solid;
 
     &[data-text="true"] {
         padding: 1em;
@@ -88,6 +88,9 @@ main[data-colors="false"] {
             align-items: flex-start;
             gap: 0.25em;
         }
+    }
+    &__text {
+        font-size: 0.85em;
     }
 }
 
