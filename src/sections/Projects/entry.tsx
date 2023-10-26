@@ -13,6 +13,7 @@ export const ProjectsEntry = () => {
         text: "My projects",
         icon: PackageIcon,
         color: "blue",
+        copy: false,
       }}
     />
   );

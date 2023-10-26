@@ -16,6 +16,7 @@ export type SidebarEntryData = (
   icon: Icon;
   color?: string;
   onClick?: () => void;
+  copy?: boolean;
 };
 
 type SidebarEntryProps = {
@@ -28,6 +29,7 @@ export const SidebarEntry: FunctionalComponent<SidebarEntryProps> = ({
   children,
 }) => {
   const textToCopy = data.copyLink ? data.href : data.text;
+  const copy = data.copy === undefined ? true : data.copy;
 
   const contents = (
     <>
@@ -52,12 +54,14 @@ export const SidebarEntry: FunctionalComponent<SidebarEntryProps> = ({
       >
         {contents}
       </LinkComponent>
-      <button
-        className="sidebar-entry__button"
-        onClick={() => navigator.clipboard.writeText(textToCopy)}
-      >
-        <CopyIcon />
-      </button>
+      {copy ? (
+        <button
+          className="sidebar-entry__button"
+          onClick={() => navigator.clipboard.writeText(textToCopy)}
+        >
+          <CopyIcon />
+        </button>
+      ) : undefined}
       {children}
     </div>
   );
