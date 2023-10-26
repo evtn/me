@@ -3,6 +3,10 @@ body {
     overflow: hidden;
 }
 
+h1 {
+    font-size: 2.5em;
+}
+
 main,
 #app {
     margin: 0 auto;
@@ -50,6 +54,8 @@ main[data-lowercase="true"] * {
 }
 
 .colored {
+    color: var(--local-accent);
+
     &-red {
         --local-accent: var(--red);
     }

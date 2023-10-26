@@ -1,5 +1,5 @@
-import { FunctionalComponent } from "preact";
-import { CardGroup, CardIconData, StackList } from "@/components";
+import { ComponentChildren, FunctionalComponent } from "preact";
+import { CardGroup, CardIconData, SidebarEntry, StackList } from "@/components";
 import "./style.scss";
 import { range } from "@/utils/range";
 import { CardSubsection } from "@/components";
@@ -7,8 +7,10 @@ import {
   ArrowUpRightIcon,
   DeviceDesktopIcon,
   DotFillIcon,
+  GitCompareIcon,
   MarkGithubIcon,
   NorthStarIcon,
+  PersonIcon,
 } from "@primer/octicons-react";
 import { getClassName } from "@/utils/classname";
 
@@ -23,16 +25,16 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: "GitHub profile",
-    description:
-      "My GitHub profile, home to several projects, some of which are not listed here.",
-    stack: ["Python", "TypeScript", "Preact"],
+    title: "evtn.me",
+    description: "This website",
     icon: {
-      icon: () => <MarkGithubIcon size="24" />,
-      color: "text",
+      icon: () => <PersonIcon size="24" />,
+      color: "purple",
       invertColor: true,
     },
-    href: "https://github.com/evtn",
+    stack: ["TypeScript", "Preact"],
+    href: "https://evtn.me",
+    repo: "https://github.com/evtn/me",
   },
   {
     title: "MonCalc",
@@ -114,11 +116,55 @@ const projects: Project[] = [
     stack: ["Python"],
     href: "https://github.com/evtn/easypoint",
   },
+  {
+    title: "tomata",
+    description: "Generic stateful event-based flow framework",
+    icon: {
+      icon: () => <GitCompareIcon size={24} />,
+      color: "red",
+      invertColor: true,
+    },
+    stack: ["Python"],
+    href: "https://github.com/evtn/tomata",
+  },
 ];
 
+const frontEndProjects: Project[] = projects.filter((project) =>
+  project.stack.includes("TypeScript"),
+);
+
+const pythonProjects: Project[] = projects.filter((project) =>
+  project.stack.includes("Python"),
+);
+
+const getGHRegexp = () => /https:\/\/github.com\/([\w.-]+\/[\w.-]+)/;
+
 const isGithub = (project: Project) => {
-  return !!(
-    project.href && /https:\/\/github.com\/[\w-]+\/.+/.test(project.href)
+  return !!(project.href && getGHRegexp().test(project.href));
+};
+
+const getRepoText = (repo: string): string => {
+  const match = repo.match(getGHRegexp());
+  if (!match) {
+    return "repo";
+  }
+
+  return match[1];
+};
+
+const ProjectRepo: FunctionalComponent<{ repo: string; color?: string }> = ({
+  repo,
+  color,
+}) => {
+  const colorClass = color ? `colored-${color}` : undefined;
+  return (
+    <a
+      href={`https://github.com/${repo}`}
+      class={getClassName("project__repo", colorClass)}
+    >
+      <MarkGithubIcon className="repo-icon" />
+      <code>{repo}</code>
+    </a>
   );
 };
 
@@ -126,7 +172,7 @@ const Project: FunctionalComponent<{ project: Project }> = ({ project }) => {
   const isGH = isGithub(project);
   const href = isGH ? undefined : project.href;
   const repo = isGH ? project.href : project.repo;
-  const colorClass = project.icon ? `colored-${project.icon.color}` : undefined;
+  const color = project.icon ? project.icon.color : undefined;
 
   return (
     <CardGroup
@@ -151,12 +197,7 @@ const Project: FunctionalComponent<{ project: Project }> = ({ project }) => {
             <>
               {project.description && <span>{project.description}</span>}
               {repo ? (
-                <a
-                  href={repo}
-                  class={getClassName("project__repo", colorClass)}
-                >
-                  <MarkGithubIcon className="repo-icon" /> Repo
-                </a>
+                <ProjectRepo repo={getRepoText(repo)} color={color} />
               ) : undefined}
             </>
           ),
@@ -166,16 +207,16 @@ const Project: FunctionalComponent<{ project: Project }> = ({ project }) => {
   );
 };
 
-export const ProjectSection: FunctionalComponent = () => {
+const ProjectGroup: FunctionalComponent<{
+  header: ComponentChildren;
+  projects: Project[];
+  color: string;
+}> = ({ header, projects, color }) => {
   const pairCount = Math.ceil(projects.length / 2);
 
   return (
-    <section className="projects">
-      <h1>My projects</h1>
-      <p>
-        Keep in mind this is not <i>everything</i> I've worked on, these are
-        just some things you can check out right now
-      </p>
+    <div className={getClassName("project-group", `colored-${color}`)}>
+      <h2 className="project-group__header">{header} projects</h2>
       {range(pairCount).map((e) => (
         <CardSubsection>
           {projects.slice(e * 2, (e + 1) * 2).map((project) => (
@@ -183,6 +224,33 @@ export const ProjectSection: FunctionalComponent = () => {
           ))}
         </CardSubsection>
       ))}
+    </div>
+  );
+};
+
+export const ProjectSection: FunctionalComponent = () => {
+  const pairCount = Math.ceil(projects.length / 2);
+
+  return (
+    <section className="projects">
+      <h1>
+        My projects&nbsp;&nbsp;
+        <ProjectRepo repo="evtn" color="text" />
+      </h1>
+      <p>
+        Keep in mind this is not <i>everything</i> I've worked on, these are
+        just some things you can check out right now
+      </p>
+      <ProjectGroup
+        header={<span className="colored">Front-End</span>}
+        projects={frontEndProjects}
+        color="yellow"
+      />
+      <ProjectGroup
+        header={<span className="colored">Python</span>}
+        projects={pythonProjects}
+        color="blue"
+      />
     </section>
   );
 };

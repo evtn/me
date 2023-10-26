@@ -44,15 +44,12 @@
     width: 35rem;
     max-width: 100%;
     & > * {
-        width: 50%;
+        width: calc(50% - 0.5rem);
         & > .card-group {
             width: 100%;
         }
     }
     & .card-group__content {
-        flex-grow: 1;
-    }
-    & .card-group {
         flex-grow: 1;
     }
 }

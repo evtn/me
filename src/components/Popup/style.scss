@@ -22,7 +22,7 @@
         position: relative;
         padding: 2.5rem;
         border-radius: 1rem;
-        & p {
+        & > * > p {
             margin-bottom: 0.5rem;
         }
         & iframe {

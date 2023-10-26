@@ -59,7 +59,7 @@ main[data-colors="false"] {
     &__subtitle {
         margin: 0;
         font-weight: 500;
-        line-height: 1;
+        line-height: 1.3;
         font-size: 0.9em;
         &-alpha {
             opacity: 0.5;
@@ -91,6 +91,10 @@ main[data-colors="false"] {
     }
     &__text {
         font-size: 0.85em;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-grow: 1;
     }
 }
 
