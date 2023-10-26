@@ -4,6 +4,6 @@ export type Settings = Record<string, boolean>;
 
 export const settingsAtom = atomWithStorage<Settings>("settings", {
     Colors: true,
-    Lowercase: true,
+    Lowercase: false,
     Monospace: false,
 });
