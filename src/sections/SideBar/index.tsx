@@ -4,7 +4,7 @@ import { useState } from "preact/hooks";
 import { ProjectsEntry } from "../Projects/entry";
 import { entries } from "./entry";
 import { SidebarEntry, Logo, MoneyEntry, Switch } from "@/components";
-import { Settings, settingsAtom } from "@/state/settings";
+import { SettingKey, Settings, settingsAtom } from "@/state/settings";
 
 import "./style.scss";
 import { getClassName } from "@/utils/classname";
@@ -12,7 +12,8 @@ import { getClassName } from "@/utils/classname";
 export const SideBar: FunctionalComponent = () => {
   const [settings, setSettings] = useAtom(settingsAtom);
 
-  const toggleSetting = (toggleKey: string, newValue: boolean) => {
+  const toggleSetting = (toggleKey: SettingKey, newValue: boolean) => {
+    // @ts-ignore
     const newSettings: Settings = {};
 
     setSettings(toggleKey, newValue);
@@ -21,7 +22,7 @@ export const SideBar: FunctionalComponent = () => {
   const switches = Object.entries(settings).map(([key, value], i) => (
     <Switch
       label={key}
-      onSwitch={(newValue) => toggleSetting(key, newValue)}
+      onSwitch={(newValue) => toggleSetting(key as SettingKey, newValue)}
       currentValue={value}
       className={getClassName(
         "sidebar-entry__link",
