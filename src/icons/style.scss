@@ -18,3 +18,52 @@
     height: unset;
     user-select: none;
 }
+
+.icon-mcc {
+    &__piece {
+        &-top-right,
+        &-bottom-right,
+        &-center,
+        &-c-top,
+        &-c-bottom,
+        &-m {
+            fill: var(--local-accent);
+        }
+        &-top-right {
+            --local-accent: var(--yellow);
+        }
+        &-bottom-right {
+            --local-accent: var(--red);
+        }
+        &-center {
+            --local-accent: var(--text);
+        }
+        &-c-top,
+        &-c-bottom,
+        &-m {
+            --local-accent: var(--background);
+        }
+    }
+}
+
+.icon-inverted {
+    .icon-mcc {
+        overflow: visible;
+        &__piece {
+            &-top-right,
+            &-bottom-right,
+            &-center {
+                --local-accent: transparent;
+            }
+            &-c-top {
+                --local-accent: var(--yellow);
+            }
+            &-c-bottom {
+                --local-accent: var(--red);
+            }
+            &-m {
+                --local-accent: var(--green);
+            }
+        }
+    }
+}

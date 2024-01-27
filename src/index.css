@@ -2,24 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@500&display=swap");
 
-main[data-monospace="true"] {
-  font-family:
-    "Fira Code",
-    Noto Sans Georgian,
-    monospace;
-  line-height: 1.5;
-  font-weight: 400;
-  font-size: 0.85rem;
-}
-
 :root {
-  font-family:
-    Manrope,
-    Noto Sans Georgian,
-    sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
   color-scheme: light dark;
   color: var(--text);
   background-color: var(--background);

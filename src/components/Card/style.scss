@@ -14,6 +14,10 @@ main[data-colors="false"] {
     gap: 0.5em;
     outline: 1px var(--local-accent) solid;
 
+    main[data-neon="true"] & {
+        background: transparent;
+    }
+
     &[data-text="true"] {
         padding: 1em;
     }
@@ -33,15 +37,21 @@ main[data-colors="false"] {
         flex-shrink: 0;
         background: var(--local-accent);
         color: var(--background);
+        --icon-color: var(--background);
         border-radius: 0.5em;
         overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
 
-        &.inverted {
-            background: var(--background);
+        &.icon-inverted {
+            background: transparent;
             color: var(--local-accent);
+            --icon-color: var(--local-accent);
+        }
+        & .logo {
+            filter: unset;
+            padding: 0.5rem;
         }
         & code {
             font-weight: 600;
@@ -62,6 +72,10 @@ main[data-colors="false"] {
         line-height: 1.3;
         font-size: 0.9em;
         &-alpha {
+            main[data-neon="true"] & {
+                opacity: 1;
+                color: var(--local-accent);
+            }
             opacity: 0.5;
         }
     }
@@ -88,6 +102,10 @@ main[data-colors="false"] {
             align-items: flex-start;
             gap: 0.25em;
         }
+        &-gapless {
+            gap: 0;
+            padding: 0 0.5em;
+        }
     }
     &__text {
         font-size: 0.85em;
@@ -98,7 +116,7 @@ main[data-colors="false"] {
     }
 }
 
-a.card {
+.card__subtitle a.card {
     color: var(--text);
 }
 

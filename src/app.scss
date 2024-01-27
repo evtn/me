@@ -7,6 +7,31 @@ h1 {
     font-size: 2.5em;
 }
 
+main[data-monospace="true"] {
+    &,
+    & button {
+        font-family:
+            "Fira Code",
+            Noto Sans Georgian,
+            monospace;
+        line-height: 1.5;
+        font-weight: 400;
+        font-size: 0.85rem;
+    }
+}
+
+:root {
+    &,
+    & button {
+        font-family:
+            Manrope,
+            Noto Sans Georgian,
+            sans-serif;
+        line-height: 1.5;
+        font-weight: 400;
+    }
+}
+
 main,
 #app {
     margin: 0 auto;
@@ -40,7 +65,7 @@ main,
 
 ::selection {
     background-color: var(--overlay);
-    color: var(--link);
+    color: var(--local-accent);
 }
 
 main[data-lowercase="true"] * {

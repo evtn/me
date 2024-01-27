@@ -1,5 +1,6 @@
 .logo {
     cursor: pointer;
+    --local-accent: var(--blue);
 
     &__text {
         animation: rotate 30s linear infinite;

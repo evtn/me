@@ -29,6 +29,7 @@ export type CardData = (
   subtitle?: ComponentChildren;
   cardType?: CardType;
   href?: string;
+  color?: string;
 };
 
 const getCardIconColors = (data: CardIconData) => {
@@ -64,13 +65,20 @@ const CardIcon: FunctionalComponent<{ data: CardIconData }> = ({ data }) => {
 
 export const Card: FunctionalComponent<{ data: CardData }> = ({ data }) => {
   let backgroundColor: string = "dark";
-
-  if (data.icon) {
+  if (data.color) {
+    backgroundColor = data.color;
+  } else if (data.icon) {
     backgroundColor = getCardIconColors(data.icon).backgroundColor;
   }
 
   const header = (
-    <div className="card__header">
+    <div
+      className={getClassName(
+        "card__header",
+        data.icon &&
+          (data.icon.invertColor ? "card__header-gapless" : undefined),
+      )}
+    >
       {data.icon && <CardIcon data={data.icon} />}
       <div className="card__header-text">
         {data.title ? <h2 className="card__title">{data.title}</h2> : null}

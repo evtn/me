@@ -1,9 +1,11 @@
+import { settingsAtom } from "@/state/settings";
 import {
   NumberIcon,
   OrganizationIcon,
   PencilIcon,
   TypographyIcon,
 } from "@primer/octicons-react";
+import { useAtom } from "jotai";
 import { ComponentChildren, FunctionalComponent } from "preact";
 import { CardIconData } from "../components/Card";
 import { makePaddedIcon } from "../components/Card/paddedIcon";
@@ -27,7 +29,6 @@ const interests: Interest[] = [
     icon: {
       icon: makePaddedIcon(() => <PencilIcon size={24} />),
       color: "blue",
-      invertColor: true,
     },
   },
   {
@@ -37,7 +38,6 @@ const interests: Interest[] = [
     icon: {
       icon: makePaddedIcon(() => <NumberIcon size={24} />),
       color: "red",
-      invertColor: true,
     },
   },
   {
@@ -47,7 +47,6 @@ const interests: Interest[] = [
     icon: {
       icon: makePaddedIcon(() => <TypographyIcon size={24} />),
       color: "orange",
-      invertColor: true,
     },
   },
   {
@@ -57,22 +56,34 @@ const interests: Interest[] = [
     icon: {
       icon: makePaddedIcon(() => <OrganizationIcon size={24} />),
       color: "green",
-      invertColor: true,
     },
   },
 ];
 
-const interestToCardGroup = (interest: Interest): CardGroupProps => {
+const interestToCardGroup = (
+  interest: Interest,
+  isNeon: boolean,
+): CardGroupProps => {
+  const headerColor = interest.icon.color;
+  const baseColor = isNeon ? headerColor : undefined;
+  let icon = { ...interest.icon };
+
+  if (isNeon) {
+    icon.invertColor = !icon.invertColor;
+  }
+
   return {
     headerCards: [
       {
         title: interest.title,
-        icon: interest.icon,
+        icon,
+        color: headerColor,
       },
     ],
     contentCards: [
       {
         text: interest.description,
+        color: baseColor,
       },
     ],
   };
@@ -80,6 +91,7 @@ const interestToCardGroup = (interest: Interest): CardGroupProps => {
 
 export const Interests: FunctionalComponent = () => {
   const pairCount = Math.ceil(interests.length / 2);
+  const [{ Neon: isNeon }] = useAtom(settingsAtom);
 
   return (
     <div className="card-section">
@@ -88,7 +100,7 @@ export const Interests: FunctionalComponent = () => {
       {[...Array(pairCount).keys()].map((e) => (
         <CardSubsection>
           {interests.slice(e * 2, (e + 1) * 2).map((interest) => (
-            <CardGroup {...interestToCardGroup(interest)} />
+            <CardGroup {...interestToCardGroup(interest, isNeon)} />
           ))}
         </CardSubsection>
       ))}

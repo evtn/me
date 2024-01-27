@@ -1,5 +1,11 @@
 import { ComponentChildren, FunctionalComponent } from "preact";
-import { CardGroup, CardIconData, SidebarEntry, StackList } from "@/components";
+import {
+  CardGroup,
+  CardIconData,
+  Logo,
+  SidebarEntry,
+  StackList,
+} from "@/components";
 import "./style.scss";
 import { range } from "@/utils/range";
 import { CardSubsection } from "@/components";
@@ -13,6 +19,8 @@ import {
   PersonIcon,
 } from "@primer/octicons-react";
 import { getClassName } from "@/utils/classname";
+import { settingsAtom } from "@/state/settings";
+import { useAtom } from "jotai";
 
 type Project = {
   title: string;
@@ -28,9 +36,8 @@ const projects: Project[] = [
     title: "evtn.me",
     description: "This website",
     icon: {
-      icon: () => <PersonIcon size="24" />,
+      icon: () => <Logo />,
       color: "purple",
-      invertColor: true,
     },
     stack: ["TypeScript", "Preact"],
     href: "https://evtn.me",
@@ -43,7 +50,6 @@ const projects: Project[] = [
     icon: {
       icon: () => <DeviceDesktopIcon size="24" />,
       color: "blue",
-      invertColor: true,
     },
     stack: ["TypeScript", "Preact"],
     href: "https://moncalc.evtn.me",
@@ -54,7 +60,6 @@ const projects: Project[] = [
     icon: {
       icon: () => <h3>ჭ</h3>,
       color: "pink",
-      invertColor: true,
     },
     stack: ["TypeScript", "Preact"],
     href: "https://kartuli.evtn.me",
@@ -66,7 +71,6 @@ const projects: Project[] = [
     icon: {
       icon: () => <NorthStarIcon size="24" />,
       color: "green",
-      invertColor: true,
     },
     stack: ["TypeScript", "Preact"],
     href: "https://newyear.evtn.me",
@@ -78,7 +82,6 @@ const projects: Project[] = [
     icon: {
       icon: () => <code>&lt;svg&gt;</code>,
       color: "purple",
-      invertColor: true,
     },
     stack: ["Python"],
     href: "https://github.com/evtn/soda",
@@ -89,7 +92,6 @@ const projects: Project[] = [
     icon: {
       icon: () => <code>/a+/</code>,
       color: "red",
-      invertColor: true,
     },
     stack: ["Python"],
     href: "https://github.com/evtn/rgx",
@@ -100,7 +102,6 @@ const projects: Project[] = [
     icon: {
       icon: () => <code>.py</code>, // &#123;&#125;
       color: "orange",
-      invertColor: true,
     },
     stack: ["Python"],
     href: "https://github.com/courage-tci/gekkota",
@@ -111,7 +112,6 @@ const projects: Project[] = [
     icon: {
       icon: () => <DotFillIcon size="24" />,
       color: "green",
-      invertColor: true,
     },
     stack: ["Python"],
     href: "https://github.com/evtn/easypoint",
@@ -122,7 +122,6 @@ const projects: Project[] = [
     icon: {
       icon: () => <GitCompareIcon size={24} />,
       color: "red",
-      invertColor: true,
     },
     stack: ["Python"],
     href: "https://github.com/evtn/tomata",
@@ -172,23 +171,27 @@ const Project: FunctionalComponent<{ project: Project }> = ({ project }) => {
   const isGH = isGithub(project);
   const href = isGH ? undefined : project.href;
   const repo = isGH ? project.href : project.repo;
-  const color = project.icon ? project.icon.color : undefined;
+  const headerColor = project.icon ? project.icon.color : undefined;
 
   return (
     <CardGroup
+      className="project"
       headerCards={[
         {
           title: (
             <>
               {project.title}
               {href ? (
-                <ArrowUpRightIcon className="project__link" />
+                <div className="project__link">
+                  <ArrowUpRightIcon />
+                </div>
               ) : undefined}
             </>
           ),
           subtitle: <StackList stack={project.stack} />,
           icon: project.icon,
           href,
+          color: headerColor,
         },
       ]}
       contentCards={[
@@ -197,10 +200,11 @@ const Project: FunctionalComponent<{ project: Project }> = ({ project }) => {
             <>
               {project.description && <span>{project.description}</span>}
               {repo ? (
-                <ProjectRepo repo={getRepoText(repo)} color={color} />
+                <ProjectRepo repo={getRepoText(repo)} color={headerColor} />
               ) : undefined}
             </>
           ),
+          color: "dark",
         },
       ]}
     />

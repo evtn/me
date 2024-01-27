@@ -7,6 +7,7 @@ import { SidebarEntry, Logo, MoneyEntry, Switch } from "@/components";
 import { Settings, settingsAtom } from "@/state/settings";
 
 import "./style.scss";
+import { getClassName } from "@/utils/classname";
 
 export const SideBar: FunctionalComponent = () => {
   const [settings, setSettings] = useAtom(settingsAtom);
@@ -14,19 +15,18 @@ export const SideBar: FunctionalComponent = () => {
   const toggleSetting = (toggleKey: string, newValue: boolean) => {
     const newSettings: Settings = {};
 
-    Object.entries(settings).map(([key, value]) => {
-      newSettings[key] = key === toggleKey ? newValue : value;
-    });
-
-    setSettings(newSettings);
+    setSettings(toggleKey, newValue);
   };
 
-  const switches = Object.entries(settings).map(([key, value]) => (
+  const switches = Object.entries(settings).map(([key, value], i) => (
     <Switch
       label={key}
       onSwitch={(newValue) => toggleSetting(key, newValue)}
       currentValue={value}
-      className="sidebar-entry__link"
+      className={getClassName(
+        "sidebar-entry__link",
+        `colored-${["green", "blue", "orange", "red"][i]}`,
+      )}
     />
   ));
 
@@ -41,9 +41,9 @@ export const SideBar: FunctionalComponent = () => {
     >
       <section className="sidebar">
         <Logo />
-        <h1 className="sidebar__name">Dmitry Gritsenko</h1>
+        <h1 className="sidebar__name colored-blue">Dmitry Gritsenko</h1>
         <div className="sidebar__info">
-          <h2 onClick={incrementSpecialization}>
+          <h2 onClick={incrementSpecialization} className="colored-blue">
             {["Frontend", "Python"][specialization % 2]} Developer
           </h2>
           {entries.map((e) => (
