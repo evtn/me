@@ -62,6 +62,7 @@ export const entries: SidebarEntryData[] = [
         ln: "telegram",
         text: "aternative",
         icon: "telegram",
+        copyLink: true,
         color: "cyan",
         label: "Telegram",
     },
