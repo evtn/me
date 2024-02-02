@@ -171,9 +171,11 @@ main[data-lowercase="true"] * {
     }
 }
 
-[aria-label]:hover {
-    &::after {
-        display: block;
+@media (hover: hover) and (min-width: 50rem) {
+    [aria-label]:hover {
+        &::after {
+            display: block;
+        }
     }
 }
 
