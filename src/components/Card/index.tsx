@@ -1,108 +1,93 @@
-import { ComponentChildren, ComponentType, FunctionalComponent } from "preact";
-import "./style.scss";
-import { ImportantContent } from "../Popup/veryImportant";
-import { usePopup } from "../Popup";
-import { getClassName } from "@/utils/classname";
-import { JSXInternal } from "preact/src/jsx";
+import { FunctionalComponent } from "preact";
 
-export { makePaddedIcon } from "./paddedIcon";
+import { Filler } from "@/components";
+import { cardToSlug, gotoCard } from "@/hooks";
+import { Icon } from "@/icons";
+import { CardData } from "@/types";
+import { classBuilder, format } from "@/utils";
 
-export type CardIconData = {
-  color?: string;
-  invertColor?: boolean;
-  icon: ComponentType<{ className: string }>;
+import "./style.css";
+
+import { getCardColor } from "./getColor";
+import { CardIcon } from "./icon";
+import { CardSubtitle } from "./subtitle";
+import { CardTitle } from "./title";
+
+export type CardComponent = FunctionalComponent<{ data: CardData }>;
+
+export const classname = classBuilder("card");
+const element = classname.element;
+
+export const Card: FunctionalComponent<{
+    data: CardData;
+    isVisible: boolean;
+}> = ({ data, isVisible }) => {
+    const entryType = data.type || "project";
+    const entryColor = getCardColor(entryType);
+
+    const cardContent = data.description && (
+        <div className={element("content").build()}>
+            <span className={element("description").build()}>
+                {format(data.description)}
+            </span>
+        </div>
+    );
+
+    return (
+        <div
+            className={classname.color(entryColor).build(classname.card)}
+            data-visible={isVisible}
+        >
+            <div className={element("header").build()}>
+                <CardIcon data={data} />
+                <div className={element("header-text").build()}>
+                    <CardSubtitle data={data} />
+                    <CardTitle data={data} />
+                </div>
+                <Filler />
+                {data.repo && (
+                    <a
+                        className={classname
+                            .element("card-button")
+                            .build(classname.card)}
+                        href={`https://github.com/${data.repo}`}
+                        aria-label={`GitHub Repo: ${data.repo}`}
+                    >
+                        <Icon iconKey="github" />
+                    </a>
+                )}
+                {data.href && (
+                    <a
+                        className={classname
+                            .element("card-button")
+                            .build(classname.card)}
+                        href={data.href}
+                        aria-label={`External link: ${data.href}`}
+                    >
+                        <Icon iconKey="external" />
+                    </a>
+                )}
+                <button
+                    className={classname
+                        .element("card-button")
+                        .build(classname.card)}
+                    onClick={() => gotoCard(data)}
+                >
+                    <Icon iconKey="expand" />
+                </button>
+                <a
+                    className={classname
+                        .element("card-button")
+                        .build(classname.card)}
+                    href={`/timeline/${cardToSlug(data)}`}
+                    aria-label={`Link to this card`}
+                >
+                    <Icon iconKey="link" />
+                </a>
+            </div>
+            {cardContent}
+        </div>
+    );
 };
 
-type CardType = "common" | "time" | "experience";
-
-export type CardData = (
-  | {
-      title: ComponentChildren;
-      text?: ComponentChildren;
-    }
-  | {
-      title?: ComponentChildren;
-      text: ComponentChildren;
-    }
-) & {
-  icon?: CardIconData;
-  subtitle?: ComponentChildren;
-  cardType?: CardType;
-  href?: string;
-  color?: string;
-};
-
-const getCardIconColors = (data: CardIconData) => {
-  const primaryColor = data.color || "text";
-  const backgroundColor = data.invertColor ? primaryColor : "background";
-  const iconColor = data.invertColor ? "background" : primaryColor;
-
-  return {
-    primaryColor,
-    backgroundColor,
-    iconColor,
-  };
-};
-
-const CardIcon: FunctionalComponent<{ data: CardIconData }> = ({ data }) => {
-  const { primaryColor } = getCardIconColors(data);
-
-  const setPopupContents = usePopup();
-
-  return (
-    <div
-      className={getClassName(
-        "card__icon",
-        `colored-${primaryColor}`,
-        data.invertColor ? "icon-inverted" : undefined,
-      )}
-      onClick={() => setPopupContents(ImportantContent)}
-    >
-      <data.icon className="card__icon-main" />
-    </div>
-  );
-};
-
-export const Card: FunctionalComponent<{ data: CardData }> = ({ data }) => {
-  let backgroundColor: string = "dark";
-  if (data.color) {
-    backgroundColor = data.color;
-  } else if (data.icon) {
-    backgroundColor = getCardIconColors(data.icon).backgroundColor;
-  }
-
-  const header = (
-    <div
-      className={getClassName(
-        "card__header",
-        data.icon &&
-          (data.icon.invertColor ? "card__header-gapless" : undefined),
-      )}
-    >
-      {data.icon && <CardIcon data={data.icon} />}
-      <div className="card__header-text">
-        {data.title ? <h2 className="card__title">{data.title}</h2> : null}
-        {data.subtitle ? (
-          <h3 className="card__subtitle">{data.subtitle}</h3>
-        ) : null}
-      </div>
-    </div>
-  );
-
-  const props = {
-    className: getClassName("card", `colored-${backgroundColor}`),
-    "data-text": !!data.text,
-    "data-type": data.cardType || "common",
-    href: data.href,
-    children: [
-      data.title ? header : null,
-      data.text ? <p className="card__text">{data.text}</p> : null,
-    ],
-  };
-
-  if (data.href) {
-    return <a {...props} />;
-  }
-
-  return <div {...props} />;
-};
+export { CardTitle, CardSubtitle, CardIcon };

@@ -1,0 +1,169 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    align-self: stretch;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 400;
+    gap: 0.5rem;
+    height: max-content;
+    flex-grow: 1;
+    box-sizing: border-box;
+    --icon-color: var(--blue);
+    max-width: 40rem;
+
+    &__specialization span {
+        color: var(--local-accent);
+    }
+
+    &__header {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        flex-direction: column;
+        gap: 0.5rem;
+        flex-grow: 1;
+        width: 100%;
+
+        &-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+
+    &__logo {
+        color: var(--icon-color);
+        --local-accent: var(--icon-color);
+        padding: 1rem;
+        width: 100%;
+        height: 0;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+    }
+
+    &__name {
+        color: var(--icon-color);
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 0;
+        line-height: 1.5;
+        text-align: right;
+        max-width: 10em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+        font-weight: 600;
+        margin: 0.5rem 0;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-self: stretch;
+        max-width: 100%;
+        border-radius: var(--border-radius);
+        background: transparent;
+        gap: 0.5rem;
+    }
+
+    & .logo {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+    }
+}
+
+[data-monospace="true"] button {
+    font-family: "Fira Code", monospace;
+}
+
+.sidebar-portal {
+    background: var(--background);
+    scrollbar-color: var(--local-accent) var(--card);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    box-shadow: 0 0 1rem var(--mono-black-overlay);
+    position: relative;
+    z-index: 2;
+
+    & .settings {
+        flex-direction: row-reverse;
+    }
+}
+
+@media (max-width: 65rem) {
+    .sidebar-portal {
+        align-items: center;
+    }
+
+    .sidebar {
+        align-items: center;
+        max-width: unset;
+
+        &__header {
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+
+            &-text {
+                margin-right: 0;
+                text-align: center;
+                align-items: center;
+                align-self: stretch;
+            }
+        }
+
+        &__info {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        &__logo {
+            height: 20rem;
+        }
+    }
+}
+
+@media (max-width: 40rem) {
+    .sidebar {
+        align-items: center;
+        max-width: unset;
+
+        &__header {
+            flex-direction: column;
+        }
+
+        &__info {
+            flex-direction: column;
+            flex-wrap: nowrap;
+        }
+    }
+}
+
+@media (max-width: 35rem) {
+    .sidebar {
+        &__info {
+            max-width: 100%;
+        }
+    }
+    .sidebar-portal .settings {
+        flex-direction: column;
+        align-items: flex-end;
+        align-self: flex-end;
+    }
+}

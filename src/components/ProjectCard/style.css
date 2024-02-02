@@ -1,0 +1,224 @@
+.project-card {
+    width: 55rem;
+    max-width: 100%;
+    max-height: 95svh;
+    overflow: auto;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+        margin: 0;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    &__links {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    &__link {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.2rem;
+        color: var(--local-accent);
+
+        cursor: pointer;
+
+        opacity: 0.7;
+
+        svg {
+            display: inline-block;
+        }
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+
+    &__subtitle {
+        font-weight: 500;
+        opacity: 0.7;
+        text-transform: uppercase;
+        font-size: 1rem;
+    }
+
+    &__type {
+        color: var(--local-accent);
+    }
+
+    &__description {
+        font-size: 1.2rem;
+        padding: 1rem;
+        background: var(--card);
+        border-radius: var(--border-radius);
+        z-index: 1;
+        white-space: break-spaces;
+    }
+
+    &__stack-bar {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    &__stack-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        padding: 0.3rem;
+        font-size: 0.75rem;
+        color: var(--local-accent);
+        border-radius: var(--border-radius);
+        z-index: 0;
+    }
+}
+
+.versionlist {
+    margin: 0;
+    padding-left: 0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1rem 1rem;
+    z-index: 1;
+
+    &-header {
+        font-size: 1.2rem;
+        color: var(--local-accent);
+    }
+
+    &-version {
+        font-size: 1.2rem;
+
+        &::marker {
+            content: "";
+        }
+
+        a {
+            color: var(--local-accent);
+            font-size: 1.2rem;
+            display: inline-flex;
+            padding: 0.5rem;
+            border-radius: var(--border-radius);
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            z-index: 1;
+            position: relative;
+
+            svg {
+                color: inherit;
+            }
+        }
+
+        & .timeline-entry__title {
+            font-size: 1.2rem;
+            display: inline;
+        }
+    }
+}
+
+.cardchange-button {
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 1rem;
+    font-size: 2rem;
+    font-weight: 500;
+    cursor: pointer;
+    line-height: 1;
+
+    button + & {
+        right: calc(100% + 0.5rem);
+    }
+
+    .project-card + & {
+        left: calc(100% + 0.5rem);
+    }
+
+    &:not(.hack) {
+        position: absolute;
+        background: var(--background);
+    }
+}
+
+@media (max-width: 50rem) {
+    .project-card {
+        &:not(.hack) {
+            padding: 1rem;
+        }
+
+        h2.card__title {
+            font-size: 1rem;
+        }
+        span.card__subtitle {
+            font-size: 0.75rem;
+        }
+        p.project-card__description {
+            font-size: 0.75rem;
+        }
+        &__stack-icon {
+            width: 1.2rem;
+            height: 1.2rem;
+            padding: 0.3rem;
+            font-size: 0.75rem;
+            background-color: var(--local-accent);
+            color: var(--background);
+            border-radius: var(--border-radius);
+        }
+    }
+    .cardchange-button {
+        padding: 1rem;
+        font-size: 2rem;
+        font-weight: 500;
+        cursor: pointer;
+        color: var(--local-accent);
+        bottom: 0.5rem;
+        top: unset;
+
+        button + & {
+            left: 0.5rem;
+            right: unset;
+        }
+
+        .project-card + & {
+            right: 0.5rem;
+            left: unset;
+        }
+
+        &:not(.hack) {
+            position: fixed;
+            transform: unset;
+            background: var(--background);
+            width: calc((100vw - 1rem - 5rem) / 2);
+        }
+    }
+}
+
+@media (max-width: 35rem) {
+    .project-card {
+        padding: 1rem;
+        h2 {
+            font-size: 1rem;
+        }
+        &__description {
+            font-size: 0.75rem;
+        }
+    }
+}

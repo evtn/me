@@ -24,4 +24,8 @@ dist-ssr
 *.sw?
 *.lock
 
+.yarn
+.yarnrc.yml
 package-lock.json
+*.cpuprofile
+stats.html

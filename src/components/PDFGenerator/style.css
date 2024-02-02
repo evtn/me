@@ -1,0 +1,213 @@
+.pdf-generator {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    font-size: 1rem;
+    max-height: 95svh;
+    box-sizing: border-box;
+    overflow: scroll;
+
+    h2 {
+        margin: 0;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    &__config-bar {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        width: 100%;
+
+        & > .switch {
+            flex-shrink: 0;
+        }
+    }
+
+    &__section {
+        border: none;
+        outline: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.5rem;
+        font-weight: 400;
+        position: relative;
+        width: 100%;
+        transition: opacity 150ms ease-in-out;
+
+        &.invalid {
+            p {
+                color: var(--red);
+            }
+
+            .text-field-wrapper {
+                &,
+                & input {
+                    color: var(--background);
+                }
+
+                &::before {
+                    opacity: 1;
+                }
+            }
+        }
+
+        &.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        & > .text-field-wrapper {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0.5rem;
+            gap: 0.5rem;
+        }
+
+        & > .colored-card {
+            z-index: 0;
+            color: var(--local-accent);
+        }
+
+        & > p {
+            font-size: 1.2rem;
+        }
+
+        &::after {
+            content: "";
+            height: 100%;
+            border: 0.25rem solid var(--local-accent);
+            border-radius: 0 0.25rem 0.25rem 0;
+            position: absolute;
+            top: 0rem;
+            left: -2rem;
+            opacity: 0.7;
+        }
+    }
+
+    &__text-field {
+        appearance: none;
+        border: none;
+        font-size: inherit;
+        border-radius: var(--border-radius);
+        background-color: transparent;
+        line-height: inherit;
+    }
+
+    &__warning {
+        color: var(--red);
+        font-weight: 600;
+    }
+
+    &__submit-panel {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+
+        &::after {
+            content: none;
+        }
+    }
+
+    &__submit-button {
+        line-height: inherit;
+        padding: 0.5rem 1rem;
+        color: var(--local-accent);
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        align-items: center;
+        z-index: 0;
+    }
+
+    & .switch[aria-label] {
+        &::after {
+            left: 50%;
+            top: calc(100% + 0.5rem);
+            transform: translateX(-50%);
+        }
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        min-height: 20rem;
+        max-height: calc(100% - 5rem);
+        align-self: center;
+        border-radius: 0.25rem;
+        box-shadow: 0 0 2rem #0005;
+    }
+
+    .text-field-wrapper {
+        cursor: text;
+        &:focus-within {
+            color: var(--background);
+            ::selection {
+                background: var(--background-overlay);
+                color: var(--background);
+            }
+
+            &::before {
+                opacity: 0.9;
+                padding: 0.25rem;
+                left: -0.25rem;
+                top: -0.25rem;
+                box-shadow: 0 0 2.5rem var(--local-accent);
+            }
+        }
+
+        &:active {
+            color: var(--background);
+            &::before {
+                opacity: 1;
+                padding: 0.1rem;
+                left: -0.1rem;
+                top: -0.1rem;
+            }
+        }
+
+        & input:focus {
+            outline: none;
+        }
+    }
+}
+
+@media (max-width: 50rem) {
+    .pdf-generator {
+        max-height: calc(100svh - 5.5rem);
+
+        &__section {
+            & > p {
+                font-size: 1rem;
+            }
+        }
+
+        &__submit-panel {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        &__submit-button {
+            flex-shrink: 0;
+            flex-grow: 1;
+        }
+    }
+}

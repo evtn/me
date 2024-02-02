@@ -1,0 +1,378 @@
+html,
+body {
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+svg {
+    overflow: visible;
+}
+:root {
+    font-family: "Rethink Sans", "Noto Sans Georgian", sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    --border-radius: 0.25rem;
+}
+
+main[data-monospace="true"],
+code {
+    font-family:
+        "JetBrains Mono",
+        Noto Sans Georgian,
+        monospace;
+
+    & * {
+        letter-spacing: -0.05em;
+    }
+}
+
+button,
+input {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+}
+
+main,
+#app {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    min-height: 100vh;
+    overflow: hidden;
+    background: var(--background);
+}
+
+.scroll-portal {
+    height: 100svh;
+    overflow: auto;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 65rem) {
+    #app {
+        height: 100svh;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    main {
+        flex-direction: column;
+        height: max-content;
+    }
+    .scroll-portal {
+        height: max-content;
+        overflow: hidden;
+    }
+    .settings {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+::selection {
+    background-color: var(--overlay);
+    color: var(--local-accent);
+}
+
+main[data-lowercase="true"] * {
+    text-transform: lowercase;
+}
+
+.colored {
+    color: var(--local-accent);
+
+    &-red {
+        --local-accent: var(--red);
+        --overlay: var(--red-overlay);
+        --over-text: var(--background);
+    }
+    &-orange {
+        --local-accent: var(--orange);
+        --overlay: var(--orange-overlay);
+        --over-text: var(--background);
+    }
+    &-yellow {
+        --local-accent: var(--yellow);
+        --overlay: var(--yellow-overlay);
+        --over-text: var(--mono-black);
+    }
+    &-green {
+        --local-accent: var(--green);
+        --overlay: var(--green-overlay);
+        --over-text: var(--background);
+    }
+    &-cyan {
+        --local-accent: var(--cyan);
+        --overlay: var(--cyan-overlay);
+        --over-text: var(--mono-black);
+    }
+    &-blue {
+        --local-accent: var(--blue);
+        --overlay: var(--blue-overlay);
+        --over-text: var(--background);
+    }
+    &-purple {
+        --local-accent: var(--purple);
+        --overlay: var(--purple-overlay);
+        --over-text: var(--mono-white);
+    }
+    &-pink {
+        --local-accent: var(--pink);
+        --overlay: var(--pink-overlay);
+        --over-text: var(--mono-black);
+    }
+    &-text {
+        --local-accent: var(--text);
+        --overlay: var(--text-overlay);
+        --over-text: var(--background);
+    }
+    &-background {
+        --local-accent: var(--background);
+        --over-text: var(--text);
+    }
+}
+[aria-label] {
+    position: relative;
+}
+
+[aria-label]::after {
+    content: attr(aria-label);
+    position: absolute;
+
+    left: calc(100% + 0.5rem);
+    top: calc(50%);
+    transform: translateY(-50%);
+
+    padding: 0.1em 0.3em;
+    border-radius: var(--border-radius);
+    background: var(--local-accent);
+    color: var(--background);
+    font-weight: 700;
+    width: max-content;
+    z-index: 100;
+    font-size: 0.8rem;
+    pointer-events: none;
+    display: none;
+
+    main[data-lowercase="true"] & {
+        text-transform: lowercase;
+    }
+}
+
+[aria-label]:hover {
+    &::after {
+        display: block;
+    }
+}
+
+@media (max-width: 60rem) {
+    :root {
+        --border-radius: 0.5rem;
+    }
+}
+
+b {
+    font-weight: 700;
+}
+
+i {
+    font-style: oblique;
+}
+
+.transparent {
+    opacity: 0.6;
+}
+
+code {
+    font-family: "JetBrains Mono";
+    padding: 0.1em 0.4em;
+    --local-accent: var(--text);
+}
+.highlight,
+.link {
+    color: var(--local-accent);
+    padding: 0.1em 0.3em;
+    white-space: nowrap;
+
+    &::before {
+        border-radius: var(--border-radius);
+    }
+
+    &[data-visible="false"] span {
+        opacity: 0.7;
+    }
+}
+
+.link {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 2px;
+}
+
+.spoiler {
+    position: relative;
+    white-space: nowrap;
+
+    &:hover::before {
+        opacity: 0;
+    }
+
+    &::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: var(--text);
+        border-radius: var(--border-radius);
+        position: absolute;
+        transition: opacity 300ms ease-in-out;
+        pointer-events: none;
+    }
+}
+
+.colored-card {
+    position: relative;
+    border-radius: var(--border-radius);
+    background: transparent;
+
+    transition: color 200ms ease-in-out;
+    position: relative;
+
+    &::before {
+        transition: 150ms ease-in-out;
+        transition-property: color, opacity, background-color, padding, top,
+            left;
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: var(--local-accent);
+        opacity: 0.1;
+        pointer-events: none;
+        border-radius: var(--border-radius);
+        z-index: -1;
+        padding: 0;
+    }
+}
+
+button,
+a,
+label {
+    &.colored-card {
+        &:focus,
+        &:hover {
+            outline: none;
+        }
+    }
+}
+
+@media (hover: hover) {
+    button,
+    a,
+    label {
+        &.colored-card {
+            &:focus,
+            &:hover {
+                outline: none;
+                color: var(--background);
+
+                &::before {
+                    opacity: 0.9;
+                    padding: 0.25rem;
+                    left: -0.25rem;
+                    top: -0.25rem;
+                    box-shadow: 0 0 2.5rem var(--local-accent);
+                }
+            }
+
+            &:active {
+                color: var(--background);
+                &::before {
+                    opacity: 1;
+                    padding: 0.1rem;
+                    left: -0.1rem;
+                    top: -0.1rem;
+                }
+            }
+        }
+    }
+}
+
+@media (prefers-reduced-motion) {
+    .colored-card::before {
+        left: 0 !important;
+        top: 0 !important;
+        padding: 0 !important;
+    }
+}
+
+[data-active="false"].colored-card {
+    &:hover {
+        color: var(--local-accent);
+        &::before {
+            opacity: 0.1;
+        }
+    }
+}
+
+.card-highlighted {
+    &::before {
+        background-size: 100%;
+        opacity: 0.3;
+        animation-name: highlight-blink;
+        animation-duration: 1s;
+        animation-iteration-count: 3;
+        animation-timing-function: ease-in-out;
+    }
+}
+
+@keyframes highlight-blink {
+    0% {
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0.1;
+    }
+}
+
+.filler {
+    flex-grow: 1;
+}
+
+main[data-colorful="false"] {
+    & :not(.link, a, button, label).colored-card {
+        &::before {
+            background: var(--card);
+            opacity: 1;
+        }
+        &:hover::before {
+            background: var(--card);
+            opacity: 1;
+        }
+    }
+    a,
+    button,
+    label {
+        &.colored-card {
+            &:not(:hover)::before {
+                background: var(--text);
+                opacity: 0.03;
+            }
+        }
+    }
+}

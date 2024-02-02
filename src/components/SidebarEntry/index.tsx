@@ -1,68 +1,65 @@
-import { getClassName } from "@/utils/classname";
-import { CopyIcon, Icon } from "@primer/octicons-react";
 import { ComponentChildren, FunctionalComponent } from "preact";
 
-export type SidebarEntryData = (
-  | {
-      href: string;
-      copyLink?: boolean;
-    }
-  | {
-      href?: string;
-      copyLink?: false;
-    }
-) & {
-  text: string;
-  icon: Icon;
-  color?: string;
-  onClick?: () => void;
-  copy?: boolean;
-};
+import { Color } from "@/types";
+import { classBuilder } from "@/utils";
 
-type SidebarEntryProps = {
-  data: SidebarEntryData;
-  children?: ComponentChildren;
-};
+import { SidebarEntryProps } from "@/data/sidebar";
+import { Icon, IconKey } from "@/icons/icon";
+import { getDynamicLink } from "@/utils/getDynamicLink";
 
-export const SidebarEntry: FunctionalComponent<SidebarEntryProps> = ({
-  data,
-  children,
-}) => {
-  const textToCopy = data.copyLink ? data.href : data.text;
-  const copy = data.copy === undefined ? true : data.copy;
+import "./style.css";
 
-  const contents = (
-    <>
-      <data.icon className="sidebar-entry__icon" />
-      <p>{data.text}</p>
-    </>
-  );
+const classname = classBuilder("sidebar-entry");
 
-  const LinkComponent = data.href ? "a" : "button";
+export const SidebarEntry: FunctionalComponent<SidebarEntryProps> = (
+    { data, children },
+) => {
+    const copy = data.copy === undefined || data.copy;
 
-  return (
-    <div
-      className={getClassName(
-        "sidebar-entry",
-        `colored-${data.color || "text"}`,
-      )}
-    >
-      <LinkComponent
-        className="sidebar-entry__link"
-        href={data.href}
-        onClick={data.onClick}
-      >
-        {contents}
-      </LinkComponent>
-      {copy ? (
-        <button
-          className="sidebar-entry__button"
-          onClick={() => navigator.clipboard.writeText(textToCopy)}
-        >
-          <CopyIcon />
-        </button>
-      ) : undefined}
-      {children}
-    </div>
-  );
+    const contents = (
+        <>
+            <Icon
+                iconKey={data.icon}
+                className={classname.element("icon").build()}
+            />
+            <p>
+                {data.text
+                    .split(/(\/)/g)
+                    .map((e, i) =>
+                        i % 2 ? <span className="alpha"> / </span> : e,
+                    )}
+            </p>
+        </>
+    );
+
+    const href = data.ln ? getDynamicLink(data.ln) : data.href;
+    const textToCopy = data.copyLink && href ? href : data.text;
+
+    const LinkComponent = href ? "a" : "button";
+    const color = data.color || "text";
+
+    return (
+        <div className={classname.color(color).build()}>
+            <LinkComponent
+                className={classname.element("link").build(classname.card)}
+                href={href}
+                onClick={data.onClick}
+                aria-label={data.label || undefined}
+            >
+                {contents}
+            </LinkComponent>
+            {children}
+            {copy ? (
+                <button
+                    className={classname
+                        .element("button")
+                        .build(classname.card)}
+                    onClick={() => navigator.clipboard.writeText(textToCopy)}
+                    aria-label="Copy"
+                >
+                    <Icon iconKey="copy" />
+                </button>
+            ) : undefined}
+        </div>
+    );
 };

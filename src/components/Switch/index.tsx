@@ -1,59 +1,39 @@
 import { ComponentProps, FunctionalComponent } from "preact";
 import { useRef } from "preact/hooks";
-import {
-  AriaSwitchProps,
-  useFocusRing,
-  useSwitch,
-  VisuallyHidden,
-} from "react-aria";
-import { useToggleState } from "react-stately";
-import { getClassName } from "../../utils/classname";
-import "./style.scss";
+
+import { classBuilder } from "@/utils";
+
+import "./style.css";
 
 type SwitchProps = {
-  label: string;
-  onSwitch?: (state: boolean) => void;
-  currentValue?: boolean;
-  className?: string;
+    label: string;
+    onSwitch?: (state: boolean) => void;
+    currentValue?: boolean;
+    className?: string;
 } & ComponentProps<"label">;
 
-export const Switch: FunctionalComponent<SwitchProps> = ({
-  label,
-  onSwitch,
-  currentValue,
-  className,
-  ...rest
-}) => {
-  const props: AriaSwitchProps = {
-    children: (
-      <>
-        <div className="switch__element" aria-hidden="true">
-          <div className="switch__element-mover" />
-          <div className="switch__element-circle" />
-        </div>
-        <p>{label}</p>
-      </>
-    ),
-    onChange: onSwitch,
-    isSelected: currentValue,
-  };
+const classname = classBuilder("switch");
 
-  const state = useToggleState(props);
-  let ref = useRef(null);
-  const { inputProps } = useSwitch(props, state, ref);
-  const { isFocusVisible, focusProps } = useFocusRing();
+export const Switch: FunctionalComponent<SwitchProps> = (
+    { label, onSwitch, currentValue, className, ...rest },
+) => {
+    let ref = useRef(null);
 
-  return (
-    <label
-      {...rest}
-      data-focused={isFocusVisible}
-      className={getClassName("switch", className)}
-      data-active={state.isSelected}
-    >
-      <VisuallyHidden>
-        <input {...inputProps} {...focusProps} ref={ref} />
-      </VisuallyHidden>
-      {props.children}
-    </label>
-  );
+    return (
+        <label
+            {...rest}
+            className={classname.build(className, classname.card)}
+            data-active={currentValue}
+        >
+            <input
+                ref={ref}
+                onChange={(e) => onSwitch && onSwitch(e.currentTarget.checked)}
+                aria-role="switch"
+                aria-checked={currentValue}
+                type="checkbox"
+                checked={currentValue}
+            />
+            <p className="switch-label">{label}</p>
+        </label>
+    );
 };

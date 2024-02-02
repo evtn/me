@@ -1,56 +1,61 @@
-import { settingsAtom } from "@/state/settings";
-import { useAtom } from "jotai";
 import { FunctionalComponent } from "preact";
-import { story } from "../../utils/story";
-import { usePopup } from "../Popup";
-import "./style.scss";
+import { route } from "preact-router";
+
+import { useSettings } from "@/hooks";
+import { classBuilder } from "@/utils";
+
+import "./style.css";
+
+const classname = classBuilder("logo");
 
 export const Logo: FunctionalComponent = () => {
-  const setPopupContents = usePopup();
-  const [settings] = useAtom(settingsAtom);
+    const [settings] = useSettings();
 
-  return (
-    <svg
-      className="logo"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 256 256"
-      onClick={() => setPopupContents(story)}
-    >
-      <defs>
-        <mask id="logo-mask"></mask>
-      </defs>
-      <g>
-        <text
-          fill="var(--icon-color)"
-          font-family={settings.Monospace ? "Fira Code" : "Manrope"}
-          font-size={settings.Monospace ? 11.2 : 14.6}
-          font-weight="bold"
-          className="logo__text"
+    return (
+        <svg
+            className={classname.build()}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="-16 -16 288 288"
+            data-hovered={true}
+            onClick={() => route("/logo")}
         >
-          <textPath href="#circle">
-            Photo from this CV is on a vacation for an indefinite period of
-            time, sorry for the inconvenience.
-          </textPath>
-        </text>
-        <path
-          id="circle"
-          fill="#fff"
-          fill-opacity="0"
-          d="M234 128a106 106 0 0 1-106 106 106 106 0 0 1-106-106 106 106 0 0 1 106-106 106 106 0 0 1 106 106z"
-        />
-      </g>
-      <g
-        fill="none"
-        stroke="var(--icon-color)"
-        stroke-linecap="round"
-        stroke-miterlimit="8"
-        stroke-width="8"
-      >
-        <path d="M201.455 172.32l-67.299-67.299m-4.511-62.791l-24.633 91.932M52.9 169.46l91.932-24.633" />
-        <path d="M100.505 71.37l-12.317 45.966m50.477 50.474l-45.966 12.317m98.096-47.617l-33.649-33.649" />
-        <path d="M203.105 86.54l-91.932 24.633M54.55 83.69l67.299 67.299m4.501 62.781l24.633-91.932" />
-        <path d="M65.205 123.49l33.649 33.649M167.81 138.67l-12.317 45.966m7.807-108.756l-45.966 12.317" />
-      </g>
-    </svg>
-  );
+            <g>
+                <text
+                    fill="currentColor"
+                    font-family={
+                        settings.monospace ? "JetBrains Mono" : "Rethink Sans"
+                    }
+                    font-size={settings.monospace ? 15 : 19}
+                    font-weight="700"
+                    className="logo__text"
+                >
+                    <textPath href="#circle">
+                        Photo from this CV is on a vacation for an indefinite
+                        period of time, sorry for the inconvenience.
+                    </textPath>
+                </text>
+                <circle cx="128" cy="128" r="128" id="circle" fill-opacity="0">
+                    <animateTransform
+                        attributeName="transform"
+                        attributeType="XML"
+                        type="rotate"
+                        from="0 128 128"
+                        to="360 128 128"
+                        dur="30s"
+                        repeatCount="indefinite"
+                    />
+                </circle>
+            </g>
+            <g
+                fill="var(--logo-accent)"
+                stroke="var(--logo-back)"
+                stroke-width="3"
+            >
+                <path d="m102.28 62.98 11.343 11.343-16.607 61.98-11.344-11.343zm51.45 130.034-11.343-11.343 16.607-61.979 11.344 11.343zm-94.9-75.244 15.495-4.152 45.372 45.372-15.494 4.152z" />
+                <path d="m197.17 138.23-15.495 4.152-45.373-45.372 15.495-4.152zM84.56 182.784l4.151-15.495 61.98-16.608-4.151 15.495z" />
+                <path d="m171.45 73.21-4.152 15.495-61.979 16.608 4.152-15.496zM40.3 79.58l15.495-4.152 34.029 34.029-4.151 15.495zm175.41 96.827-15.495 4.152-34.03-34.03 4.152-15.494zm-173.48 3.338 4.152-15.495 46.484-12.456 11.344 11.344z" />
+                <path d="m213.78 76.25-4.152 15.495-46.484 12.455L151.8 92.857zm-87.7-48.42 11.344 11.344-12.455 46.484-15.495 4.152zm3.85 200.327-11.344-11.344 12.455-46.484 15.495-4.152z" />
+            </g>
+        </svg>
+    );
 };
