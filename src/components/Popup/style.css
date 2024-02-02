@@ -18,7 +18,7 @@
 
     &__container {
         background: var(--background);
-        max-width: min(60rem, calc(100% - 3rem));
+        max-width: min(60rem, calc(100% - 4.5rem));
         max-height: 95svh;
         height: max-content;
         position: relative;
