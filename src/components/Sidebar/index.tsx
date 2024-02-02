@@ -9,6 +9,7 @@ import {
     SidebarEntry,
 } from "@/components";
 import { useSettings } from "@/hooks";
+import { Icon } from "@/icons";
 import { Color } from "@/types";
 import { classBuilder, getEntries } from "@/utils";
 
@@ -70,7 +71,13 @@ export const Sidebar: FunctionalComponent = () => {
                             Dmitry Gritsenko
                         </h1>
                         <h2 className={element("specialization").build()}>
-                            <span>Python</span> / <span>Front-end</span>{" "}
+                            <span className="colored-orange">
+                                <Icon iconKey="react" /> Front-end
+                            </span>
+                            ,{" "}
+                            <span>
+                                <Icon iconKey="python" /> Python
+                            </span>{" "}
                             Developer
                         </h2>
                     </div>

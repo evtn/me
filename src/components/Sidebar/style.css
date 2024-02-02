@@ -16,6 +16,15 @@
 
     &__specialization span {
         color: var(--local-accent);
+        display: inline-flex;
+        align-items: baseline;
+
+        & svg {
+            height: 0.75em;
+            width: 0.75em;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
     }
 
     &__header {
