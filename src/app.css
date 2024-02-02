@@ -37,6 +37,10 @@ input {
     color: inherit;
 }
 
+main {
+    padding-bottom: calc(100vh - 100svh);
+}
+
 main,
 #app {
     margin: 0 auto;
