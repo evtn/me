@@ -61,7 +61,6 @@ const paramsToObject = (entries: IterableIterator<[string, any]>) => {
     const result: Record<string, any> = {};
 
     for (let [key, value] of entries) {
-        console.log([key, value]);
         switch (value) {
             case "True": {
                 value = true;
@@ -241,8 +240,6 @@ export const PDFGenerator: FunctionalComponent = () => {
         );
     }
 
-    console.log("cmpsErr", compensationError);
-
     const compensationSection = (
         <label
             className={section
@@ -263,7 +260,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                 <Icon iconKey="dollar" />
                 <input
                     type="text"
-                    inputmode="numeric"
+                    inputMode="numeric"
                     pattern="\d{5,}|[3-9]\d{3}"
                     title="an integer more than 3000"
                     value={pdfSettings.compensation}
@@ -317,8 +314,6 @@ export const PDFGenerator: FunctionalComponent = () => {
         if (add) {
             newValue.push(sectionKey);
         }
-
-        console.log(newValue);
 
         setPdfSettings("sections", newValue);
     };
