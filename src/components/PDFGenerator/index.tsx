@@ -208,12 +208,9 @@ export const PDFGenerator: FunctionalComponent = () => {
                     color="orange"
                 />
             ) : undefined}
+
             <a href={link} download={pdfSettings.filename}>
                 <PDFGeneratorButton
-                    onClick={(e) => {
-                        e.preventDefault();
-                        () => navigator.share(shareData);
-                    }}
                     text={`Download ${format.toUpperCase()}`}
                     icon="download"
                     color="blue"
