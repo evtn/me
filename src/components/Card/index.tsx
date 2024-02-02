@@ -67,14 +67,6 @@ export const Card: FunctionalComponent<{
                         <Icon iconKey="external" />
                     </a>
                 )}
-                <button
-                    className={classname
-                        .element("card-button")
-                        .build(classname.card)}
-                    onClick={() => gotoCard(data)}
-                >
-                    <Icon iconKey="expand" />
-                </button>
                 <a
                     className={classname
                         .element("card-button")
@@ -82,7 +74,7 @@ export const Card: FunctionalComponent<{
                     href={`/timeline/${cardToSlug(data)}`}
                     aria-label={`Link to this card`}
                 >
-                    <Icon iconKey="link" />
+                    <Icon iconKey="expand" />
                 </a>
             </div>
             {cardContent}
