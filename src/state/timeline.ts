@@ -10,7 +10,7 @@ type AtomMap = Record<CardType, WritableAtom<boolean, [boolean], void>>;
 // maybe I could use Partial<...> but that seems wrong since I would actually populate all the keys.
 const atoms = {} as AtomMap;
 
-const defaultEnabled: CardType[] = ["position"];
+const defaultEnabled: CardType[] = ["position", "stack"];
 
 cardTypeKeys.forEach((key) => {
     atoms[key] = atomWithStorage<boolean>(
