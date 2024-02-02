@@ -15,13 +15,17 @@ const classname = classBuilder("pdf-generator");
 const buttonClassName = classname.element("submit-button");
 
 export const PDFGeneratorButton: FunctionalComponent<PDFButtonProps> = (
-    { color, icon, text, className, ...rest },
+    { color, icon, text, className, onClick, ...rest },
 ) => {
     return (
         <button
             className={buttonClassName
                 .color(color)
                 .build(buttonClassName.card, className)}
+            onClick={(e) => {
+                e.preventDefault();
+                onClick?.(e);
+            }}
             {...rest}
         >
             <Icon iconKey={icon} />

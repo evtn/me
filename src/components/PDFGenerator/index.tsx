@@ -189,7 +189,6 @@ export const PDFGenerator: FunctionalComponent = () => {
             />
             <PDFGeneratorButton
                 onClick={(e) => {
-                    e.preventDefault();
                     navigator?.clipboard?.writeText?.(link);
                 }}
                 text="Copy URL"
