@@ -1,7 +1,7 @@
 import { WritableAtom, atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 
-import { getEntries, isMobile } from "@/utils";
+import { getEntries } from "@/utils";
 
 export type Settings = Record<SettingKey, boolean>;
 
