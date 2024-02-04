@@ -24,7 +24,7 @@
     "devDependencies": {
         "@preact/preset-vite": "^2.5.0",
         "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-        "cssnano": "^6.0.3",
+        "lightningcss": "^1.23.0",
         "postcss-nested": "^6.0.1",
         "postcss-viewport-unit-fallback": "^1.0.1",
         "rollup-plugin-visualizer": "^5.12.0",

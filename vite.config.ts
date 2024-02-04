@@ -1,5 +1,4 @@
 import preact from "@preact/preset-vite";
-import cssnano from "cssnano";
 import postcssNested from "postcss-nested";
 import postcssViewportFallback from "postcss-viewport-unit-fallback";
 import { visualizer } from "rollup-plugin-visualizer";
@@ -19,17 +18,11 @@ export default defineConfig({
     ],
     css: {
         postcss: {
-            plugins: [
-                postcssViewportFallback(),
-                postcssNested,
-                cssnano({
-                    preset: "default",
-                }),
-            ],
+            plugins: [postcssViewportFallback(), postcssNested],
         },
     },
     build: {
-        cssMinify: false,
+        cssMinify: "lightningcss",
         sourcemap: true,
     },
 });
