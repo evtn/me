@@ -41,16 +41,12 @@ export const useRouting = ({ matches, path, url }: MatchChildrenProps) => {
     const entries = useEntries();
 
     const setter = (value: any) => {
-        console.log("setter", value);
         setPopupContents(value);
     };
 
     const pathParts = useMemo(() => getPathParts(url), [url]);
 
-    console.log("routing");
-
     useEffect(() => {
-        console.log(pathParts);
         switch (pathParts[0]) {
             case "timeline": {
                 const card = findTimelineCard(pathParts[1], entries);
@@ -60,7 +56,6 @@ export const useRouting = ({ matches, path, url }: MatchChildrenProps) => {
                 break;
             }
             case "logo": {
-                console.log("story!");
                 setter(<Story />);
                 break;
             }
@@ -73,7 +68,5 @@ export const useRouting = ({ matches, path, url }: MatchChildrenProps) => {
             }
         }
     }, [...pathParts, entries]);
-
-    console.log(matches, path, url);
     return undefined;
 };
