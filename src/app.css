@@ -381,7 +381,7 @@ label {
 }
 
 main[data-colorful="false"] {
-    & :not(.link, a, button, label).colored-card {
+    & :not(.link, a, button, label, input, .text-field-wrapper).colored-card {
         &::before {
             background: var(--card);
             opacity: 1;

@@ -244,9 +244,7 @@ export const PDFGenerator: FunctionalComponent = () => {
         >
             <p>
                 Compensation
-                <span className="transparent">
-                    , $/month, gross, rounded to nearest 100
-                </span>
+                <span className="transparent">, $/month, gross</span>
             </p>
             <div
                 className={classBuilder("text-field-wrapper").build(

@@ -15,22 +15,22 @@ const extraKeys = ["plans", "compact", "card_colors", "configurable"] as const;
 
 const break8 = (n: number): [number, number] => [n & 0xf, n >> 4];
 
-const breakVariable = (n: number): number[] => {
-    const result = [];
+const breakVariable = (n: bigint): number[] => {
+    const result: number[] = [];
 
-    if (n < 0) {
-        n = 0;
+    if (n < 0n) {
+        return [];
     }
 
-    while (n > 0) {
-        result.push(n & 0xf);
-        n >>= 8;
+    while (n > 0n) {
+        result.push(Number(n & 15n));
+        n >>= 4n;
     }
     return result;
 };
 
 export const convert = (data: PDFSettings): string => {
-    const compensation = Math.floor((+data.compensation - 3000) / 100);
+    const compensation = (BigInt(data.compensation) - 3000n) / 100n;
     const theme = (+!!data.contrast << 1) | +!!data.light;
     const monospace = +!!data.monospace;
     const lowercase = +!!data.lowercase;

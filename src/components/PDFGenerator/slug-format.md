@@ -31,42 +31,56 @@ Now, we have two flags: `lowercase` and `monospace`. These fit nicely into one b
 
 Then we have sections set. It is a set of fixed strings (all of which are in the example). Let's use 4 bits to represent it, with the order as defined in example.
 
-Compensation can fit into a variable-width number, and final value would be represented by formula `100 * n + 3000`, thus representing ranges from 3000 to 412600 (make me an offer with more, I dare you).
+Compensation can fit into a variable-width integer, and final value would be represented by formula `100 * n + 3000`
 
 Let's allow for extra flags to appear as a 4-bit tail, and add a 8-bit version header. Then, our binary format will look roughly like this:
 
 ```
-EEEE CCCC* SSSS MLTT VVVV VVVV
+VVVV VVVV MLTT SSSS CCCC* EEEE
 ```
 
-To convert to Base16, we would use a simple alphabet of `0123456789abcdef`, //but XOR the value of every chunk with 0b1001 and then with the index of the chunk.  
-This will not corrupt the data, but at the same time provide a more interesting-looking config key, (in the example below, `9835dcfe` instead of `008f0000`)
+To convert to Base16, we would use a simple alphabet of `0123456789abcdef`
 
-...yielding a compact 3-4 byte representation. A sample conversion from example JSON to a base16 string:
+...yielding a compact 3+ byte representation. A sample conversion from example JSON to a base16 string:
 
 ```typescript
+// that's converter.ts from the same folder
+import { PDFSettings } from ".";
+
+import { CardType } from "@/types/card";
+
 const CURRENT_VERSION = 0;
 
-const availableSections: TimelineEntryType[] = [
+const availableSections: CardType[] = [
     "position",
     "project",
     "stack",
     "history",
 ];
 
-const extraKeys = ["bright", "compact"] as const;
+const extraKeys = ["plans", "compact", "card_colors", "configurable"] as const;
 
 const break8 = (n: number): [number, number] => [n & 0xf, n >> 4];
-const break12 = (n: number): [number, number, number] => [
-    ...break8(n & 0xff),
-    (n >> 8) & 0xf,
-];
+
+const breakVariable = (n: bigint): number[] => {
+    const result: number[] = [];
+
+    if (n < 0n) {
+        return [];
+    }
+
+    while (n > 0n) {
+        result.push(Number(n & 15n));
+        n >>= 4n;
+    }
+    return result;
+};
 
 export const convert = (data: PDFSettings): string => {
-    const compensation = Math.floor((data.compensation - 3000) / 100);
-    const theme = (+data.contrast << 1) | +data.light;
-    const monospace = +data.monospace;
-    const lowercase = +data.lowercase;
+    const compensation = (BigInt(data.compensation) - 3000n) / 100n;
+    const theme = (+!!data.contrast << 1) | +!!data.light;
+    const monospace = +!!data.monospace;
+    const lowercase = +!!data.lowercase;
     const sections = availableSections.reduce(
         (acc, elem, i) => acc | (+data.sections.includes(elem) << i),
         0,
@@ -78,10 +92,10 @@ export const convert = (data: PDFSettings): string => {
         ...break8(CURRENT_VERSION),
         theme | (lowercase << 2) | (monospace << 3),
         sections,
-        ...break12(compensation),
+        ...breakVariable(compensation),
         extra,
     ]
-        .map((n, i) => "0123456789abcdef"[n ^ 0b1001 ^ i])
+        .map((n, i) => "0123456789abcdef"[n])
         .join("");
 };
 ```
@@ -89,6 +103,8 @@ export const convert = (data: PDFSettings): string => {
 And to convert to dictionary (in Python since it's the language of the PDF generator backend):
 
 ```python
+# this is a simplified example, real backend does some optimizations and tweaks
+
 available_sections = ["position", "project", "stack", "history"]
 extra_keys = ["plans", "compact", "card_colors", "configurable"]
 
@@ -103,8 +119,8 @@ def quartet_join(*parts: int) -> int:
     return s
 
 
-def make_config(key: str):
-    vl, vh, *parts = (int(c, 16) ^ i ^ 0b1001 for i, c in enumerate(key))
+def make_config(key: str) -> Config:
+    vl, vh, *parts = (int(c, 16) for i in key)
 
     version = quartet_join(vl, vh)
 
@@ -123,7 +139,7 @@ def make_config(key: str):
 
     compensation = 3000 + quartet_join(*c) * 100
 
-    return {
+    value: Config = {
         "theme": theme,
         "lowercase": lowercase,
         "monospace": monospace,
@@ -132,7 +148,20 @@ def make_config(key: str):
             for i, section in enumerate(available_sections)
             if sections & (1 << i)
         ],
-        "compensation": compensation,
-        **{extra_keys[i]: bool(extra & (1 << i)) for i in range(4) if extra_keys[i]},
+        "compensation": round_large(compensation),
     }
+
+    extra_i = 0
+
+    while extra:
+        key = extra_keys[extra_i]
+
+        if not key:
+            continue
+
+        value[key] = bool(extra & 1)
+        extra >>= 1
+        extra_i += 1
+
+    return value
 ```
