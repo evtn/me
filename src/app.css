@@ -228,8 +228,16 @@ code {
     position: relative;
     white-space: nowrap;
 
-    &:hover::before {
-        opacity: 0;
+    opacity: 0.5;
+    transition: opacity 200ms ease-in-out;
+
+    &:hover,
+    &:active,
+    &:focus {
+        opacity: 1;
+        &::before {
+            opacity: 0;
+        }
     }
 
     &::before {
@@ -242,7 +250,7 @@ code {
         background-color: var(--text);
         border-radius: var(--border-radius);
         position: absolute;
-        transition: opacity 300ms ease-in-out;
+        transition: opacity 200ms ease-in-out;
         pointer-events: none;
     }
 }
@@ -251,8 +259,6 @@ code {
     position: relative;
     border-radius: var(--border-radius);
     background: transparent;
-
-    transition: color 200ms ease-in-out;
     position: relative;
 
     &::before {
@@ -290,6 +296,8 @@ label {
     a,
     label {
         &.colored-card {
+            transition: color 200ms ease-in-out;
+
             &:focus,
             &:hover {
                 outline: none;
@@ -372,6 +380,7 @@ main[data-colorful="false"] {
             opacity: 1;
         }
     }
+
     a,
     button,
     label {
