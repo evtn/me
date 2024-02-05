@@ -151,12 +151,13 @@
             max-width: 20rem;
         }
 
-        &.sidebar &__header-text,
-        &.sidebar &__logo {
+        &__header-text,
+        &__logo {
             height: 100%;
 
-            &:not(.evergiveup)::before {
-                opacity: 0;
+            &::before {
+                opacity: 0 !important;
+                /* I am really, truly sorry for this */
             }
         }
     }
