@@ -247,11 +247,22 @@ code {
         height: 100%;
         top: 0;
         left: 0;
-        background-color: var(--text);
+        background-color: var(--local-accent);
         border-radius: var(--border-radius);
         position: absolute;
         transition: opacity 200ms ease-in-out;
         pointer-events: none;
+    }
+}
+
+@media (hover: none) {
+    .spoiler {
+        opacity: 0.75;
+        color: var(--text);
+
+        &::before {
+            display: none;
+        }
     }
 }
 
