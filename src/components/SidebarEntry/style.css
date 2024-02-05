@@ -18,7 +18,6 @@
     }
 
     &__link,
-    button.sidebar-entry__link,
     &__button {
         box-sizing: border-box;
         cursor: pointer;
@@ -32,8 +31,7 @@
         }
     }
 
-    &__link,
-    button.sidebar-entry__link {
+    &__link {
         color: var(--local-accent);
         font-weight: 500;
         display: flex;
@@ -45,8 +43,9 @@
 
         & p {
             padding: 0.1rem 0.2rem;
-            border-radius: var(--border-radius); /* 2px */
+            border-radius: var(--border-radius);
         }
+
         & svg {
             opacity: 1;
         }
@@ -80,6 +79,27 @@
 
         &_tg {
             transform: rotate(-45deg);
+        }
+    }
+}
+
+@media (min-width: 100rem) {
+    .sidebar-entry {
+        max-width: 30rem;
+
+        &__link,
+        &__button {
+            padding: 0.75rem;
+            height: 3rem;
+        }
+
+        &__link {
+            gap: 1rem;
+            font-size: 1.2rem;
+        }
+
+        &__button {
+            width: 3rem;
         }
     }
 }

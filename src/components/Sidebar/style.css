@@ -12,7 +12,6 @@
     flex-grow: 1;
     box-sizing: border-box;
     --icon-color: var(--blue);
-    max-width: 40rem;
 
     &__specialization span {
         color: var(--local-accent);
@@ -106,12 +105,62 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    box-shadow: 0 0 1rem var(--mono-black-overlay);
     position: relative;
     z-index: 2;
+    min-width: 40%;
 
     & .settings {
         flex-direction: row-reverse;
+    }
+}
+
+@media (min-width: 100rem) {
+    .sidebar {
+        gap: 1rem;
+
+        &__info {
+            justify-content: center;
+            align-items: center;
+        }
+
+        &__header {
+            flex-direction: row;
+            max-height: 30rem;
+            flex-grow: 0;
+        }
+
+        &__header-text {
+            gap: 0.5rem;
+            align-items: flex-start;
+            flex-grow: 0;
+            width: max-content;
+        }
+
+        h1 {
+            font-size: 3rem;
+            width: 15rem;
+            text-align: left;
+            line-height: 110%;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            width: 20rem;
+        }
+
+        &__logo {
+            max-width: 20rem;
+        }
+
+        &__header-text,
+        &__logo {
+            height: 100%;
+            align-self: stretch;
+
+            &:not(.hack)::before {
+                opacity: 0;
+            }
+        }
     }
 }
 
@@ -139,7 +188,6 @@
 
         &__info {
             flex-direction: row;
-            flex-wrap: wrap;
         }
 
         &__logo {

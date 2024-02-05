@@ -11,6 +11,7 @@
     flex-shrink: 0;
     font-size: 0.7rem;
     border-bottom: var(--blue-medium) 1px solid;
+    align-self: stretch;
 
     &__header {
         opacity: 0.3;
@@ -64,11 +65,5 @@
         &__setting {
             text-align: left;
         }
-    }
-}
-
-@media (min-width: 100rem) {
-    .settings {
-        align-self: stretch;
     }
 }

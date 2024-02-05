@@ -72,17 +72,16 @@ export const Sidebar: FunctionalComponent = () => {
                         </h1>
                         <h2 className={element("specialization").build()}>
                             <span className="colored-orange">
-                                <Icon iconKey="react" /> Front-end
+                                <Icon iconKey="react" />
+                                Front-end&nbsp;Developer
                             </span>
-                            ,{" "}
+                            <br />
                             <span>
-                                <Icon iconKey="python" /> Python
-                            </span>{" "}
-                            Developer
+                                <Icon iconKey="python" /> Python&nbsp;Developer
+                            </span>
                         </h2>
                     </div>
                 </div>
-
                 <div className={element("info").build()}>{entriesContent}</div>
             </section>
         </div>
