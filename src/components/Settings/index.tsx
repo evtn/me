@@ -1,11 +1,11 @@
+import { Switch } from "../Switch";
 import { useState } from "preact/hooks";
 
 import { Color } from "@/types";
 
+import { useMobile } from "@/hooks/useMobile";
 import { classBuilder } from "@/utils/classname";
-import { isMobile } from "@/utils/isMobile";
 
-import { Switch } from "../Switch";
 import "./style.css";
 
 const classname = classBuilder("settings");
@@ -27,7 +27,8 @@ type SettingsBarProps<T extends string> = {
 export const SettingsBar = <T extends string>(
     { onClick, data, title = "Settings" }: SettingsBarProps<T>,
 ) => {
-    const [isActive, setIsActive] = useState(() => !isMobile());
+    const isMobile = useMobile();
+    const [isActive, setIsActive] = useState(() => !isMobile);
 
     const content = data
         .filter((entry) => entry.shown !== false)
@@ -51,8 +52,8 @@ export const SettingsBar = <T extends string>(
             <button
                 className={classname
                     .element("header")
-                    .build(isMobile() && classname.card)}
-                onClick={() => isMobile() && setIsActive((x) => !x)}
+                    .build(isMobile && classname.card)}
+                onClick={() => isMobile && setIsActive((x) => !x)}
             >
                 {title}
             </button>
