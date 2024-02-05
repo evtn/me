@@ -18,7 +18,7 @@ export const Timeline = () => {
     const [filters] = useAtom(timelineFiltersAtom);
     const { sortedEntries, futureEdge } = useTimeline();
 
-    const timelinePieces: JSXInternal.Element[] = useMemo(() => {
+    return useMemo(() => {
         let futureCardsVisible = 0;
         const timelinePieces: JSXInternal.Element[] = [];
 
@@ -52,15 +52,17 @@ export const Timeline = () => {
             timelinePieces.splice(futureEdge + 1, 1);
         }
 
-        return timelinePieces;
+        return (
+            <div
+                className={classBuilder("timeline-wrapper").build(
+                    "scroll-portal",
+                )}
+            >
+                <TimelineFilters />
+                <section className={classname.build()}>
+                    {timelinePieces}
+                </section>
+            </div>
+        );
     }, [sortedEntries, futureEdge, filters]);
-
-    return (
-        <div
-            className={classBuilder("timeline-wrapper").build("scroll-portal")}
-        >
-            <TimelineFilters />
-            <section className={classname.build()}>{timelinePieces}</section>
-        </div>
-    );
 };
