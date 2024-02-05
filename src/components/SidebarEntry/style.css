@@ -83,7 +83,7 @@
     }
 }
 
-@media (min-width: 100rem) {
+@media (min-width: 75rem) {
     .sidebar-entry {
         max-width: 30rem;
 

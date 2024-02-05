@@ -112,7 +112,7 @@
     }
 }
 
-@media (min-width: 100rem) {
+@media (min-width: 75rem) {
     .sidebar {
         gap: 1rem;
 
@@ -144,7 +144,7 @@
 
         h2 {
             font-size: 1.5rem;
-            width: 20rem;
+            width: 16.5rem;
         }
 
         &__logo {
