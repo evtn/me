@@ -63,7 +63,7 @@ export const settingsData: Record<SettingKey, Setting> = {
     lowercase: makeSetting("lowercase"),
     monospace: makeSetting("monospace"),
     compact: makeSetting("compact"),
-    colorful: makeSetting("colorful", true),
+    colorful: makeSetting("colorful", false),
 };
 
 export const settingsAtom = atom(
