@@ -18,27 +18,37 @@ export const Timeline = () => {
     const { sortedEntries, futureEdge } = useTimeline();
 
     const timelinePieces: JSXInternal.Element[] = [];
+    let futureCardsVisible = 0;
 
     sortedEntries.forEach((data, i) => {
         const entryType = data.type || "project";
+        const cardVisible = filters[entryType];
 
         timelinePieces.push(
-            <Card key={i} data={data} isVisible={filters[entryType]} />,
+            <Card key={i} data={data} isVisible={cardVisible} />,
         );
 
         if (i === futureEdge) {
             timelinePieces.push(
                 <span
                     key="edge"
-                    className={classBuilder("timeline-future-edge").build(
-                        classname.card,
-                    )}
+                    className={classBuilder("timeline-future-edge")
+                        .color("text")
+                        .build(classname.card)}
                 >
                     Plans
                 </span>,
             );
         }
+
+        if (i > futureEdge && cardVisible) {
+            futureCardsVisible++;
+        }
     });
+
+    if (!futureCardsVisible) {
+        timelinePieces.splice(futureEdge + 1, 1);
+    }
 
     return (
         <div
