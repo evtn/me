@@ -16,25 +16,14 @@ export const Logo: FunctionalComponent = () => {
             className={classname.build()}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="-16 -16 288 288"
-            data-hovered={true}
             onClick={() => route("/logo")}
         >
-            <g>
-                <text
-                    fill="currentColor"
-                    font-family={
-                        settings.monospace ? "JetBrains Mono" : "Rethink Sans"
-                    }
-                    font-size={settings.monospace ? 15 : 19}
-                    font-weight="700"
-                    className="logo__text"
+            <defs>
+                <path
+                    d="M128 0A128 128 0 1 1 0 128A128 128 0 0 1 128 0"
+                    id="circle"
+                    fill-opacity="0"
                 >
-                    <textPath href="#circle">
-                        Photo from this CV is on a vacation for an indefinite
-                        period of time, sorry for the inconvenience.
-                    </textPath>
-                </text>
-                <circle cx="128" cy="128" r="128" id="circle" fill-opacity="0">
                     <animateTransform
                         attributeName="transform"
                         attributeType="XML"
@@ -44,7 +33,24 @@ export const Logo: FunctionalComponent = () => {
                         dur="30s"
                         repeatCount="indefinite"
                     />
-                </circle>
+                </path>
+            </defs>
+
+            <g>
+                <text
+                    fill="currentColor"
+                    font-family={
+                        settings.monospace ? "JetBrains Mono" : "Rethink Sans"
+                    }
+                    font-size={settings.monospace ? 14.8 : 18.8}
+                    font-weight="700"
+                    className="logo__text"
+                >
+                    <textPath href="#circle">
+                        Photo from this CV is on a vacation for an indefinite
+                        period of time, sorry for the inconvenience.
+                    </textPath>
+                </text>
             </g>
             <g
                 fill="var(--logo-accent)"
