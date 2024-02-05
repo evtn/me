@@ -9,14 +9,14 @@ type PDFButtonProps = {
     color: Color;
     icon: IconKey;
     text: string;
-} & ComponentProps<"button">;
+};
 
 const classname = classBuilder("pdf-generator");
 const buttonClassName = classname.element("submit-button");
 
-export const PDFGeneratorButton: FunctionalComponent<PDFButtonProps> = (
-    { color, icon, text, className, onClick, ...rest },
-) => {
+export const PDFGeneratorButton: FunctionalComponent<
+    PDFButtonProps & ComponentProps<"button">
+> = ({ color, icon, text, className, onClick, ...rest }) => {
     return (
         <button
             className={buttonClassName
@@ -31,5 +31,22 @@ export const PDFGeneratorButton: FunctionalComponent<PDFButtonProps> = (
             <Icon iconKey={icon} />
             {text}
         </button>
+    );
+};
+
+export const PDFGeneratorLink: FunctionalComponent<
+    PDFButtonProps & ComponentProps<"a">
+> = ({ color, icon, text, className, onClick, ...rest }) => {
+    return (
+        <a
+            className={buttonClassName
+                .color(color)
+                .build(buttonClassName.card, className)}
+            onClick={onClick}
+            {...rest}
+        >
+            <Icon iconKey={icon} />
+            {text}
+        </a>
     );
 };

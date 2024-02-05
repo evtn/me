@@ -302,6 +302,10 @@ label {
     }
 }
 
+a:focus {
+    outline: none;
+}
+
 @media (hover: hover) {
     button,
     a,
@@ -386,6 +390,7 @@ main[data-colorful="false"] {
             background: var(--card);
             opacity: 1;
         }
+        &:focus::before,
         &:hover::before {
             background: var(--card);
             opacity: 1;
@@ -396,7 +401,7 @@ main[data-colorful="false"] {
     button,
     label {
         &.colored-card {
-            &:not(:hover)::before {
+            &:not(:hover, :focus)::before {
                 background: var(--text);
                 opacity: 0.03;
             }

@@ -14,7 +14,7 @@ import { CardType, cardTypeKeys, cardTypes } from "@/types/card";
 
 import "./style.css";
 
-import { PDFGeneratorButton } from "./button";
+import { PDFGeneratorButton, PDFGeneratorLink } from "./button";
 import { convert } from "./converter";
 import { PDFSection } from "./section";
 
@@ -208,13 +208,13 @@ export const PDFGenerator: FunctionalComponent = () => {
                 />
             ) : undefined}
 
-            <a href={link} download={pdfSettings.filename}>
-                <PDFGeneratorButton
-                    text={`Download ${format.toUpperCase()}`}
-                    icon="download"
-                    color="blue"
-                />
-            </a>
+            <PDFGeneratorLink
+                download={pdfSettings.filename}
+                href={link}
+                text={`Download ${format.toUpperCase()}`}
+                icon="download"
+                color="blue"
+            />
         </div>
     );
 
@@ -261,7 +261,6 @@ export const PDFGenerator: FunctionalComponent = () => {
                     className={classname.element("text-field").build()}
                     onInput={(e) => {
                         const validity = e.currentTarget.validity;
-                        console.log(validity);
                         setPdfSettings("compensation", e.currentTarget.value);
                         setCompensationError(!validity.valid);
                     }}
