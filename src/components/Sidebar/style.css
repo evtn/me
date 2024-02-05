@@ -132,6 +132,7 @@
             align-items: flex-start;
             flex-grow: 0;
             width: max-content;
+            background: transparent;
         }
 
         h1 {
@@ -150,11 +151,11 @@
             max-width: 20rem;
         }
 
-        &__header-text,
-        &__logo {
+        &.sidebar &__header-text,
+        &.sidebar &__logo {
             height: 100%;
 
-            &:not(.hack)::before {
+            &:not(.evergiveup)::before {
                 opacity: 0;
             }
         }
