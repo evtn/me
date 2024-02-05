@@ -31,6 +31,8 @@
 
         & > div {
             padding: 2rem;
+            max-height: 95svh;
+            overflow: auto;
         }
 
         & iframe {
@@ -133,6 +135,10 @@
         }
         &__container {
             max-width: calc(100vw - 1rem);
+
+            & > div {
+                max-height: calc(100svh - 5.5rem);
+            }
         }
     }
 }

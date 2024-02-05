@@ -5,9 +5,7 @@
     align-items: flex-start;
     gap: 1rem;
     font-size: 1rem;
-    max-height: 95svh;
     box-sizing: border-box;
-    overflow: scroll;
 
     h2 {
         margin: 0;
@@ -192,8 +190,6 @@
 
 @media (max-width: 50rem) {
     .pdf-generator {
-        max-height: calc(100svh - 5.5rem);
-
         &__section {
             & > p {
                 font-size: 1rem;
