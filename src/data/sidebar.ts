@@ -44,6 +44,7 @@ export type SidebarEntryProps = {
 
 export const entries: SidebarEntryData[] = [
     {
+        ln: "location",
         text: "Tbilisi / Relocate / Remote",
         icon: "location",
         color: "red",
