@@ -48,8 +48,16 @@ export const entries: SidebarEntryData[] = [
         text: "Tbilisi / Relocate / Remote",
         icon: "location",
         color: "red",
-        label: "Location",
         copy: false,
+        label: "That's where I am",
+    },
+    {
+        href: "/pdf",
+        text: "Get a PDF",
+        icon: "file",
+        copy: false,
+        color: "orange",
+        label: "PDF Generator",
     },
     {
         ln: "github/me",

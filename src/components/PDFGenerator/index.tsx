@@ -188,9 +188,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                 icon="play"
             />
             <PDFGeneratorButton
-                onClick={(e) => {
-                    navigator?.clipboard?.writeText?.(link);
-                }}
+                onClick={() => navigator?.clipboard?.writeText?.(link)}
                 text="Copy URL"
                 icon="copy"
                 color="green"
@@ -198,10 +196,7 @@ export const PDFGenerator: FunctionalComponent = () => {
 
             {isShareAvailable ? (
                 <PDFGeneratorButton
-                    onClick={(e) => {
-                        e.preventDefault();
-                        () => navigator.share(shareData);
-                    }}
+                    onClick={() => navigator.share(shareData)}
                     text="Share"
                     icon="share"
                     color="orange"
@@ -329,7 +324,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                 configKey: key,
                 color: getCardColor(key),
                 value: sections.includes(key),
-                key: key,
+                key,
                 description: `Include ${key} section in the document`,
             }))}
             warning={

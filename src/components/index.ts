@@ -1,6 +1,5 @@
 export { Highlighter } from "./Highlighter";
 export { Sidebar } from "./Sidebar";
-export { PDFEntry } from "./PDFGenerator/entry";
 export { SettingsBar } from "./Settings";
 export { PDFGenerator } from "./PDFGenerator";
 export { ProjectCard } from "./ProjectCard";

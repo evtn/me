@@ -1,13 +1,7 @@
 import { FunctionalComponent } from "preact";
 import { useMemo } from "preact/hooks";
 
-import {
-    Logo,
-    MoneyEntry,
-    PDFEntry,
-    SettingsBar,
-    SidebarEntry,
-} from "@/components";
+import { Logo, MoneyEntry, SettingsBar, SidebarEntry } from "@/components";
 import { useSettings } from "@/hooks";
 import { Icon } from "@/icons";
 import { Color } from "@/types";
@@ -30,7 +24,7 @@ const classname = classBuilder("sidebar");
 const element = classname.element;
 
 const buildSwitches = (settings: Settings) => {
-    return getEntries(settings).map(([key, value], i) => ({
+    return getEntries(settings).map(([key, value]) => ({
         name: settingsData[key].name,
         key,
         value,
@@ -47,25 +41,18 @@ export const Sidebar: FunctionalComponent = () => {
 
     const entriesContent = entries.map((e) => <SidebarEntry data={e} />);
 
-    entriesContent.splice(1, 0, <MoneyEntry />, <PDFEntry />);
+    entriesContent.splice(1, 0, <MoneyEntry />);
 
     return (
         <div className="sidebar-portal">
             <SettingsBar data={switches} onClick={setSettings} />
-
             <section className={classname.build()}>
-                <div className={element("header").build()}>
-                    <div
-                        className={element("logo")
-                            .color("blue")
-                            .build(classname.card)}
-                    >
+                <div className={element("header").color("blue").build()}>
+                    <div className={element("logo").build(classname.card)}>
                         <Logo />
                     </div>
                     <div
-                        className={element("header-text")
-                            .color("blue")
-                            .build(classname.card)}
+                        className={element("header-text").build(classname.card)}
                     >
                         <h1 className={element("name").build()}>
                             Dmitry Gritsenko
