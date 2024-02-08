@@ -165,10 +165,13 @@
 
             &::before {
                 opacity: 0.9;
-                padding: 0.25rem;
-                left: -0.25rem;
-                top: -0.25rem;
-                box-shadow: 0 0 2.5rem var(--local-accent);
+
+                main[data-neon="true"] & {
+                    padding: 0.25rem;
+                    left: -0.25rem;
+                    top: -0.25rem;
+                    box-shadow: 0 0 2.5rem var(--local-accent);
+                }
             }
         }
 

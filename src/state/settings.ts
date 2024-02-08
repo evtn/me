@@ -10,7 +10,8 @@ export type SettingKey =
     | "lowercase"
     | "monospace"
     | "compact"
-    | "colorful";
+    | "colorful"
+    | "neon";
 
 type SettingsAtom = WritableAtom<boolean, [boolean], void>;
 
@@ -52,6 +53,10 @@ export const settingsDataBase: Record<SettingKey, SettingData> = {
         name: "Colorful",
         description: "Adds more color!",
     },
+    neon: {
+        name: "Neon",
+        description: "Adds neon lights to hovered buttons",
+    },
 };
 
 type Setting = {
@@ -64,6 +69,7 @@ export const settingsData: Record<SettingKey, Setting> = {
     monospace: makeSetting("monospace"),
     compact: makeSetting("compact"),
     colorful: makeSetting("colorful", false),
+    neon: makeSetting("neon", true),
 };
 
 export const settingsAtom = atom(

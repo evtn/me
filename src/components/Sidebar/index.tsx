@@ -18,6 +18,7 @@ const switchColors: Record<SettingKey, Color> = {
     compact: "green",
     colors: "red",
     colorful: "cyan",
+    neon: "pink",
 };
 
 const classname = classBuilder("sidebar");
