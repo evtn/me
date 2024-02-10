@@ -7,6 +7,7 @@ import { CardData } from "@/types/card";
 
 import { classBuilder } from "./classname";
 import { getDynamicLink } from "./getDynamicLink";
+import { cleanHref } from "./link";
 
 type FormattedTextType =
     | "bold"
@@ -80,7 +81,7 @@ const wrappers: { [K in RichTextType]: Wrapper<K> } = {
                     .color(data.color)
                     .build(linkClassName.card)}
                 href={link}
-                aria-label={`External link: ${link}`}
+                aria-label={`External link: ${cleanHref(link)}`}
             >
                 {format(data.content)}
             </a>

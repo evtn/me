@@ -6,6 +6,8 @@ import { Icon } from "@/icons";
 import { CardData } from "@/types";
 import { classBuilder, format } from "@/utils";
 
+import { cleanHref } from "@/utils/link";
+
 import "./style.css";
 
 import { getCardColor } from "./getColor";
@@ -33,6 +35,8 @@ export const Card: FunctionalComponent<{
         </div>
     );
 
+    const cardHref = `/timeline/${cardToSlug(data)}`;
+
     return (
         <div
             className={classname.color(entryColor).build(classname.card)}
@@ -40,10 +44,12 @@ export const Card: FunctionalComponent<{
         >
             <div className={element("header").build()}>
                 <CardIcon data={data} />
-                <div className={element("header-text").build()}>
-                    <CardSubtitle data={data} />
-                    <CardTitle data={data} />
-                </div>
+                <a href={cardHref}>
+                    <div className={element("header-text").build()}>
+                        <CardSubtitle data={data} />
+                        <CardTitle data={data} />
+                    </div>
+                </a>
                 <Filler />
                 {data.repo && (
                     <a
@@ -62,7 +68,7 @@ export const Card: FunctionalComponent<{
                             .element("card-button")
                             .build(classname.card)}
                         href={data.href}
-                        aria-label={`External link: ${data.href}`}
+                        aria-label={`External link: ${cleanHref(data.href)}`}
                     >
                         <Icon iconKey="external" />
                     </a>
@@ -71,8 +77,8 @@ export const Card: FunctionalComponent<{
                     className={classname
                         .element("card-button")
                         .build(classname.card)}
-                    href={`/timeline/${cardToSlug(data)}`}
-                    aria-label={`Link to this card`}
+                    href={cardHref}
+                    aria-label="Expand / Link to this card"
                 >
                     <Icon iconKey="expand" />
                 </a>
