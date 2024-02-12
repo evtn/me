@@ -28,7 +28,7 @@ export const Switch: FunctionalComponent<SwitchProps> = (
             <input
                 ref={ref}
                 onChange={(e) => onSwitch && onSwitch(e.currentTarget.checked)}
-                aria-role="switch"
+                role="switch"
                 aria-checked={currentValue}
                 type="checkbox"
                 checked={currentValue}
