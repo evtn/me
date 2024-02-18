@@ -18,51 +18,45 @@ export const Timeline = () => {
     const [filters] = useAtom(timelineFiltersAtom);
     const { sortedEntries, futureEdge } = useTimeline();
 
-    return useMemo(() => {
-        let futureCardsVisible = 0;
-        const timelinePieces: JSXInternal.Element[] = [];
+    let futureCardsVisible = 0;
+    const timelinePieces: JSXInternal.Element[] = [];
 
-        sortedEntries.forEach((data, i) => {
-            const entryType = data.type || "project";
-            const cardVisible = filters[entryType];
+    sortedEntries.forEach((data, i) => {
+        const entryType = data.type || "project";
+        const cardVisible = filters[entryType];
 
+        timelinePieces.push(
+            <Card key={i} data={data} isVisible={cardVisible} />,
+        );
+
+        if (i === futureEdge) {
             timelinePieces.push(
-                <Card key={i} data={data} isVisible={cardVisible} />,
+                <span
+                    key="edge"
+                    className={classBuilder("timeline-future-edge")
+                        .color("text")
+                        .build(classname.card)}
+                >
+                    Plans
+                </span>,
             );
-
-            if (i === futureEdge) {
-                timelinePieces.push(
-                    <span
-                        key="edge"
-                        className={classBuilder("timeline-future-edge")
-                            .color("text")
-                            .build(classname.card)}
-                    >
-                        Plans
-                    </span>,
-                );
-            }
-
-            if (i > futureEdge && cardVisible) {
-                futureCardsVisible++;
-            }
-        });
-
-        if (!futureCardsVisible) {
-            timelinePieces.splice(futureEdge + 1, 1);
         }
 
-        return (
-            <div
-                className={classBuilder("timeline-wrapper").build(
-                    "scroll-portal",
-                )}
-            >
-                <TimelineFilters />
-                <section className={classname.build()}>
-                    {timelinePieces}
-                </section>
-            </div>
-        );
-    }, [sortedEntries, futureEdge, filters]);
+        if (i > futureEdge && cardVisible) {
+            futureCardsVisible++;
+        }
+    });
+
+    if (!futureCardsVisible) {
+        timelinePieces.splice(futureEdge + 1, 1);
+    }
+
+    return (
+        <div
+            className={classBuilder("timeline-wrapper").build("scroll-portal")}
+        >
+            <TimelineFilters />
+            <section className={classname.build()}>{timelinePieces}</section>
+        </div>
+    );
 };

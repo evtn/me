@@ -3,6 +3,8 @@ import { atomWithStorage } from "jotai/utils";
 
 import { getEntries } from "@/utils";
 
+import { colorShiftHack } from "@/utils/classname";
+
 export type Settings = Record<SettingKey, boolean>;
 
 export type SettingKey =
@@ -47,7 +49,7 @@ export const settingsDataBase: Record<SettingKey, SettingData> = {
     },
     compact: {
         name: "Compact",
-        description: "Hide card descriptions",
+        description: "Make everything compact",
     },
     colorful: {
         name: "Colorful",
@@ -84,5 +86,19 @@ export const settingsAtom = atom(
     },
     (_, set, key: SettingKey, value: boolean) => {
         set(settingsData[key].atom, value);
+    },
+);
+
+const colorShiftAtomBase = atom(0);
+
+export const colorShiftAtom = atom(
+    (get) => get(colorShiftAtomBase),
+    (_, set, reset?: boolean) => {
+        if (reset) {
+            colorShiftHack.shift = 0;
+        } else {
+            colorShiftHack.shift++;
+        }
+        set(colorShiftAtomBase, colorShiftHack.shift);
     },
 );

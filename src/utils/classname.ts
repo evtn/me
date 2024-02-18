@@ -1,5 +1,7 @@
 import { Color } from "@/types";
 
+import { random } from "./random";
+
 const classFilter = (parts: ClassNameLike[]) => {
     return parts.filter(Boolean) as Exclude<ClassNameLike, undefined>[];
 };
@@ -52,6 +54,37 @@ export const build = (data: ClassData, extra: ClassNameLike[]): string => {
     return parts.map((x) => x.toString()).join(" ");
 };
 
+const colors: Color[] = [
+    "blue",
+    "red",
+    "green",
+    "orange",
+    "purple",
+    "yellow",
+    "pink",
+    "cyan",
+];
+
+export const colorShiftHack = {
+    shift: 0,
+};
+
+const getColor = (color: Color): Color => {
+    if (color === "text") {
+        return "text";
+    }
+
+    const oldIndex = colors.indexOf(color);
+    const newIndex =
+        ~~(
+            random(colorShiftHack.shift + oldIndex) *
+            colors.length *
+            colorShiftHack.shift
+        ) + oldIndex;
+
+    return colors[newIndex % colors.length];
+};
+
 const classBuilderFromData = (data: ClassData): ClassBuilder => {
     return {
         build: (...extra: ClassNameLike[]) => build(data, extra),
@@ -68,7 +101,7 @@ const classBuilderFromData = (data: ClassData): ClassBuilder => {
         color: (color) =>
             classBuilderFromData({
                 ...data,
-                additional: [...data.additional, `colored-${color}`],
+                additional: [...data.additional, `colored-${getColor(color)}`],
             }),
         add: (additional) =>
             classBuilderFromData({

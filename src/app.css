@@ -313,13 +313,16 @@ a:focus {
         &.colored-card {
             transition: color 200ms ease-in-out;
 
-            &:focus,
+            &:focus {
+                outline: 2px solid var(--local-accent);
+            }
+
             &:hover {
                 outline: none;
                 color: var(--background);
 
                 &::before {
-                    opacity: 0.9;
+                    opacity: 1;
 
                     main[data-neon="true"] & {
                         padding: 0.25rem;
@@ -331,9 +334,7 @@ a:focus {
             }
 
             &:active {
-                color: var(--background);
                 &::before {
-                    opacity: 1;
                     padding: 0.1rem;
                     left: -0.1rem;
                     top: -0.1rem;

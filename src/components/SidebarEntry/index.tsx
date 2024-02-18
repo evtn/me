@@ -1,10 +1,9 @@
-import { ComponentChildren, FunctionalComponent } from "preact";
+import { FunctionalComponent } from "preact";
 
-import { Color } from "@/types";
 import { classBuilder } from "@/utils";
 
 import { SidebarEntryProps } from "@/data/sidebar";
-import { Icon, IconKey } from "@/icons/icon";
+import { Icon } from "@/icons/icon";
 import { getDynamicLink } from "@/utils/getDynamicLink";
 
 import "./style.css";
@@ -55,7 +54,9 @@ export const SidebarEntry: FunctionalComponent<SidebarEntryProps> = (
                         .element("button")
                         .build(classname.card)}
                     onClick={() => navigator.clipboard.writeText(textToCopy)}
-                    aria-label="Copy"
+                    aria-label={
+                        data.copyLink ? "Copy link" : `Copy "${textToCopy}"`
+                    }
                 >
                     <Icon iconKey="copy" />
                 </button>

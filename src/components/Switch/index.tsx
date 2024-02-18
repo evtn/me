@@ -1,7 +1,10 @@
 import { ComponentProps, FunctionalComponent } from "preact";
 import { useRef } from "preact/hooks";
 
+import { useSettings } from "@/hooks";
 import { classBuilder } from "@/utils";
+
+import { Icon, IconKey } from "@/icons/icon";
 
 import "./style.css";
 
@@ -10,14 +13,16 @@ type SwitchProps = {
     onSwitch?: (state: boolean) => void;
     currentValue?: boolean;
     className?: string;
+    icon?: IconKey;
 } & ComponentProps<"label">;
 
 const classname = classBuilder("switch");
 
 export const Switch: FunctionalComponent<SwitchProps> = (
-    { label, onSwitch, currentValue, className, ...rest },
+    { label, onSwitch, currentValue, className, icon, ...rest },
 ) => {
     let ref = useRef(null);
+    const [{ compact }] = useSettings();
 
     return (
         <label
@@ -33,7 +38,10 @@ export const Switch: FunctionalComponent<SwitchProps> = (
                 type="checkbox"
                 checked={currentValue}
             />
-            <p className="switch-label">{label}</p>
+            {icon ? <Icon iconKey={icon} /> : undefined}
+            {icon && compact ? undefined : (
+                <p className="switch-label">{label}</p>
+            )}
         </label>
     );
 };

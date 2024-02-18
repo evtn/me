@@ -8,6 +8,7 @@ import { Color } from "@/types";
 import { classBuilder, getEntries } from "@/utils";
 
 import { entries } from "@/data/sidebar";
+import { IconKey } from "@/icons/icon";
 import { SettingKey, Settings, settingsData } from "@/state/settings";
 
 import "./style.css";
@@ -21,6 +22,15 @@ const switchColors: Record<SettingKey, Color> = {
     neon: "pink",
 };
 
+const switchIcons: Record<SettingKey, (value: boolean) => IconKey> = {
+    monospace: (value) => (value ? "monospace" : "proportional"),
+    lowercase: (value) => (value ? "lowercase" : "normalcase"),
+    compact: (value) => (value ? "minimize" : "expand"),
+    colors: (value) => (value ? "contrast" : "contrastOff"),
+    colorful: (value) => (value ? "colors" : "colorsOff"),
+    neon: (value) => (value ? "bulb" : "bulbOff"),
+};
+
 const classname = classBuilder("sidebar");
 const element = classname.element;
 
@@ -32,6 +42,7 @@ const buildSwitches = (settings: Settings) => {
         color: switchColors[key],
         shown: true,
         description: settingsData[key].description,
+        icon: switchIcons[key](value),
     }));
 };
 
@@ -46,9 +57,14 @@ export const Sidebar: FunctionalComponent = () => {
 
     return (
         <div className="sidebar-portal">
-            <SettingsBar data={switches} onClick={setSettings} />
-            <section className={classname.build()}>
-                <div className={element("header").color("blue").build()}>
+            <SettingsBar
+                data={switches}
+                onClick={setSettings}
+                title="Settings"
+                icon="settings"
+            />
+            <section className={classname.color("blue").build()}>
+                <div className={element("header").build()}>
                     <div className={element("logo").build(classname.card)}>
                         <Logo />
                     </div>
@@ -59,7 +75,11 @@ export const Sidebar: FunctionalComponent = () => {
                             Dmitry Gritsenko
                         </h1>
                         <h2 className={element("specialization").build()}>
-                            <span className="colored-orange">
+                            <span
+                                className={classBuilder("")
+                                    .color("orange")
+                                    .build()}
+                            >
                                 <Icon iconKey="react" />
                                 Front-end&nbsp;Developer
                             </span>

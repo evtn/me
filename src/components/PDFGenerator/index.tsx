@@ -9,6 +9,8 @@ import { Color } from "@/types";
 import { classBuilder } from "@/utils";
 
 import { useTheme } from "@/hooks/useTheme";
+import { IconKey } from "@/icons/icon";
+import { iconList } from "@/icons/iconPack";
 import { settingsDataBase } from "@/state/settings";
 import { CardType, cardTypeKeys, cardTypes } from "@/types/card";
 
@@ -98,6 +100,25 @@ const paramsToObject = (entries: IterableIterator<[string, any]>) => {
 const currentParams = paramsToObject(
     new URLSearchParams(window.location.search.slice(1)).entries(),
 );
+const nonViableIcons: IconKey[] = [
+    "epam",
+    "intetics",
+    "javascript",
+    "jotai",
+    "kartuli",
+    "logo",
+    "mcc",
+    "preact",
+    "proportional",
+    "python",
+    "react",
+    "reactNative",
+    "rgx",
+    "typescript",
+];
+const viableIcons: IconKey[] = (Object.keys(iconList) as IconKey[]).filter(
+    (x) => !nonViableIcons.includes(x),
+);
 
 export const PDFGenerator: FunctionalComponent = () => {
     const initPdfSettings = useSetAtom(pdfSettingsAtomBase);
@@ -107,9 +128,20 @@ export const PDFGenerator: FunctionalComponent = () => {
     const [preview, setPreview] = useState(false);
     const [settings] = useSettings();
     const theme = useTheme();
+    const [copied, setCopied] = useState(false);
+    const [currentIcon, setIcon] = useState<IconKey>("file");
 
     useEffect(() => {
-        return () => initPdfSettings(undefined);
+        const interval = setInterval(() => {
+            const iconKey =
+                viableIcons[Math.floor(Math.random() * viableIcons.length)];
+            setIcon(iconKey);
+        }, 1000);
+
+        return () => {
+            initPdfSettings(undefined);
+            clearInterval(interval);
+        };
     }, []);
 
     useEffect(() => {
@@ -188,9 +220,13 @@ export const PDFGenerator: FunctionalComponent = () => {
                 icon="play"
             />
             <PDFGeneratorButton
-                onClick={() => navigator?.clipboard?.writeText?.(link)}
+                onClick={() => {
+                    navigator?.clipboard?.writeText?.(link);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                }}
                 text="Copy URL"
-                icon="copy"
+                icon={copied ? "copyCheck" : "copy"}
                 color="green"
             />
 
@@ -214,7 +250,10 @@ export const PDFGenerator: FunctionalComponent = () => {
     );
 
     const heading = [
-        <h2>CV PDF Builder</h2>,
+        <h2>
+            <Icon iconKey={currentIcon} />
+            CV PDF Builder
+        </h2>,
         <p>
             Edit the configuration as you wish, or just go further with the
             default values
@@ -246,7 +285,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     classname.card,
                 )}
             >
-                <Icon iconKey="dollar" />
+                <Icon iconKey={compensationError ? "wrongReceipt" : "dollar"} />
                 <input
                     type="text"
                     inputMode="numeric"
@@ -280,6 +319,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     color: themeColor,
                     value: pdfSettings.light,
                     description: "Tip: if you want to print, use Light theme",
+                    icon: pdfSettings.light ? "sunglasses" : "moon",
                 },
                 {
                     label: "High Contrast",
@@ -287,6 +327,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     color: "red",
                     value: pdfSettings.contrast,
                     description: settingsDataBase.colors.description,
+                    icon: pdfSettings.contrast ? "contrast" : "contrastOff",
                 },
             ]}
         />
@@ -305,6 +346,13 @@ export const PDFGenerator: FunctionalComponent = () => {
 
         setPdfSettings("sections", newValue);
     };
+
+    const sectionIcons = {
+        position: "briefcase",
+        project: "package",
+        stack: "stack",
+        history: "calendar",
+    } as const;
 
     const sections = pdfSettings.sections;
 
@@ -326,10 +374,13 @@ export const PDFGenerator: FunctionalComponent = () => {
                 value: sections.includes(key),
                 key,
                 description: `Include ${key} section in the document`,
+                icon: sections.includes(key)
+                    ? sectionIcons[key]
+                    : `${sectionIcons[key]}Off`,
             }))}
             warning={
                 sections.length < 1 && !pdfSettings.compact
-                    ? "By excluding all sections you will get the ultra-compact layout with my contact info (includes stack anyway, sorry)"
+                    ? "When you exclude all sections you get the ultra-compact layout"
                     : undefined
             }
         />
@@ -381,6 +432,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     color: "orange",
                     value: pdfSettings.monospace,
                     description: settingsDataBase.monospace.description,
+                    icon: pdfSettings.monospace ? "monospace" : "proportional",
                 },
                 {
                     label: "Lowercase",
@@ -388,6 +440,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     color: "blue",
                     value: pdfSettings.lowercase,
                     description: settingsDataBase.lowercase.description,
+                    icon: pdfSettings.lowercase ? "lowercase" : "normalcase",
                 },
                 {
                     label: "Colorful",
@@ -395,6 +448,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     color: "cyan",
                     value: pdfSettings.card_colors,
                     description: settingsDataBase.colorful.description,
+                    icon: pdfSettings.card_colors ? "colors" : "colorsOff",
                 },
                 {
                     label: "Plans",
@@ -402,6 +456,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     color: "pink",
                     value: pdfSettings.plans,
                     description: "Include planned cards",
+                    icon: pdfSettings.plans ? "calendar" : "calendarOff",
                 },
                 {
                     label: "Configurable",
@@ -409,6 +464,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     color: "purple",
                     value: pdfSettings.configurable,
                     description: "Include a link to this builder",
+                    icon: pdfSettings.configurable ? "settings" : "settingsOff",
                 },
             ]}
         />
@@ -426,6 +482,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     configKey: "pdf",
                     color: "red",
                     value: format == "pdf",
+                    icon: "pdf",
                 },
                 {
                     label: "PNG",
@@ -433,6 +490,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     configKey: "png",
                     color: "green",
                     value: format == "png",
+                    icon: "image",
                 },
             ]}
         />
@@ -450,6 +508,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     classname.card,
                 )}
             >
+                <Icon iconKey="file" />
                 <input
                     type="text"
                     value={pdfSettings.filename}

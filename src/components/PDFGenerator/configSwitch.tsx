@@ -5,6 +5,8 @@ import { FunctionalComponent } from "preact";
 import { Switch } from "@/components";
 import { Color } from "@/types";
 
+import { IconKey } from "@/icons/icon";
+
 export type ConfigSwitchSetter = (key: any, value: boolean) => void;
 
 export type ConfigSwitchProps = {
@@ -15,10 +17,11 @@ export type ConfigSwitchProps = {
     value: boolean;
     active?: boolean;
     description?: string;
+    icon?: IconKey;
 };
 
 export const ConfigSwitch: FunctionalComponent<ConfigSwitchProps> = (
-    { configKey, setter, label, color, value, active, description },
+    { configKey, setter, label, color, value, active, description, icon },
 ) => {
     const setPDFSettings = useSetAtom(pdfSettingsAtom);
     if (active === undefined) {
@@ -30,6 +33,7 @@ export const ConfigSwitch: FunctionalComponent<ConfigSwitchProps> = (
     return (
         <Switch
             label={label}
+            icon={icon}
             currentValue={active}
             onSwitch={() => switchSetter(configKey, !value)}
             className={classname

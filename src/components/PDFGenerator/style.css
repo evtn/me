@@ -9,6 +9,14 @@
 
     h2 {
         margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        & > * {
+            height: 1em;
+            width: 1em;
+        }
     }
 
     form {
@@ -138,9 +146,9 @@
 
     & .switch[aria-label] {
         &::after {
-            left: 50%;
+            left: -0.25rem;
             top: calc(100% + 0.5rem);
-            transform: translateX(-50%);
+            transform: translateX(0%);
         }
     }
 

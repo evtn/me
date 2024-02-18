@@ -11,7 +11,7 @@
     height: max-content;
     flex-grow: 1;
     box-sizing: border-box;
-    --icon-color: var(--blue);
+    --icon-color: var(--local-accent);
 
     &__specialization span {
         color: var(--local-accent);
@@ -144,7 +144,7 @@
 
         h2 {
             font-size: 1.5rem;
-            width: 16.5rem;
+            width: 18rem;
         }
 
         &__logo {

@@ -62,7 +62,7 @@ export const entries: SidebarEntryData[] = [
     {
         href: "https://github.com/evtn/me/tree/2-beta/",
         text: "Source",
-        icon: "code",
+        icon: "source",
         copyLink: true,
         color: "pink",
         label: "Source of this website",

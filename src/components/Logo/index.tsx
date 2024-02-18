@@ -44,7 +44,7 @@ export const Logo: FunctionalComponent = () => {
                     }
                     font-size={settings.monospace ? 14.8 : 18.8}
                     font-weight="700"
-                    className="logo__text"
+                    className={classname.element("text").build()}
                 >
                     <textPath href="#circle">
                         Photo from this CV is on a vacation for an indefinite

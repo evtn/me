@@ -13,7 +13,7 @@
         "defaults"
     ],
     "dependencies": {
-        "@mynaui/icons-react": "^0.0.39",
+        "@tabler/icons-react": "^2.47.0",
         "jotai": "^2.0.3",
         "postcss": "^8.4.33",
         "preact": "^10.11.3",
