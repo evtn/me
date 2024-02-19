@@ -251,7 +251,9 @@ export const PDFGenerator: FunctionalComponent = () => {
 
     const heading = [
         <h2>
-            <Icon iconKey={currentIcon} />
+            <div aria-label={`This is ${currentIcon}`}>
+                <Icon iconKey={currentIcon} />
+            </div>
             CV PDF Builder
         </h2>,
         <p>
