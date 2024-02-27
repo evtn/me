@@ -10,8 +10,8 @@ const getDTValue = (dt: DateTuple): number => {
     return (dt[0] * 12 + dt[1]) * 31 + dt[2];
 };
 
-export const useTimeline = () => {
-    const entries = useEntries();
+export const useTimeline = (doFetch: boolean = false) => {
+    const entries = useEntries(doFetch);
     const sortedEntries = useMemo(
         () =>
             [...entries].sort((a, b) => {

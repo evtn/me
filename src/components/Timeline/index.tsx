@@ -1,5 +1,4 @@
 import { useAtom } from "jotai";
-import { useMemo } from "preact/hooks";
 import { JSXInternal } from "preact/src/jsx";
 
 import { Card } from "@/components";
@@ -16,7 +15,7 @@ const classname = classBuilder("timeline");
 
 export const Timeline = () => {
     const [filters] = useAtom(timelineFiltersAtom);
-    const { sortedEntries, futureEdge } = useTimeline();
+    const { sortedEntries, futureEdge } = useTimeline(true);
 
     let futureCardsVisible = 0;
     const timelinePieces: JSXInternal.Element[] = [];

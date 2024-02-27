@@ -102,3 +102,5 @@ export const colorShiftAtom = atom(
         set(colorShiftAtomBase, colorShiftHack.shift);
     },
 );
+
+export const baseCompensationAtom = atom(3000);
