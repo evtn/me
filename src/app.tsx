@@ -8,8 +8,11 @@ import { useRouting, useSettingsDataset } from "@/hooks";
 import "./app.css";
 import "./styles/colors.css";
 
+import { colorShiftAtom } from "./state/settings";
+
 const AppContents = () => {
     const dataset = useSettingsDataset();
+    useAtomValue(colorShiftAtom);
 
     return (
         <main {...dataset}>
