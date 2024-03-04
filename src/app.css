@@ -192,6 +192,7 @@ b {
 
 i {
     font-style: oblique;
+    font-variation-settings: "ital" 1;
 }
 
 .transparent {
