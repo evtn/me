@@ -77,7 +77,7 @@ export const settingsData: Record<SettingKey, Setting> = {
     compact: makeSetting("compact"),
     colorful: makeSetting("colorful", false),
     neon: makeSetting("neon", true),
-    reversed: makeSetting("reversed"),
+    reversed: makeSetting("reversed", true),
 };
 
 export const settingsAtom = atom(
