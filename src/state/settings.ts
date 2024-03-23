@@ -13,7 +13,8 @@ export type SettingKey =
     | "monospace"
     | "compact"
     | "colorful"
-    | "neon";
+    | "neon"
+    | "reversed";
 
 type SettingsAtom = WritableAtom<boolean, [boolean], void>;
 
@@ -59,6 +60,10 @@ export const settingsDataBase: Record<SettingKey, SettingData> = {
         name: "Neon",
         description: "Adds neon lights to hovered buttons",
     },
+    reversed: {
+        name: "Reversed",
+        description: "Reverse the timeline",
+    },
 };
 
 type Setting = {
@@ -72,6 +77,7 @@ export const settingsData: Record<SettingKey, Setting> = {
     compact: makeSetting("compact"),
     colorful: makeSetting("colorful", false),
     neon: makeSetting("neon", true),
+    reversed: makeSetting("reversed"),
 };
 
 export const settingsAtom = atom(

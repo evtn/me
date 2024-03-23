@@ -20,6 +20,7 @@ const switchColors: Record<SettingKey, Color> = {
     colors: "red",
     colorful: "cyan",
     neon: "pink",
+    reversed: "purple",
 };
 
 const switchIcons: Record<SettingKey, (value: boolean) => IconKey> = {
@@ -29,6 +30,7 @@ const switchIcons: Record<SettingKey, (value: boolean) => IconKey> = {
     colors: (value) => (value ? "contrast" : "contrastOff"),
     colorful: (value) => (value ? "colors" : "colorsOff"),
     neon: (value) => (value ? "bulb" : "bulbOff"),
+    reversed: (value) => (value ? "reversedsort" : "normalsort"),
 };
 
 const classname = classBuilder("sidebar");
