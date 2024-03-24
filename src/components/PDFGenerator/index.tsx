@@ -17,11 +17,13 @@ import { CardType, cardTypeKeys, cardTypes } from "@/types/card";
 import "./style.css";
 
 import { PDFGeneratorButton, PDFGeneratorLink } from "./button";
+import { ConfigSwitch } from "./configSwitch";
 import { convert } from "./converter";
 import { PDFSection } from "./section";
 
 export const classname = classBuilder("pdf-generator");
 const section = classname.element("section");
+const configBar = classname.element("config-bar");
 
 export type PDFSettings = {
     light: boolean;
@@ -35,6 +37,8 @@ export type PDFSettings = {
     filename: string;
     card_colors: boolean;
     configurable: boolean;
+    reversed: boolean;
+    hide_compensation: boolean;
 };
 
 const pdfSettingsAtomBase = atom<PDFSettings | undefined>(undefined);
@@ -157,6 +161,8 @@ export const PDFGenerator: FunctionalComponent = () => {
                 compact: settings.compact,
                 card_colors: settings.colorful,
                 configurable: true,
+                reversed: settings.reversed,
+                hide_compensation: false,
                 ...currentParams,
             });
         }
@@ -276,31 +282,53 @@ export const PDFGenerator: FunctionalComponent = () => {
         <label
             className={section
                 .color(compensationError ? "red" : "green")
-                .build(compensationError && "invalid")}
+                .build(
+                    compensationError && "invalid",
+                    pdfSettings.hide_compensation && "hidden",
+                )}
         >
             <p>
                 Compensation
                 <span className="transparent">, $/month, gross</span>
             </p>
-            <div
-                className={classBuilder("text-field-wrapper").build(
-                    classname.card,
-                )}
-            >
-                <Icon iconKey={compensationError ? "wrongReceipt" : "dollar"} />
-                <input
-                    type="text"
-                    inputMode="numeric"
-                    pattern="\d{5,}|[3-9]\d{3}"
-                    title="an integer more than 3000"
-                    value={pdfSettings.compensation}
-                    className={classname.element("text-field").build()}
-                    onInput={(e) => {
-                        const validity = e.currentTarget.validity;
-                        setPdfSettings("compensation", e.currentTarget.value);
-                        setCompensationError(!validity.valid);
-                    }}
-                    required
+            <div className={configBar.build()}>
+                <div
+                    className={classBuilder("text-field-wrapper").build(
+                        classname.card,
+                    )}
+                >
+                    <Icon
+                        iconKey={compensationError ? "wrongReceipt" : "dollar"}
+                    />
+                    <input
+                        type="text"
+                        inputMode="numeric"
+                        pattern="\d{5,}|[3-9]\d{3}"
+                        title="an integer more than 3000"
+                        value={pdfSettings.compensation}
+                        className={classname.element("text-field").build()}
+                        onInput={(e) => {
+                            const validity = e.currentTarget.validity;
+                            setPdfSettings(
+                                "compensation",
+                                e.currentTarget.value,
+                            );
+                            setCompensationError(!validity.valid);
+                        }}
+                        required
+                    />
+                </div>
+                <ConfigSwitch
+                    label="Do not include in CV"
+                    configKey="hide_compensation"
+                    color="green"
+                    value={pdfSettings.hide_compensation}
+                    description="Hide compensation value from the PDF"
+                    icon={
+                        pdfSettings.hide_compensation
+                            ? "wrongReceipt"
+                            : "dollar"
+                    }
                 />
             </div>
         </label>
@@ -467,6 +495,14 @@ export const PDFGenerator: FunctionalComponent = () => {
                     value: pdfSettings.configurable,
                     description: "Include a link to this builder",
                     icon: pdfSettings.configurable ? "settings" : "settingsOff",
+                },
+                {
+                    label: "Reversed",
+                    configKey: "reversed",
+                    color: "purple",
+                    value: pdfSettings.reversed,
+                    description: "Reverse the order",
+                    icon: pdfSettings.reversed ? "reversedsort" : "normalsort",
                 },
             ]}
         />

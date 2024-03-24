@@ -70,19 +70,23 @@
             }
         }
 
+        &.hidden {
+            opacity: 0.6;
+        }
+
         &.disabled {
             opacity: 0.3;
             pointer-events: none;
         }
 
-        & > .text-field-wrapper {
+        & .text-field-wrapper {
             display: flex;
             align-items: center;
             padding: 0.5rem 0.5rem;
             gap: 0.5rem;
         }
 
-        & > .colored-card {
+        & .colored-card {
             z-index: 0;
             color: var(--local-accent);
         }
