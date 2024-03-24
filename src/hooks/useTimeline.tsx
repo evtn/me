@@ -5,43 +5,32 @@ import { isFuture } from "@/utils/date";
 
 import { useEntries } from "./useEntries";
 import { cardToSlug } from "./useRouting";
-import { useSettings } from "./useSettings";
 
 const getDTValue = (dt: DateTuple): number => {
     return (dt[0] * 12 + dt[1]) * 31 + dt[2];
 };
 
-const sortCards = (a: CardData, b: CardData, reversed: boolean) => {
-    const sortBase = (a: CardData, b: CardData) => {
-        const aDate = a.startDate;
-        const bDate = b.startDate;
+const sortCards = (a: CardData, b: CardData) => {
+    const aDate = a.startDate;
+    const bDate = b.startDate;
 
-        if (aDate) {
-            if (bDate) {
-                return getDTValue(aDate) - getDTValue(bDate);
-            }
-            return -1;
-        }
+    if (aDate) {
         if (bDate) {
-            return 1;
+            return getDTValue(aDate) - getDTValue(bDate);
         }
-        return 0;
-    };
-
-    const result = sortBase(a, b);
-
-    if (reversed) {
-        return -result;
+        return -1;
     }
-    return result;
+    if (bDate) {
+        return 1;
+    }
+    return 0;
 };
 
 export const useTimeline = (doFetch: boolean = false) => {
-    const [{ reversed }] = useSettings();
     const entries = useEntries(doFetch);
     const sortedEntries = useMemo(
-        () => [...entries].sort((a, b) => sortCards(a, b, reversed)),
-        [entries, reversed],
+        () => [...entries].sort(sortCards),
+        [entries],
     );
 
     const futureEdge = useMemo(
