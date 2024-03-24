@@ -124,15 +124,7 @@ const viableIcons: IconKey[] = (Object.keys(iconList) as IconKey[]).filter(
     (x) => !nonViableIcons.includes(x),
 );
 
-export const PDFGenerator: FunctionalComponent = () => {
-    const initPdfSettings = useSetAtom(pdfSettingsAtomBase);
-    const [pdfSettings, setPdfSettings] = useAtom(pdfSettingsAtom);
-    const [compensationError, setCompensationError] = useState(false);
-    const [format, setFormat] = useState("pdf");
-    const [preview, setPreview] = useState(false);
-    const [settings] = useSettings();
-    const theme = useTheme();
-    const [copied, setCopied] = useState(false);
+export const PDFHeaderIcon = () => {
     const [currentIcon, setIcon] = useState<IconKey>("file");
 
     useEffect(() => {
@@ -143,8 +135,30 @@ export const PDFGenerator: FunctionalComponent = () => {
         }, 1000);
 
         return () => {
-            initPdfSettings(undefined);
             clearInterval(interval);
+        };
+    }, []);
+
+    return (
+        <div aria-label={`This is ${currentIcon}`}>
+            <Icon iconKey={currentIcon} />
+        </div>
+    );
+};
+
+export const PDFGenerator: FunctionalComponent = () => {
+    const initPdfSettings = useSetAtom(pdfSettingsAtomBase);
+    const [pdfSettings, setPdfSettings] = useAtom(pdfSettingsAtom);
+    const [compensationError, setCompensationError] = useState(false);
+    const [format, setFormat] = useState("pdf");
+    const [preview, setPreview] = useState(false);
+    const [settings] = useSettings();
+    const theme = useTheme();
+    const [copied, setCopied] = useState(false);
+
+    useEffect(() => {
+        return () => {
+            initPdfSettings(undefined);
         };
     }, []);
 
@@ -257,9 +271,7 @@ export const PDFGenerator: FunctionalComponent = () => {
 
     const heading = [
         <h2>
-            <div aria-label={`This is ${currentIcon}`}>
-                <Icon iconKey={currentIcon} />
-            </div>
+            <PDFHeaderIcon />
             CV PDF Builder
         </h2>,
         <p>
