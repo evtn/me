@@ -1,5 +1,5 @@
 const CornerLogo = (text: string) => {
-  return <div className="icon-js">{text}</div>;
+    return <div className="icon-js">{text}</div>;
 };
 
 export const JSLogo = () => CornerLogo("JS");

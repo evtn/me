@@ -1,0 +1,55 @@
+.cursor-provider {
+    --width: var(--cursor-size, 1em);
+    --height: var(--cursor-size, 1em);
+    --position: translate(var(--cursor-position-x), var(--cursor-position-y));
+    --local-accent: var(--cursor-color);
+    background: var(--cursor-color);
+    position: fixed;
+
+    outline: var(--background) 2px solid;
+
+    width: var(--width);
+    height: var(--height);
+
+    left: calc(var(--width) * -0.5);
+    top: calc(var(--height) * -0.5);
+
+    transform: var(--position);
+
+    transition-timing-function: ease;
+    transition-property: background, width, height, left, top, border-radius;
+    transition-duration: 100ms;
+
+    pointer-events: none;
+
+    border-radius: var(--border-radius); /* 100% */
+    border-top-left-radius: 0;
+
+    opacity: 0.8;
+
+    z-index: 999;
+
+    &[data-cursor-type="default"] {
+        transform: var(--position);
+        left: 0;
+        top: 0;
+    }
+
+    &[data-cursor-type="text"] {
+        --width: calc(var(--cursor-size) * 0.3);
+        --height: calc(var(--cursor-size) * 1.4);
+        border-radius: var(--border-radius); /* 0.1em */
+    }
+
+    &[data-cursor-type="pointer"] {
+        --size: calc(var(--cursor-size) * 1.5);
+        --width: var(--size);
+        --height: var(--size);
+        border-radius: var(--border-radius); /* 100% */
+        opacity: 0.5;
+    }
+
+    main[data-cursor="false"] & {
+        display: none;
+    }
+}

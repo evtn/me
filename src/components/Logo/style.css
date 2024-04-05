@@ -1,0 +1,20 @@
+.logo {
+    cursor: pointer;
+
+    --logo-back: var(--card);
+    --logo-accent: var(--local-accent);
+
+    &__text {
+        transform-origin: center;
+        opacity: 0.5;
+        user-select: none;
+    }
+
+    & .logo-text {
+        display: none;
+    }
+
+    &:hover .logo-text {
+        display: block;
+    }
+}
