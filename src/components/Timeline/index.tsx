@@ -24,10 +24,6 @@ export const Timeline = () => {
         const entryType = data.type || "project";
         const cardVisible = filters[entryType];
 
-        timelinePieces.push(
-            <Card key={i} data={data} isVisible={cardVisible} />,
-        );
-
         if (i === futureEdge) {
             timelinePieces.push(
                 <span
@@ -40,6 +36,10 @@ export const Timeline = () => {
                 </span>,
             );
         }
+
+        timelinePieces.push(
+            <Card key={i} data={data} isVisible={cardVisible} />,
+        );
 
         if (i > futureEdge && cardVisible) {
             futureCardsVisible++;
