@@ -60,7 +60,7 @@ export const entries: SidebarEntryData[] = [
         label: "PDF Generator",
     },
     {
-        href: "https://github.com/evtn/me/tree/2-beta/",
+        ln: "github/me",
         text: "Source",
         icon: "source",
         copyLink: true,
