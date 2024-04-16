@@ -62,7 +62,7 @@ main {
     justify-content: center;
 }
 
-@media (max-width: 65rem) {
+@media (max-width: 85rem) {
     #app {
         height: 100svh;
         overflow-y: scroll;
