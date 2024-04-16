@@ -8,7 +8,7 @@ import { colorShiftHack } from "@/utils/classname";
 export type Settings = Record<SettingKey, boolean>;
 
 export type SettingKey =
-    | "colors"
+    | "contrast"
     | "lowercase"
     | "monospace"
     | "compact"
@@ -36,8 +36,8 @@ type SettingData = {
 };
 
 export const settingsDataBase: Record<SettingKey, SettingData> = {
-    colors: {
-        name: "Colors",
+    contrast: {
+        name: "Contrast",
         description: "Get a high-contrast b&w experience",
     },
     lowercase: {
@@ -53,15 +53,15 @@ export const settingsDataBase: Record<SettingKey, SettingData> = {
         description: "Make everything compact",
     },
     colorful: {
-        name: "Colorful",
-        description: "Adds more color!",
+        name: "Colors",
+        description: "More colors!",
     },
     neon: {
         name: "Neon",
-        description: "Adds neon lights to hovered buttons",
+        description: "Immersive transitions and animations",
     },
     reversed: {
-        name: "Reversed",
+        name: "Reverse",
         description: "Reverse the timeline",
     },
 };
@@ -71,7 +71,7 @@ type Setting = {
 } & SettingData;
 
 export const settingsData: Record<SettingKey, Setting> = {
-    colors: makeSetting("colors", true),
+    contrast: makeSetting("contrast", false),
     lowercase: makeSetting("lowercase"),
     monospace: makeSetting("monospace"),
     compact: makeSetting("compact"),

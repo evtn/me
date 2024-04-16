@@ -48,7 +48,7 @@ export const MoneyEntry: FunctionalComponent = () => {
 
     const refreshButton = (
         <button
-            className={classname.element("button").build(classname.card)}
+            className={classname.element("button").build(classname.button)}
             onClick={() => {
                 setCompensationShift(0);
                 shiftColors(true);
@@ -61,7 +61,7 @@ export const MoneyEntry: FunctionalComponent = () => {
 
     const addButton = (
         <button
-            className={classname.element("button").build(classname.card)}
+            className={classname.element("button").build(classname.button)}
             onClick={() =>
                 setCompensationShift(
                     (value) =>

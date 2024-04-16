@@ -267,16 +267,18 @@ code {
     }
 }
 
-.colored-card {
-    position: relative;
+.colored-card,
+.colored-button {
     border-radius: var(--border-radius);
-    background: transparent;
     position: relative;
+    transition-duration: 200ms;
+    transition-property: scale, color, margin;
+    transition-timing-function: ease-in-out;
 
     &::before {
         transition: 150ms ease-in-out;
         transition-property: color, opacity, background-color, padding, top,
-            left;
+            left, box-shadow;
         content: "";
         position: absolute;
         width: 100%;
@@ -292,14 +294,11 @@ code {
     }
 }
 
-button,
-a,
-label {
-    &.colored-card {
-        &:focus,
-        &:hover {
-            outline: none;
-        }
+.colored-card,
+.colored-button {
+    &:focus,
+    &:hover {
+        outline: none;
     }
 }
 
@@ -307,69 +306,23 @@ a:focus {
     outline: none;
 }
 
-@media (hover: hover) {
-    button,
-    a,
-    label {
-        &.colored-card {
-            transition: color 200ms ease-in-out;
-
-            &:focus {
-                outline: 2px solid var(--local-accent);
-            }
-
-            &:hover {
-                outline: none;
-                color: var(--background);
-
-                &::before {
-                    opacity: 1;
-
-                    main[data-neon="true"] & {
-                        padding: 0.25rem;
-                        left: -0.25rem;
-                        top: -0.25rem;
-                        box-shadow: 0 0 2.5rem var(--local-accent);
-                    }
-                }
-            }
-
-            &:active {
-                &::before {
-                    padding: 0.1rem;
-                    left: -0.1rem;
-                    top: -0.1rem;
-                }
-            }
+@media (prefers-reduced-motion) {
+    .colored-card,
+    .colored-button {
+        ::before {
+            left: 0 !important;
+            top: 0 !important;
+            padding: 0 !important;
         }
     }
 }
 
-@media (prefers-reduced-motion) {
-    .colored-card::before {
-        left: 0 !important;
-        top: 0 !important;
-        padding: 0 !important;
-    }
-}
-
-[data-active="false"].colored-card {
+[data-active="false"].colored-button {
     &:hover {
         color: var(--local-accent);
         &::before {
             opacity: 0.1;
         }
-    }
-}
-
-.card-highlighted {
-    &::before {
-        background-size: 100%;
-        opacity: 0.3;
-        animation-name: highlight-blink;
-        animation-duration: 1s;
-        animation-iteration-count: 3;
-        animation-timing-function: ease-in-out;
     }
 }
 
@@ -390,25 +343,63 @@ a:focus {
 }
 
 main[data-colorful="false"] {
-    & :not(.link, a, button, label, input, .text-field-wrapper).colored-card {
+    & .colored-card {
         &::before {
-            background: var(--card);
-            opacity: 1;
-        }
-        &:focus::before,
-        &:hover::before {
-            background: var(--card);
+            background-color: var(--card);
             opacity: 1;
         }
     }
+}
 
-    a,
-    button,
-    label {
-        &.colored-card {
-            &:not(:hover, :focus)::before {
-                background: var(--text);
-                opacity: 0.03;
+.colored-card.card-highlighted:not(.a) {
+    main[data-neon="true"] & {
+        scale: 105%;
+        margin-bottom: 1rem;
+        margin-top: 0.5rem;
+
+        &::before {
+            box-shadow: 0 0 1rem var(--local-accent);
+        }
+    }
+
+    &::before {
+        background-size: 100%;
+        opacity: 0.3;
+        animation-name: highlight-blink;
+        animation-duration: 1s;
+        animation-iteration-count: 3;
+        animation-timing-function: ease-in-out;
+        background-color: var(--local-accent);
+    }
+}
+
+@media (hover: hover) {
+    .colored-button {
+        &:focus {
+            outline: 2px solid var(--local-accent);
+        }
+
+        &:hover,
+        &.text-field-wrapper:focus-within {
+            outline: none;
+            color: var(--background);
+
+            main[data-neon="true"] & {
+                scale: 105%;
+            }
+
+            &::before {
+                opacity: 1;
+
+                main[data-neon="true"] & {
+                    box-shadow: 0 0 2.5rem var(--local-accent);
+                }
+            }
+        }
+
+        &:active {
+            main[data-neon="true"] & {
+                scale: 95%;
             }
         }
     }

@@ -1,6 +1,4 @@
 .card {
-    position: relative;
-
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -46,7 +44,6 @@
         padding: 0.25rem;
         cursor: pointer;
         color: var(--local-accent);
-        background: var(--overlay);
         border-radius: var(--border-radius);
         align-self: flex-end;
 
@@ -61,7 +58,7 @@
         align-items: center;
         justify-content: flex-start;
         gap: 0.5rem;
-        width: 36rem;
+        width: 100%;
         flex-shrink: 0;
         position: relative;
         max-width: 100%;

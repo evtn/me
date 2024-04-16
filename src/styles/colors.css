@@ -86,7 +86,7 @@
     --overlay: var(--text-overlay);
 }
 
-main[data-colors="false"] {
+main[data-contrast="true"] {
     --background: var(--mono-black);
     --background-overlay: var(--mono-black-overlay);
     --card: var(--mono-gray);
@@ -97,7 +97,7 @@ main[data-colors="false"] {
 
 /* light theme */
 @media (prefers-color-scheme: light) {
-    main[data-colors="false"] {
+    main[data-contrast="true"] {
         --background: var(--mono-lightgray);
         --background-overlay: var(--mono-lightgray-overlay);
         --card: var(--mono-white);
@@ -134,7 +134,7 @@ main[data-colors="false"] {
     }
 }
 
-main[data-colors="false"] {
+main[data-contrast="true"] {
     --red: var(--text);
     --orange: var(--text);
     --yellow: var(--text);

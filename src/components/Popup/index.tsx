@@ -1,4 +1,4 @@
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { FunctionalComponent } from "preact";
 import { route } from "preact-router";
 import { useEffect } from "preact/hooks";
@@ -13,7 +13,7 @@ import "./style.css";
 const classname = classBuilder("popup");
 
 export const PopupContainer: FunctionalComponent = () => {
-    const [contents, setContents] = useAtom(popupAtom);
+    const contents = useAtomValue(popupAtom);
     const isOpen = !!contents;
 
     useEffect(() => {

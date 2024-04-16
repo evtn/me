@@ -79,7 +79,7 @@ const wrappers: { [K in RichTextType]: Wrapper<K> } = {
             <a
                 className={linkClassName
                     .color(data.color)
-                    .build(linkClassName.card)}
+                    .build(linkClassName.button)}
                 href={link}
                 aria-label={`External link: ${cleanHref(link)}`}
             >
@@ -91,7 +91,7 @@ const wrappers: { [K in RichTextType]: Wrapper<K> } = {
         <span
             className={classBuilder("highlight")
                 .color(data.color || "text")
-                .build(linkClassName.card)}
+                .build(linkClassName.button)}
         >
             {format(data.content)}
         </span>

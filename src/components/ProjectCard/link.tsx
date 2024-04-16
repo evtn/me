@@ -4,13 +4,12 @@ import { classBuilder } from "@/utils";
 
 type ProjectCardLinkProps = {
     href: string;
-    text?: string;
 };
 
 const classname = classBuilder("project-card");
 
 export const ProjectCardLink: FunctionalComponent<ProjectCardLinkProps> = (
-    { href, children, text },
+    { href, children },
 ) => {
     return (
         <a

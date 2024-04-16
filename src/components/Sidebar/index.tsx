@@ -8,7 +8,7 @@ import { Color } from "@/types";
 import { classBuilder, getEntries } from "@/utils";
 
 import { entries } from "@/data/sidebar";
-import { IconKey } from "@/icons/icon";
+import { type IconKey, iconOff } from "@/icons/base";
 import { SettingKey, Settings, settingsData } from "@/state/settings";
 
 import "./style.css";
@@ -17,20 +17,20 @@ const switchColors: Record<SettingKey, Color> = {
     monospace: "orange",
     lowercase: "blue",
     compact: "green",
-    colors: "red",
+    contrast: "red",
     colorful: "cyan",
     neon: "pink",
     reversed: "purple",
 };
 
-const switchIcons: Record<SettingKey, (value: boolean) => IconKey> = {
-    monospace: (value) => (value ? "monospace" : "proportional"),
-    lowercase: (value) => (value ? "lowercase" : "normalcase"),
-    compact: (value) => (value ? "minimize" : "expand"),
-    colors: (value) => (value ? "contrast" : "contrastOff"),
-    colorful: (value) => (value ? "colors" : "colorsOff"),
-    neon: (value) => (value ? "bulb" : "bulbOff"),
-    reversed: (value) => (value ? "reversedsort" : "normalsort"),
+const switchIcons: Record<SettingKey, [IconKey, IconKey]> = {
+    monospace: ["proportional", "monospace"],
+    lowercase: ["normalcase", "lowercase"],
+    compact: ["expand", "minimize"],
+    contrast: iconOff("contrast"),
+    colorful: iconOff("colors"),
+    neon: iconOff("bulb"),
+    reversed: ["normalsort", "reversedsort"],
 };
 
 const classname = classBuilder("sidebar");
@@ -44,7 +44,7 @@ const buildSwitches = (settings: Settings) => {
         color: switchColors[key],
         shown: true,
         description: settingsData[key].description,
-        icon: switchIcons[key](value),
+        icons: switchIcons[key],
     }));
 };
 
@@ -63,7 +63,7 @@ export const Sidebar: FunctionalComponent = () => {
                 data={switches}
                 onClick={setSettings}
                 title="Settings"
-                icon="settings"
+                icons={["settings", "settings"]}
             />
             <section className={classname.color("blue").build()}>
                 <div className={element("header").build()}>

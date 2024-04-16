@@ -76,14 +76,10 @@
         user-select: none;
         overflow: visible;
         flex-shrink: 0;
-
-        &_tg {
-            transform: rotate(-45deg);
-        }
     }
 }
 
-@media (min-width: 75rem) {
+@media (min-width: 90rem) {
     .sidebar-entry {
         max-width: 30rem;
 

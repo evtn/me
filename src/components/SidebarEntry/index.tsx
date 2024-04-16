@@ -18,7 +18,7 @@ export const SidebarEntry: FunctionalComponent<SidebarEntryProps> = (
     const contents = (
         <>
             <Icon
-                iconKey={data.icon}
+                iconKey={data.icon || data.ln}
                 className={classname.element("icon").build()}
             />
             <p>
@@ -40,7 +40,7 @@ export const SidebarEntry: FunctionalComponent<SidebarEntryProps> = (
     return (
         <div className={classname.color(color).build()}>
             <LinkComponent
-                className={classname.element("link").build(classname.card)}
+                className={classname.element("link").build(classname.button)}
                 href={href}
                 onClick={data.onClick}
                 aria-label={data.label || undefined}
@@ -52,7 +52,7 @@ export const SidebarEntry: FunctionalComponent<SidebarEntryProps> = (
                 <button
                     className={classname
                         .element("button")
-                        .build(classname.card)}
+                        .build(classname.button)}
                     onClick={() => navigator.clipboard.writeText(textToCopy)}
                     aria-label={
                         data.copyLink ? "Copy link" : `Copy "${textToCopy}"`

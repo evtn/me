@@ -1,13 +1,17 @@
+import { IconBulldozer } from "@tabler/icons-react";
 import { FunctionalComponent } from "preact";
+import { Suspense, lazy } from "preact/compat";
 
-import { IconProps } from "./base";
-import { iconList } from "./iconPack";
+import { type IconKey, IconProps } from "./base";
 
-export type IconKey = keyof typeof iconList;
+const LoadedIcon = lazy(async () => (await import("./iconPack")).LoadedIcon);
 
 export const Icon: FunctionalComponent<{ iconKey: IconKey } & IconProps> = (
-    { iconKey, ...rest },
+    props,
 ) => {
-    const IconBase = iconList[iconKey];
-    return <IconBase {...rest} />;
+    return (
+        <Suspense fallback={<IconBulldozer />}>
+            <LoadedIcon {...props} />
+        </Suspense>
+    );
 };

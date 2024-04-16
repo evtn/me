@@ -6,10 +6,10 @@ type Theme = {
 };
 
 export const useTheme = (): Theme => {
-    const [{ colors }] = useSettings();
+    const [{ contrast }] = useSettings();
 
     return {
-        contrast: !colors,
+        contrast,
         light: false,
     };
 };

@@ -72,7 +72,7 @@ import { InteticsLogo } from "./InteticsLogo";
 import { MCCLogo } from "./MCCLogo";
 import { PythonLogo } from "./PythonLogo";
 import { ReactLogo } from "./ReactLogo";
-import { IconBase } from "./base";
+import { IconComponent, IconKey, IconProps } from "./base";
 import { KartuliIcon } from "./kartuli";
 
 const Tabler = (Icon: FunctionalComponent<TablerIconsProps>) => {
@@ -152,4 +152,12 @@ export const iconList = {
     users: Tabler(IconUsers),
     wrongReceipt: Tabler(IconReceiptOff),
     x: Tabler(IconX),
-} as const satisfies Record<string, IconBase>;
+} as const satisfies Record<string, IconComponent>;
+
+export const LoadedIcon: FunctionalComponent<
+    { iconKey: IconKey } & IconProps
+> = ({ iconKey, ...rest }) => {
+    const IconBase = iconList[iconKey];
+
+    return <IconBase {...rest} />;
+};

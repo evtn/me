@@ -72,3 +72,11 @@ button {
 main[data-cursor="true"] * {
     cursor: none !important;
 }
+
+input {
+    color: inherit;
+
+    &:focus {
+        outline: none;
+    }
+}

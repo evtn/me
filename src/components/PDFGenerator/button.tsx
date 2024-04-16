@@ -3,7 +3,8 @@ import { ComponentProps, FunctionalComponent } from "preact";
 import { Color } from "@/types";
 import { classBuilder } from "@/utils";
 
-import { Icon, IconKey } from "@/icons/icon";
+import { IconKey } from "@/icons/base";
+import { Icon } from "@/icons/icon";
 
 type PDFButtonProps = {
     color: Color;

@@ -4,7 +4,7 @@ import { FunctionalComponent } from "preact";
 import { CardIcon, CardTitle, Filler } from "@/components";
 import { Icon } from "@/icons";
 
-import { CardSubtitle, buildDateRange } from "@/components/Card/subtitle";
+import { CardSubtitle } from "@/components/Card/subtitle";
 import { stackColors, stackNames } from "@/types/card";
 
 import { ProjectCardLink } from "./link";
@@ -12,8 +12,6 @@ import { ProjectCardLink } from "./link";
 export const ProjectCardHeader: FunctionalComponent<ProjectCardProps> = (
     { data },
 ) => {
-    const dateRange = buildDateRange(data);
-
     return (
         <>
             <div className={classname.element("header").build()}>

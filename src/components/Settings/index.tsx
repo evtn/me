@@ -5,7 +5,8 @@ import { useSettings } from "@/hooks";
 import { Color } from "@/types";
 
 import { useMobile } from "@/hooks/useMobile";
-import { Icon, IconKey } from "@/icons/icon";
+import { IconKey } from "@/icons/base";
+import { Icon } from "@/icons/icon";
 import { classBuilder } from "@/utils/classname";
 
 import "./style.css";
@@ -19,17 +20,17 @@ export type SwitchData<T extends string> = {
     color: Color;
     shown?: boolean;
     description?: string;
-    icon?: IconKey;
+    icons?: [IconKey, IconKey];
 };
 
 type SettingsBarProps<T extends string> = {
     onClick: (key: T, value: boolean) => void;
     data: SwitchData<T>[];
     title?: string;
-    icon?: IconKey;
+    icons?: [IconKey, IconKey];
 };
 export const SettingsBar = <T extends string>(
-    { onClick, data, title, icon }: SettingsBarProps<T>,
+    { onClick, data, title, icons }: SettingsBarProps<T>,
 ) => {
     const isMobile = useMobile();
     const [isActive, setIsActive] = useState(() => !isMobile);
@@ -48,7 +49,7 @@ export const SettingsBar = <T extends string>(
                     currentValue={entry.value}
                     onSwitch={(state: boolean) => onClick(entry.key, state)}
                     aria-label={entry.description}
-                    icon={entry.icon}
+                    icons={entry.icons}
                 />
             );
         });
@@ -58,10 +59,10 @@ export const SettingsBar = <T extends string>(
             <button
                 className={classname
                     .element("header")
-                    .build(isMobile && classname.card)}
+                    .build(isMobile && classname.button)}
                 onClick={() => isMobile && setIsActive((x) => !x)}
             >
-                {compact && icon ? <Icon iconKey={icon} /> : title}
+                {compact && icons ? <Icon iconKey={icons[+isActive]} /> : title}
             </button>
 
             {isActive ? content : undefined}

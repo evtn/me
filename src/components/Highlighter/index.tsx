@@ -51,8 +51,10 @@ export const Highlighter: FunctionalComponent<TimelineLink> = (
         child.classList.add("card-highlighted");
 
         const onAnimationEnd = () => {
-            child.classList.remove("card-highlighted");
-            child.removeEventListener("animationend", onAnimationEnd);
+            setTimeout(() => {
+                child.classList.remove("card-highlighted");
+                child.removeEventListener("animationend", onAnimationEnd);
+            }, 100);
         };
 
         child.addEventListener("animationend", onAnimationEnd);
@@ -84,7 +86,7 @@ export const Highlighter: FunctionalComponent<TimelineLink> = (
         <a
             className={linkClassName
                 .color(color || getCardColor(entry.type))
-                .build(linkClassName.card)}
+                .build(linkClassName.button)}
             onClick={highlight}
             aria-label={`${
                 cardVisible ? "" : "(filtered) "

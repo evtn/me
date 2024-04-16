@@ -1,7 +1,6 @@
 export { Highlighter } from "./Highlighter";
 export { Sidebar } from "./Sidebar";
 export { SettingsBar } from "./Settings";
-export { PDFGenerator } from "./PDFGenerator";
 export { ProjectCard } from "./ProjectCard";
 export { MoneyEntry } from "./MoneyEntry";
 export { PopupContainer, usePopup } from "./Popup";

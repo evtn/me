@@ -97,7 +97,6 @@
 }
 
 .sidebar-portal {
-    background: var(--background);
     scrollbar-color: var(--local-accent) var(--card);
     flex-shrink: 0;
     display: flex;
@@ -112,7 +111,7 @@
     }
 }
 
-@media (min-width: 75rem) {
+@media (min-width: 90rem) {
     .sidebar {
         gap: 1rem;
 

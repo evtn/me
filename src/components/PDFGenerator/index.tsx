@@ -9,8 +9,7 @@ import { Color } from "@/types";
 import { classBuilder } from "@/utils";
 
 import { useTheme } from "@/hooks/useTheme";
-import { IconKey } from "@/icons/icon";
-import { iconList } from "@/icons/iconPack";
+import { IconKey, iconKeys, iconOff } from "@/icons/base";
 import { settingsDataBase } from "@/state/settings";
 import { CardType, cardTypeKeys, cardTypes } from "@/types/card";
 
@@ -120,7 +119,8 @@ const nonViableIcons: IconKey[] = [
     "rgx",
     "typescript",
 ];
-const viableIcons: IconKey[] = (Object.keys(iconList) as IconKey[]).filter(
+
+const viableIcons: IconKey[] = iconKeys.filter(
     (x) => !nonViableIcons.includes(x),
 );
 
@@ -306,7 +306,7 @@ export const PDFGenerator: FunctionalComponent = () => {
             <div className={configBar.build()}>
                 <div
                     className={classBuilder("text-field-wrapper").build(
-                        classname.card,
+                        classname.button,
                     )}
                 >
                     <Icon
@@ -336,11 +336,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     color="green"
                     value={pdfSettings.hide_compensation}
                     description="Hide compensation value from the PDF"
-                    icon={
-                        pdfSettings.hide_compensation
-                            ? "wrongReceipt"
-                            : "dollar"
-                    }
+                    icons={["dollar", "wrongReceipt"]}
                 />
             </div>
         </label>
@@ -361,15 +357,15 @@ export const PDFGenerator: FunctionalComponent = () => {
                     color: themeColor,
                     value: pdfSettings.light,
                     description: "Tip: if you want to print, use Light theme",
-                    icon: pdfSettings.light ? "sunglasses" : "moon",
+                    icons: ["moon", "sunglasses"],
                 },
                 {
                     label: "High Contrast",
                     configKey: "contrast",
                     color: "red",
                     value: pdfSettings.contrast,
-                    description: settingsDataBase.colors.description,
-                    icon: pdfSettings.contrast ? "contrast" : "contrastOff",
+                    description: settingsDataBase.contrast.description,
+                    icons: ["contrastOff", "contrast"],
                 },
             ]}
         />
@@ -416,9 +412,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                 value: sections.includes(key),
                 key,
                 description: `Include ${key} section in the document`,
-                icon: sections.includes(key)
-                    ? sectionIcons[key]
-                    : `${sectionIcons[key]}Off`,
+                icons: iconOff(sectionIcons[key]),
             }))}
             warning={
                 sections.length < 1 && !pdfSettings.compact
@@ -474,7 +468,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     color: "orange",
                     value: pdfSettings.monospace,
                     description: settingsDataBase.monospace.description,
-                    icon: pdfSettings.monospace ? "monospace" : "proportional",
+                    icons: ["proportional", "monospace"],
                 },
                 {
                     label: "Lowercase",
@@ -482,7 +476,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     color: "blue",
                     value: pdfSettings.lowercase,
                     description: settingsDataBase.lowercase.description,
-                    icon: pdfSettings.lowercase ? "lowercase" : "normalcase",
+                    icons: ["normalcase", "lowercase"],
                 },
                 {
                     label: "Colorful",
@@ -490,7 +484,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     color: "cyan",
                     value: pdfSettings.card_colors,
                     description: settingsDataBase.colorful.description,
-                    icon: pdfSettings.card_colors ? "colors" : "colorsOff",
+                    icons: ["colorsOff", "colors"],
                 },
                 {
                     label: "Plans",
@@ -498,7 +492,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     color: "pink",
                     value: pdfSettings.plans,
                     description: "Include planned cards",
-                    icon: pdfSettings.plans ? "calendar" : "calendarOff",
+                    icons: ["calendarOff", "calendar"],
                 },
                 {
                     label: "Configurable",
@@ -506,7 +500,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     color: "purple",
                     value: pdfSettings.configurable,
                     description: "Include a link to this builder",
-                    icon: pdfSettings.configurable ? "settings" : "settingsOff",
+                    icons: ["settingsOff", "settings"],
                 },
                 {
                     label: "Reversed",
@@ -514,7 +508,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     color: "purple",
                     value: pdfSettings.reversed,
                     description: "Reverse the order",
-                    icon: pdfSettings.reversed ? "reversedsort" : "normalsort",
+                    icons: ["normalsort", "reversedsort"],
                 },
             ]}
         />
@@ -532,7 +526,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     configKey: "pdf",
                     color: "red",
                     value: format == "pdf",
-                    icon: "pdf",
+                    icons: ["pdf", "pdf"],
                 },
                 {
                     label: "PNG",
@@ -540,7 +534,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                     configKey: "png",
                     color: "green",
                     value: format == "png",
-                    icon: "image",
+                    icons: ["image", "image"],
                 },
             ]}
         />
@@ -555,7 +549,7 @@ export const PDFGenerator: FunctionalComponent = () => {
             <p>Filename</p>
             <div
                 className={classBuilder("text-field-wrapper").build(
-                    classname.card,
+                    classname.button,
                 )}
             >
                 <Icon iconKey="file" />

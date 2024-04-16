@@ -6,13 +6,6 @@ const classFilter = (parts: ClassNameLike[]) => {
     return parts.filter(Boolean) as Exclude<ClassNameLike, undefined>[];
 };
 
-const joiner: BuildFunc = (...args) => {
-    return args
-        .filter(Boolean)
-        .map((x) => x?.toString())
-        .join(" ");
-};
-
 type ClassData = {
     root: string;
     element?: ClassNameLike;
@@ -31,6 +24,7 @@ type ClassBuilder = {
     color: (color: Color) => ClassBuilder;
     add: (additional: ClassNameLike) => ClassBuilder;
     card: string;
+    button: string;
 };
 
 export const build = (data: ClassData, extra: ClassNameLike[]): string => {
@@ -109,6 +103,7 @@ const classBuilderFromData = (data: ClassData): ClassBuilder => {
                 additional: [...data.additional, additional],
             }),
         card: "colored-card",
+        button: "colored-button",
     };
 };
 

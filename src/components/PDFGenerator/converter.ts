@@ -55,6 +55,6 @@ export const convert = (data: PDFSettings): string => {
         newExtra,
         extra,
     ]
-        .map((n, i) => "0123456789abcdef"[n])
+        .map((n) => "0123456789abcdef"[n])
         .join("");
 };

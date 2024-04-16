@@ -1,3 +1,4 @@
+import { getCardColor } from "../Card/getColor";
 import { FunctionalComponent } from "preact";
 import { useMemo } from "preact/hooks";
 
@@ -7,10 +8,10 @@ import { cardToSlug, gotoCard } from "@/hooks/useRouting";
 import { useTimeline } from "@/hooks/useTimeline";
 import { CardData } from "@/types/card";
 
-import { getCardColor } from "../Card/getColor";
+import "./style.css";
+
 import { ProjectCardDescription } from "./description";
 import { ProjectCardHeader } from "./header";
-import "./style.css";
 import { ProjectCardVersions } from "./versions";
 
 export type ProjectCardProps = {
@@ -39,7 +40,7 @@ export const ProjectCard: FunctionalComponent<ProjectCardProps> = (
                 <button
                     className={changeButtonClass
                         .color(getCardColor(prevCard.type))
-                        .build(classname.card)}
+                        .build(classname.button)}
                     onClick={() => gotoCard(prevCard)}
                 >
                     &lt;
@@ -54,7 +55,7 @@ export const ProjectCard: FunctionalComponent<ProjectCardProps> = (
                 <button
                     className={changeButtonClass
                         .color(getCardColor(nextCard.type))
-                        .build(classname.card)}
+                        .build(classname.button)}
                     onClick={() => gotoCard(nextCard)}
                 >
                     &gt;

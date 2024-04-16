@@ -1,10 +1,11 @@
 import { route } from "preact-router";
 import { useEffect, useMemo } from "preact/hooks";
 
-import { PDFGenerator, ProjectCard, Story, usePopup } from "@/components";
+import { ProjectCard, Story, usePopup } from "@/components";
 import { useEntries } from "@/hooks";
 
 import { renderTitle } from "@/components/Card/title";
+import { PDFGeneratorWrapper } from "@/components/PDFGenerator/wrapper";
 import { CardData } from "@/types/card";
 
 type MatchChildrenProps = {
@@ -36,7 +37,7 @@ const getPathParts = (url: string) => {
     return url.split("#")[0].split("?")[0].split("/").filter(Boolean);
 };
 
-export const useRouting = ({ matches, path, url }: MatchChildrenProps) => {
+export const useRouting = ({ url }: MatchChildrenProps) => {
     const setPopupContents = usePopup();
     const entries = useEntries();
 
@@ -60,7 +61,7 @@ export const useRouting = ({ matches, path, url }: MatchChildrenProps) => {
                 break;
             }
             case "pdf": {
-                setter(<PDFGenerator />);
+                setter(<PDFGeneratorWrapper />);
                 break;
             }
             default: {

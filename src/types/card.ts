@@ -1,6 +1,6 @@
 import { Color } from "@/types";
 
-import { IconKey } from "@/icons/icon";
+import { type IconKey } from "@/icons/base";
 import { Description } from "@/utils/formatter";
 
 export const stackColors: Record<StackKey, Color> = {

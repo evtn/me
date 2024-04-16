@@ -1,7 +1,7 @@
 import { FunctionalComponent } from "preact";
 
 import { Filler } from "@/components";
-import { cardToSlug, gotoCard } from "@/hooks";
+import { cardToSlug } from "@/hooks";
 import { Icon } from "@/icons";
 import { CardData } from "@/types";
 import { classBuilder, format } from "@/utils";
@@ -55,7 +55,7 @@ export const Card: FunctionalComponent<{
                     <a
                         className={classname
                             .element("card-button")
-                            .build(classname.card)}
+                            .build(classname.button)}
                         href={`https://github.com/${data.repo}`}
                         aria-label={`GitHub Repo: ${data.repo}`}
                     >
@@ -66,7 +66,7 @@ export const Card: FunctionalComponent<{
                     <a
                         className={classname
                             .element("card-button")
-                            .build(classname.card)}
+                            .build(classname.button)}
                         href={data.href}
                         aria-label={`External link: ${cleanHref(data.href)}`}
                     >
@@ -76,7 +76,7 @@ export const Card: FunctionalComponent<{
                 <a
                     className={classname
                         .element("card-button")
-                        .build(classname.card)}
+                        .build(classname.button)}
                     href={cardHref}
                     aria-label="Expand / Link to this card"
                 >

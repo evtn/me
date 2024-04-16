@@ -10,7 +10,7 @@
     justify-content: flex-start;
     padding: 0.5rem 1rem;
     z-index: 0;
-
+    flex-shrink: 0;
     gap: 0.5rem;
 
     &:focus {

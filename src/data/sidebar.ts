@@ -2,7 +2,7 @@ import { ComponentChildren } from "preact";
 
 import { Color } from "@/types";
 
-import { IconKey } from "@/icons/icon";
+import { type IconKey } from "@/icons/base";
 
 type LinkedBase =
     | {
@@ -27,15 +27,23 @@ type NonLinkedEntry = {
     copyLink?: false;
 } & (LinkedBase | NonLinkedBase);
 
-export type SidebarEntryData = (LinkedEntry | NonLinkedEntry) & {
-    text: string;
-    icon: IconKey;
-    color?: Color;
-    onClick?: () => void;
-    copy?: boolean;
-    description?: string;
-    label: string;
-};
+export type SidebarEntryData = (LinkedEntry | NonLinkedEntry) &
+    (
+        | {
+              icon: IconKey;
+          }
+        | {
+              ln: IconKey;
+              icon?: IconKey;
+          }
+    ) & {
+        text: string;
+        color?: Color;
+        onClick?: () => void;
+        copy?: boolean;
+        description?: string;
+        label: string;
+    };
 
 export type SidebarEntryProps = {
     data: SidebarEntryData;
@@ -46,7 +54,6 @@ export const entries: SidebarEntryData[] = [
     {
         ln: "location",
         text: "Tbilisi / Relocate / Remote",
-        icon: "location",
         color: "red",
         copy: false,
         label: "That's where I am",
@@ -70,7 +77,6 @@ export const entries: SidebarEntryData[] = [
     {
         ln: "telegram",
         text: "aternative",
-        icon: "telegram",
         copyLink: true,
         color: "cyan",
         label: "Telegram",
@@ -85,7 +91,6 @@ export const entries: SidebarEntryData[] = [
     {
         ln: "github",
         text: "evtn",
-        icon: "github",
         copyLink: true,
         color: "text",
         label: "GitHub",
@@ -93,7 +98,6 @@ export const entries: SidebarEntryData[] = [
     {
         ln: "linkedin",
         text: "qevitta",
-        icon: "linkedin",
         copyLink: true,
         color: "blue",
         label: "LinkedIn",

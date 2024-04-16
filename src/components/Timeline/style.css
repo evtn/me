@@ -14,13 +14,13 @@
 .timeline {
     display: flex;
     flex-direction: column;
-    padding: 0.5rem;
+    padding: 0.5rem 2rem;
     box-sizing: border-box;
     align-items: center;
     justify-content: flex-start;
     align-self: stretch;
     position: relative;
-    max-width: 38rem;
+    max-width: 43rem;
     height: max-content;
     flex-shrink: 0;
 

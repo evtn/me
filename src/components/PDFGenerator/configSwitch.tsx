@@ -5,7 +5,7 @@ import { FunctionalComponent } from "preact";
 import { Switch } from "@/components";
 import { Color } from "@/types";
 
-import { IconKey } from "@/icons/icon";
+import { IconKey } from "@/icons/base";
 
 export type ConfigSwitchSetter = (key: any, value: boolean) => void;
 
@@ -17,11 +17,11 @@ export type ConfigSwitchProps = {
     value: boolean;
     active?: boolean;
     description?: string;
-    icon?: IconKey;
+    icons?: [IconKey, IconKey];
 };
 
 export const ConfigSwitch: FunctionalComponent<ConfigSwitchProps> = (
-    { configKey, setter, label, color, value, active, description, icon },
+    { configKey, setter, label, color, value, active, description, icons },
 ) => {
     const setPDFSettings = useSetAtom(pdfSettingsAtom);
     if (active === undefined) {
@@ -33,13 +33,10 @@ export const ConfigSwitch: FunctionalComponent<ConfigSwitchProps> = (
     return (
         <Switch
             label={label}
-            icon={icon}
+            icons={icons}
             currentValue={active}
             onSwitch={() => switchSetter(configKey, !value)}
-            className={classname
-                .element("switch")
-                .color(color)
-                .build(classname.card)}
+            className={classname.element("switch").color(color).build()}
             aria-label={description}
         />
     );
