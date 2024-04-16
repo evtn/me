@@ -3,6 +3,7 @@
     font-style: normal;
     font-weight: 100 800;
     src: url(/JBMono.woff2) format("woff2");
+    font-display: swap;
 }
 
 @font-face {
@@ -10,10 +11,12 @@
     font-style: italic;
     font-weight: 400 700;
     src: url(/RethinkSans-italic.woff2) format("woff2");
+    font-display: swap;
 }
 @font-face {
     font-family: "Rethink Sans";
     font-style: normal;
     font-weight: 400 700;
     src: url(/RethinkSans.woff2) format("woff2");
+    font-display: swap;
 }
