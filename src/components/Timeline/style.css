@@ -46,7 +46,7 @@
     }
 }
 
-@media (max-width: 65rem) {
+@media (max-width: 85rem) {
     .timeline {
         align-self: center;
     }

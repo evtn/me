@@ -163,7 +163,7 @@
     }
 }
 
-@media (max-width: 65rem) {
+@media (max-width: 85rem) {
     .sidebar-portal {
         align-items: center;
     }

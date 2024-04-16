@@ -104,7 +104,7 @@
     }
 }
 
-@media (max-width: 65rem) {
+@media (max-width: 85rem) {
     .sidebar-entry {
         max-width: calc(50% - 0.25rem);
     }
