@@ -5,8 +5,10 @@ import Match from "preact-router/match";
 import { PopupContainer, Sidebar, Timeline } from "@/components";
 import { useRouting, useSettingsDataset } from "@/hooks";
 
+import "@/styles/colors.css";
+import "@/styles/fonts.css";
+
 import "./app.css";
-import "./styles/colors.css";
 
 import { colorShiftAtom } from "./state/settings";
 

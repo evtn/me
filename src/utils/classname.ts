@@ -29,7 +29,7 @@ type ClassBuilder = {
     element: (element: ClassNameLike) => ClassBuilder;
     modify: (modifier: ClassNameLike) => ClassBuilder;
     color: (color: Color) => ClassBuilder;
-    add: (additional: ClassNameLike) => {};
+    add: (additional: ClassNameLike) => ClassBuilder;
     card: string;
 };
 
