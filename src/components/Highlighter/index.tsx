@@ -6,7 +6,7 @@ import { classBuilder } from "@/utils";
 
 import { getCardColor } from "@/components/Card/getColor";
 import { renderTitle } from "@/components/Card/title";
-import { gotoCard } from "@/hooks/useRouting";
+import { cardToSlug, gotoCard } from "@/hooks/useRouting";
 import { useTimeline } from "@/hooks/useTimeline";
 import { timelineFiltersAtom } from "@/state/timeline";
 import { CardData } from "@/types/card";
@@ -60,7 +60,9 @@ export const Highlighter: FunctionalComponent<TimelineLink> = (
         child.addEventListener("animationend", onAnimationEnd);
     };
 
-    const highlight = () => {
+    const highlight = (e: MouseEvent) => {
+        e.preventDefault();
+
         if (isCard) {
             gotoCard(sortedEntries[highlightIndex]);
             return;
@@ -77,6 +79,7 @@ export const Highlighter: FunctionalComponent<TimelineLink> = (
 
     const entry = sortedEntries[highlightIndex];
     const cardTitle = renderTitle(entry);
+    const cardHref = `/timeline/${cardToSlug(entry)}`;
 
     if (!content) {
         content = cardTitle;
@@ -92,6 +95,8 @@ export const Highlighter: FunctionalComponent<TimelineLink> = (
                 cardVisible ? "" : "(filtered) "
             }Linked card: ${cardTitle}`}
             data-visible={cardVisible}
+            href={cardHref}
+            data-native
         >
             <span>{format(content)}</span>
         </a>
