@@ -1,5 +1,5 @@
 import { getCardColor } from "../Card/getColor";
-import { Getter, Setter, atom, useAtom, useSetAtom } from "jotai";
+import { Getter, Setter, atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { FunctionalComponent } from "preact";
 import { useEffect, useMemo, useState } from "preact/hooks";
 
@@ -10,7 +10,7 @@ import { classBuilder } from "@/utils";
 
 import { useTheme } from "@/hooks/useTheme";
 import { IconKey, iconKeys, iconOff } from "@/icons/base";
-import { settingsDataBase } from "@/state/settings";
+import { baseCompensationAtom, settingsDataBase } from "@/state/settings";
 import { CardType, cardTypeKeys, cardTypes } from "@/types/card";
 
 import "./style.css";
@@ -155,6 +155,7 @@ export const PDFGenerator: FunctionalComponent = () => {
     const [settings] = useSettings();
     const theme = useTheme();
     const [copied, setCopied] = useState(false);
+    const baseCompensation = useAtomValue(baseCompensationAtom);
 
     useEffect(() => {
         return () => {
@@ -168,7 +169,7 @@ export const PDFGenerator: FunctionalComponent = () => {
                 ...theme,
                 lowercase: settings.lowercase,
                 monospace: settings.monospace,
-                compensation: "3000",
+                compensation: baseCompensation.toString(),
                 filename: "Dmitry_Gritsenko.pdf",
                 sections: ["position", "stack"],
                 plans: true,
@@ -190,7 +191,7 @@ export const PDFGenerator: FunctionalComponent = () => {
         }
         const compensationInt = parseInt(compensation);
 
-        if (isNaN(compensationInt) || compensationInt < 3000) {
+        if (isNaN(compensationInt) || compensationInt < baseCompensation) {
             setCompensationError(true);
         }
     }, [compensation]);
@@ -315,8 +316,8 @@ export const PDFGenerator: FunctionalComponent = () => {
                     <input
                         type="text"
                         inputMode="numeric"
-                        pattern="\d{5,}|[3-9]\d{3}"
-                        title="an integer more than 3000"
+                        pattern="\d{4,}"
+                        title={`an integer more than ${baseCompensation}`}
                         value={pdfSettings.compensation}
                         className={classname.element("text-field").build()}
                         onInput={(e) => {
