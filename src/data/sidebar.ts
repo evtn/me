@@ -59,14 +59,6 @@ export const entries: SidebarEntryData[] = [
         label: "That's where I am",
     },
     {
-        href: "/pdf",
-        text: "Get a PDF",
-        icon: "file",
-        copy: false,
-        color: "orange",
-        label: "PDF Generator",
-    },
-    {
         ln: "github/me",
         text: "Source",
         icon: "source",

@@ -2,14 +2,11 @@ import { useAtom, useSetAtom } from "jotai";
 import { FunctionalComponent } from "preact";
 import { useEffect, useState } from "preact/hooks";
 
-import { SidebarEntry } from "@/components";
-import { classBuilder } from "@/utils";
+import { SidebarEntry, SidebarEntryButton } from "@/components";
 
 import { SidebarEntryData } from "@/data/sidebar";
 import { Icon } from "@/icons/icon";
 import { baseCompensationAtom, colorShiftAtom } from "@/state/settings";
-
-const classname = classBuilder("sidebar-entry");
 
 export const MoneyEntry: FunctionalComponent = () => {
     const [baseCompensation, setBaseCompensation] =
@@ -47,31 +44,27 @@ export const MoneyEntry: FunctionalComponent = () => {
     };
 
     const refreshButton = (
-        <button
-            className={classname.element("button").build(classname.button)}
+        <SidebarEntryButton
             onClick={() => {
                 setCompensationShift(0);
                 shiftColors(true);
             }}
-            aria-label="Reset"
-        >
-            <Icon iconKey="refreshalt" />
-        </button>
+            label="Reset"
+            icon="refreshalt"
+        />
     );
 
     const addButton = (
-        <button
-            className={classname.element("button").build(classname.button)}
+        <SidebarEntryButton
             onClick={() =>
                 setCompensationShift(
                     (value) =>
                         value + Math.floor(Math.random() * baseCompensation),
                 )
             }
-            aria-label="Add"
-        >
-            <Icon iconKey="plus" />
-        </button>
+            label="Add"
+            icon="plus"
+        />
     );
 
     return (

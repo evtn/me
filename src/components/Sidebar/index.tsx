@@ -1,7 +1,13 @@
 import { FunctionalComponent } from "preact";
 import { useMemo } from "preact/hooks";
 
-import { Logo, MoneyEntry, SettingsBar, SidebarEntry } from "@/components";
+import {
+    Logo,
+    MoneyEntry,
+    PDFSidebarEntry,
+    SettingsBar,
+    SidebarEntry,
+} from "@/components";
 import { useSettings } from "@/hooks";
 import { Icon } from "@/icons";
 import { Color } from "@/types";
@@ -55,7 +61,7 @@ export const Sidebar: FunctionalComponent = () => {
 
     const entriesContent = entries.map((e) => <SidebarEntry data={e} />);
 
-    entriesContent.splice(1, 0, <MoneyEntry />);
+    entriesContent.splice(1, 0, <MoneyEntry />, <PDFSidebarEntry />);
 
     return (
         <div className="sidebar-portal">
