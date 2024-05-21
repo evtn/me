@@ -13,11 +13,26 @@ type SidebarEntryButtonProps = {
     icon: IconKey;
     text?: string;
     fullsize?: boolean;
+    beforeText?: string;
+    afterText?: string;
 };
 
 export const SidebarEntryButton: FunctionalComponent<
     SidebarEntryButtonProps
-> = ({ className, href, label, children, onClick, icon, text, fullsize }) => {
+> = (
+    {
+        className,
+        href,
+        label,
+        children,
+        onClick,
+        icon,
+        text,
+        fullsize,
+        beforeText,
+        afterText,
+    },
+) => {
     const LinkComponent = href ? "a" : "button";
 
     return (
@@ -35,9 +50,9 @@ export const SidebarEntryButton: FunctionalComponent<
                 iconKey={icon}
                 className={classname.element("icon").build()}
             />
-            {text ? (
-                <p>
-                    {text
+            {text || beforeText || afterText ? (
+                <p data-before={beforeText} data-after={afterText}>
+                    {(text || "")
                         .split(/(\/)/g)
                         .map((e, i) =>
                             i % 2 ? <span className="alpha"> / </span> : e,

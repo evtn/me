@@ -174,9 +174,32 @@ main[data-lowercase="true"] * {
 
 @media (hover: hover) and (min-width: 50rem) {
     [aria-label]:hover {
+        z-index: 2;
+
         &::after {
             display: block;
         }
+    }
+}
+
+[data-before] {
+    &::before {
+        content: attr(data-before);
+        opacity: 0.5;
+    }
+}
+
+[data-after] {
+    &::after {
+        content: attr(data-after);
+        opacity: 0.5;
+    }
+}
+
+main[data-compact="true"] {
+    [data-before]::before,
+    [data-after]::after {
+        content: none;
     }
 }
 

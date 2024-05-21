@@ -5,7 +5,6 @@ import { useEffect, useState } from "preact/hooks";
 import { SidebarEntry, SidebarEntryButton } from "@/components";
 
 import { SidebarEntryData } from "@/data/sidebar";
-import { Icon } from "@/icons/icon";
 import { baseCompensationAtom, colorShiftAtom } from "@/state/settings";
 
 export const MoneyEntry: FunctionalComponent = () => {
@@ -22,7 +21,6 @@ export const MoneyEntry: FunctionalComponent = () => {
             1000,
         );
 
-        // fetch current base compensation. doesn't affect the minimal value in PDF builder though
         (async () => {
             const resp = await fetch("https://evtn.me/api/compensation");
             const value = JSON.parse(await resp.text());
@@ -36,11 +34,12 @@ export const MoneyEntry: FunctionalComponent = () => {
     const compensation = compensationShift + baseCompensation;
 
     const entryData: SidebarEntryData = {
-        text: `${compensation.toString()} / mo`,
+        text: `$${compensation}`,
         icon: "dollar",
         color: "green",
-        label: "Compensation (grows every second)",
+        label: "Desired compensation (grows every second)",
         onClick: () => shiftColors(),
+        afterText: " / month, gross",
     };
 
     const refreshButton = (
@@ -49,7 +48,7 @@ export const MoneyEntry: FunctionalComponent = () => {
                 setCompensationShift(0);
                 shiftColors(true);
             }}
-            label="Reset"
+            label="Turn it back"
             icon="refreshalt"
         />
     );
@@ -62,7 +61,7 @@ export const MoneyEntry: FunctionalComponent = () => {
                         value + Math.floor(Math.random() * baseCompensation),
                 )
             }
-            label="Add"
+            label="Add more"
             icon="plus"
         />
     );

@@ -8,7 +8,7 @@ const baseData: SidebarEntryData = {
     icon: "download",
     copy: false,
     color: "orange",
-    label: "PDF Generator",
+    label: "Default PDF",
 };
 
 export const PDFSidebarEntry = () => {
@@ -18,6 +18,7 @@ export const PDFSidebarEntry = () => {
                 href="/pdf"
                 icon="settings"
                 text="Customize PDF"
+                label="PDF Generator"
                 fullsize
             />
         </SidebarEntry>

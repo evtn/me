@@ -33,6 +33,7 @@
         outline: none;
         background: none;
         color: inherit;
+        flex-shrink: 0;
 
         & p {
             padding: 0.1rem 0.2rem;
@@ -83,7 +84,7 @@
         }
 
         &__button {
-            width: 3rem;
+            min-width: 3rem;
         }
     }
 }

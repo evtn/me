@@ -43,6 +43,8 @@ export type SidebarEntryData = (LinkedEntry | NonLinkedEntry) &
         copy?: boolean;
         description?: string;
         label: string;
+        beforeText?: string;
+        afterText?: string;
     };
 
 export type SidebarEntryProps = {
@@ -53,10 +55,11 @@ export type SidebarEntryProps = {
 export const entries: SidebarEntryData[] = [
     {
         ln: "location",
-        text: "Tbilisi / Relocate / Remote",
+        text: "Tbilisi",
         color: "red",
         copy: false,
         label: "That's where I am",
+        afterText: " or Relocate / Remote",
     },
     {
         ln: "github/me",
@@ -65,6 +68,7 @@ export const entries: SidebarEntryData[] = [
         copyLink: true,
         color: "pink",
         label: "Source of this website",
+        afterText: " on GitHub",
     },
     {
         ln: "telegram",
@@ -72,6 +76,7 @@ export const entries: SidebarEntryData[] = [
         copyLink: true,
         color: "cyan",
         label: "Telegram",
+        beforeText: "t.me/",
     },
     {
         ln: "mail",
@@ -86,6 +91,7 @@ export const entries: SidebarEntryData[] = [
         copyLink: true,
         color: "text",
         label: "GitHub",
+        beforeText: "github.com/",
     },
     {
         ln: "linkedin",
@@ -93,5 +99,6 @@ export const entries: SidebarEntryData[] = [
         copyLink: true,
         color: "blue",
         label: "LinkedIn",
+        beforeText: "linkedin.com/in/",
     },
 ];
