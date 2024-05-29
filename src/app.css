@@ -329,17 +329,6 @@ a:focus {
     outline: none;
 }
 
-@media (prefers-reduced-motion) {
-    .colored-card,
-    .colored-button {
-        ::before {
-            left: 0 !important;
-            top: 0 !important;
-            padding: 0 !important;
-        }
-    }
-}
-
 [data-active="false"].colored-button {
     &:hover {
         color: var(--local-accent);
@@ -423,6 +412,24 @@ main[data-colorful="false"] {
         &:active {
             main[data-neon="true"] & {
                 scale: 95%;
+            }
+        }
+    }
+}
+
+@media (prefers-reduced-motion) {
+    html > body main:not(.importance-hack)[data-neon="true"] {
+        .colored-card,
+        .colored-button {
+            transition-property: color;
+            transition-duration: 0ms;
+            scale: 100%;
+
+            &::before {
+                left: 0;
+                top: 0;
+                padding: 0;
+                box-shadow: none;
             }
         }
     }
