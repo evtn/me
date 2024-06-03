@@ -111,7 +111,7 @@
     }
 }
 
-@media (min-width: 90rem) {
+@media (min-width: 90rem) and (min-height: 53rem) {
     .sidebar {
         gap: 1rem;
 
