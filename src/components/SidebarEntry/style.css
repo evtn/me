@@ -19,7 +19,6 @@
 
     &__button {
         box-sizing: border-box;
-        cursor: pointer;
         border-radius: var(--border-radius);
         padding: 0.5rem;
         height: 2.5rem;

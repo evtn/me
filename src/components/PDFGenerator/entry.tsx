@@ -3,7 +3,7 @@ import { SidebarEntry, SidebarEntryButton } from "@/components";
 import { SidebarEntryData } from "@/data/sidebar";
 
 const baseData: SidebarEntryData = {
-    href: "/cv",
+    href: "https://evtn.me/cv",
     text: "Download PDF",
     icon: "download",
     copy: false,

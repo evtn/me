@@ -14,11 +14,11 @@ a {
     color: var(--link);
     text-decoration: inherit;
     opacity: 0.9;
+    cursor: pointer;
 }
 
 a:hover {
     opacity: 1;
-    cursor: pointer;
 }
 
 @media (min-width: 55em) {

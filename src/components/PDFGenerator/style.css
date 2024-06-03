@@ -128,7 +128,6 @@
         padding: 0.5rem 1rem;
         color: var(--local-accent);
         border-radius: var(--border-radius);
-        cursor: pointer;
         display: flex;
         gap: 0.5rem;
         justify-content: center;

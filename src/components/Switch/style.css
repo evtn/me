@@ -4,7 +4,6 @@
     border-radius: var(--border-radius);
     border: none;
     color: var(--local-accent);
-    cursor: pointer;
     display: flex;
     font-size: 1em;
     justify-content: flex-start;
@@ -33,7 +32,6 @@
     }
 
     &-label {
-        /* text-transform: uppercase; */
         width: 100%;
     }
 
