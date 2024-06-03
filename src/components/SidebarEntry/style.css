@@ -10,6 +10,7 @@
     font-size: 1em;
     flex-grow: 1;
     position: relative;
+    flex-shrink: 1;
 
     gap: 0.5rem;
 
@@ -32,7 +33,10 @@
         outline: none;
         background: none;
         color: inherit;
-        flex-shrink: 0;
+
+        flex-shrink: 1;
+        white-space: pre;
+        min-width: 0;
 
         & p {
             padding: 0.1rem 0.2rem;
@@ -91,6 +95,18 @@
 @media (max-width: 85rem) {
     .sidebar-entry {
         max-width: calc(50% - 0.25rem);
+    }
+}
+
+@media (max-height: 53rem) {
+    .sidebar-entry {
+        width: calc(50% - 0.25rem);
+    }
+
+    .sidebar__info {
+        flex-direction: row;
+        align-self: center;
+        max-width: 100%;
     }
 }
 

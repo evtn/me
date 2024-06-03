@@ -12,6 +12,8 @@
     flex-grow: 1;
     box-sizing: border-box;
     --icon-color: var(--local-accent);
+    flex-shrink: 1;
+    min-height: 0;
 
     &__specialization span {
         color: var(--local-accent);
@@ -29,11 +31,13 @@
     &__header {
         display: flex;
         justify-content: center;
-        align-items: flex-end;
-        flex-direction: column;
+        align-items: stretch;
+        flex-direction: row;
         gap: 0.5rem;
-        flex-grow: 1;
         width: 100%;
+        flex-grow: 1;
+        flex-shrink: 1;
+        min-height: min-content;
 
         &-text {
             display: flex;
@@ -51,10 +55,19 @@
         --local-accent: var(--icon-color);
         padding: 1rem;
         width: 100%;
-        height: 0;
         box-sizing: border-box;
         display: block;
-        flex-grow: 1;
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+
+        svg.logo {
+            height: 0;
+            flex-shrink: 1;
+            flex-grow: 1;
+        }
     }
 
     &__name {
@@ -111,6 +124,14 @@
     }
 }
 
+@media (max-height: 53rem) and (min-width: 85rem) {
+    .sidebar {
+        &-portal {
+            max-width: 52%;
+        }
+    }
+}
+
 @media (min-width: 90rem) and (min-height: 53rem) {
     .sidebar {
         gap: 1rem;
@@ -121,7 +142,6 @@
         }
 
         &__header {
-            flex-direction: row;
             max-height: 30rem;
             flex-grow: 0;
         }
@@ -147,7 +167,15 @@
         }
 
         &__logo {
-            max-width: 20rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            width: auto;
+
+            svg.logo {
+                width: 20rem;
+                height: 20rem;
+            }
         }
 
         &__header-text,
