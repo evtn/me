@@ -156,11 +156,11 @@ main[data-lowercase="true"] * {
     top: calc(50%);
     transform: translateY(-50%);
 
-    padding: 0.1em 0.3em;
+    padding: 0.3em 0.5em;
     border-radius: var(--border-radius);
     background: var(--local-accent);
     color: var(--background);
-    font-weight: 700;
+    font-weight: 500;
     width: max-content;
     z-index: 100;
     font-size: 0.8rem;
@@ -210,7 +210,7 @@ main[data-compact="true"] {
 }
 
 b {
-    font-weight: 700;
+    font-weight: 600;
 }
 
 i {

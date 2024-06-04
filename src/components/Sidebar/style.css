@@ -105,10 +105,6 @@
     }
 }
 
-[data-monospace="true"] button {
-    font-family: "Fira Code", monospace;
-}
-
 .sidebar-portal {
     scrollbar-color: var(--local-accent) var(--card);
     flex-shrink: 0;
