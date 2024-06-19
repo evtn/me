@@ -102,17 +102,12 @@
     .sidebar-entry {
         width: calc(50% - 0.25rem);
     }
-
-    .sidebar__info {
-        flex-direction: row;
-        align-self: center;
-        max-width: 100%;
-    }
 }
 
 @media (max-width: 40rem) {
     .sidebar-entry {
         max-width: 100%;
+        width: unset;
     }
 }
 
