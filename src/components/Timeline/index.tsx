@@ -47,7 +47,7 @@ export const Timeline = () => {
     });
 
     if (!futureCardsVisible) {
-        timelinePieces.splice(futureEdge + 1, 1);
+        timelinePieces.splice(futureEdge, 1);
     }
 
     return (
