@@ -11,6 +11,7 @@ import {
     IconBulb,
     IconBulbOff,
     IconCalendar,
+    IconCalendarClock,
     IconCalendarOff,
     IconChevronsRight,
     IconCode,
@@ -72,6 +73,7 @@ import { InteticsLogo } from "./InteticsLogo";
 import { MCCLogo } from "./MCCLogo";
 import { PythonLogo } from "./PythonLogo";
 import { ReactLogo } from "./ReactLogo";
+import { TonstakersLogo } from "./TonstakersLogo";
 import { IconComponent, IconKey, IconProps } from "./base";
 import { KartuliIcon } from "./kartuli";
 
@@ -138,6 +140,7 @@ export const iconList = {
     refreshalt: Tabler(IconRefresh),
     reversedsort: Tabler(IconSortAscending),
     rgx: () => <code>/a+/</code>,
+    runevery: Tabler(IconCalendarClock),
     settings: Tabler(IconSettings),
     settingsOff: Tabler(IconSettingsOff),
     share: Tabler(IconShare),
@@ -148,6 +151,7 @@ export const iconList = {
     sunglasses: Tabler(IconSunglasses),
     tab: Tabler(IconArrowsLeftRight),
     telegram: Tabler(IconBrandTelegram),
+    tonstakers: TonstakersLogo,
     typescript: TSLogo,
     users: Tabler(IconUsers),
     wrongReceipt: Tabler(IconReceiptOff),
