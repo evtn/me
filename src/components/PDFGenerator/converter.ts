@@ -36,7 +36,7 @@ const packFlags = <T extends readonly (keyof PDFSettings)[]>(
 ) => keys.reduce((a, b, i) => a + (+data[b] << i), 0);
 
 export const convert = (data: PDFSettings): string => {
-    const compensation = (BigInt(data.compensation) - 3000n) / 100n;
+    const compensation = (BigInt(data.compensation) - 4500n) / 100n;
     const theme = (+!!data.contrast << 1) | +!!data.light;
     const monospace = +!!data.monospace;
     const lowercase = +!!data.lowercase;
