@@ -71,8 +71,9 @@ export const entries: SidebarEntryData[] = [
         afterText: " on GitHub",
     },
     {
-        ln: "telegram",
-        text: "aternative",
+        ln: "telegramwork",
+        icon: "telegram",
+        text: "evitanreta",
         copyLink: true,
         color: "cyan",
         label: "Telegram",
